@@ -22,7 +22,7 @@
                                 <li class="divider"></li>
                                 <li><a href="{{ url_for('cart') }}"><i class="icon-cog"></i> {% if not session.cart %} {{ _("Select a cart") }} {% else %}{{ _("Change cart") }}{% endif %}</a></li>
                                 <li><a href="#" class="help" data-toggle="modal"><i class="icon-book"></i> {{ _("Help") }}</a></li>
-                                <li><a href="/logout"><i class="icon-off"></i> {{ _("Logout") }}</a></li>
+                                <li><a href="{{ url_for('logout') }}"><i class="icon-off"></i> {{ _("Logout") }}</a></li>
 
                             </ul>
                         </li>
