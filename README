@@ -1,0 +1,53 @@
+Flask OpenERP Stock Cart
+========================
+
+Flask OpenERP Stock Cart is a Flask App to management stock pickings in warehouse.
+
+Installing
+----------
+
+See INSTALL
+
+OpenERP modules
+---------------
+
+* Stock
+* Stock Cart
+* Product Trademark
+* Nan Stock Scanner
+
+OpenERP Configuration
+---------------------
+
+Edit config.ini and add OpenERP connection:
+
+  OPENERP_SERVER = 'http://localhost:8069'
+  OPENERP_DATABASE = 'database'
+
+Username and password is from login form.
+
+Check username have permissions to read and write in models:
+
+* stock.picking
+* stock.cart
+
+Support
+-------
+
+For more information or if you encounter any problems with this module,
+please contact the programmers at
+
+  Zikzakmedia
+  --------------
+  website: http://www.zikzakmedia.com/
+  email: zikzak@zikzakmedia.com
+
+License
+-------
+
+See LICENSE
+
+Copyright
+---------
+
+See COPYRIGHT

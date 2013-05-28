@@ -1,0 +1,25 @@
+Installing Flask OpenERP Stock Cart
+===================================
+
+Prerequisites
+-------------
+
+ * Flask (https://pypi.python.org/pypi/Flask)
+ * Flask-Babel (https://pypi.python.org/pypi/Flask-Babel)
+ * Flask-WTF (https://pypi.python.org/pypi/Flask-WTF)
+ * ERPPeek (https://pypi.python.org/pypi/ERPpeek)
+
+Configuration
+-------------
+
+config.ini
+
+* APP NAME
+
+config.cfg
+
+* Debug
+* Template
+* Language
+* Payments
+

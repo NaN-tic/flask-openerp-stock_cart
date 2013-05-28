@@ -1,0 +1,37 @@
+{% extends "default/layout.html" %}
+{% block title %}{{ _("Dashboard") }}{% endblock %}
+{% block body %}
+{% include 'default/nav.html' %}
+<div class="container-fluid">
+    <div class="subnav">
+        <ul class="nav nav-pills">
+            <li><a href="{{ url_for('cart') }}">{% if not session.cart %} {{ _("Select a cart") }} {% else %}{{ _("Change cart") }}{% endif %}</a></li>
+            <li><a href="{{ url_for('picking') }}">{{ _("Process pickings") }}</a></li>
+            <li><a href="#" class="help" data-toggle="modal">{{ _("Help") }}</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="row index-box">
+    <div class="span4">
+        <div class="well">
+            <h2 class="muted">1. {{ _("Select a cart") }}</h2>
+            <p>{{ _("Go to your preferences a select a cart do you work. Remember when not working in warehouse, do logout") }}<br/><a class="btn btn-warning" href="{{ url_for('cart') }}">{{ _("Go") }}</a></p>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="well">
+            <h2 class="muted">2. {{ _("Process pickings") }}</h2>
+            <p>{{ _("When process pickings, select products in your warehouse and put in you backet cart.") }}<br/><a class="btn btn-warning" href="{{ url_for('picking') }}">{{ _("Go") }}</a></p>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="well">
+            <h2 class="muted">3. {{ _("Make picking") }}</h2>
+            <p>{{ _("When finish selection products, return your picking area and make delivery package.") }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

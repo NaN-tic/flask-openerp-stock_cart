@@ -1,0 +1,18 @@
+{% extends "default/layout.html" %}
+{% block title %}500, Internal Server Error{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="error">
+        <h1>500, Internal Server Error</h1>
+        <blockquote>
+            <p>The server encountered an unexpected error.</p>
+            <p>Please try again later.</p>
+        </blockquote>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}<ul class=error>
+            {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+        </ul>{% endif %}
+        {% endwith %}
+    </div>
+</div>
+{% endblock %}

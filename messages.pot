@@ -1,0 +1,242 @@
+# Translations template for PROJECT.
+# Copyright (C) 2013 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2013-05-28 11:34+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
+
+#: app.py:64
+msgid ""
+"Can't connect to ERP server. Check network-ports or ERP server was "
+"running."
+msgstr ""
+
+#: app.py:128
+#, python-format
+msgid "Error: Not access in %(key)s - %(value)skey"
+msgstr ""
+
+#: app.py:131
+msgid "You were logged in."
+msgstr ""
+
+#: app.py:134
+msgid "Error: Invalid username or password"
+msgstr ""
+
+#: app.py:163
+msgid "You were logged out."
+msgstr ""
+
+#: app.py:207
+#, python-format
+msgid "Cart %(name)s is working by user %(user)s."
+msgstr ""
+
+#: app.py:209
+#, python-format
+msgid "Not find some cart by %(id)s."
+msgstr ""
+
+#: app.py:211
+msgid "Error: Cart ID not valid or empty"
+msgstr ""
+
+#: app.py:214
+#, python-format
+msgid "Order products by: %(order)s."
+msgstr ""
+
+#: templates/default/cart.html:2 templates/default/index.html:8
+#: templates/default/index.html:18 templates/default/nav.html:23
+#: templates/default/picking.html:2
+msgid "Select a cart"
+msgstr ""
+
+#: templates/default/cart.html:7
+msgid "Order products by"
+msgstr ""
+
+#: templates/default/cart.html:11
+msgid "Name"
+msgstr ""
+
+#: templates/default/cart.html:12
+msgid "Baskets"
+msgstr ""
+
+#: templates/default/cart.html:13
+msgid "User"
+msgstr ""
+
+#: templates/default/cart.html:23
+msgid "Get this cart"
+msgstr ""
+
+#: templates/default/help.html:9
+msgid "Close"
+msgstr ""
+
+#: templates/default/index.html:2
+msgid "Dashboard"
+msgstr ""
+
+#: templates/default/index.html:8 templates/default/nav.html:23
+msgid "Change cart"
+msgstr ""
+
+#: templates/default/index.html:9 templates/default/index.html:24
+#: templates/default/nav.html:13
+msgid "Process pickings"
+msgstr ""
+
+#: templates/default/index.html:10 templates/default/nav.html:24
+msgid "Help"
+msgstr ""
+
+#: templates/default/index.html:19
+msgid ""
+"Go to your preferences a select a cart do you work. Remember when not "
+"working in warehouse, do logout"
+msgstr ""
+
+#: templates/default/index.html:19 templates/default/index.html:25
+msgid "Go"
+msgstr ""
+
+#: templates/default/index.html:25
+msgid ""
+"When process pickings, select products in your warehouse and put in you "
+"backet cart."
+msgstr ""
+
+#: templates/default/index.html:30
+msgid "Make picking"
+msgstr ""
+
+#: templates/default/index.html:31
+msgid ""
+"When finish selection products, return your picking area and make "
+"delivery package."
+msgstr ""
+
+#: templates/default/login.html:2 templates/default/login.html:47
+msgid "Login"
+msgstr ""
+
+#: templates/default/login.html:14
+msgid "Add a user name"
+msgstr ""
+
+#: templates/default/login.html:15
+msgid "Add a password"
+msgstr ""
+
+#: templates/default/login.html:34
+msgid "Username"
+msgstr ""
+
+#: templates/default/login.html:40
+msgid "Password"
+msgstr ""
+
+#: templates/default/nav.html:17
+msgid "Welcome"
+msgstr ""
+
+#: templates/default/nav.html:19
+msgid "Order by"
+msgstr ""
+
+#: templates/default/nav.html:20
+msgid "Location"
+msgstr ""
+
+#: templates/default/nav.html:21
+msgid "Manufacturer"
+msgstr ""
+
+#: templates/default/nav.html:25
+msgid "Logout"
+msgstr ""
+
+#: templates/default/picking.html:11
+msgid "Code"
+msgstr ""
+
+#: templates/default/picking.html:12
+msgid "Product"
+msgstr ""
+
+#: templates/default/picking.html:13 templates/default/picking.html:52
+msgid "Qty"
+msgstr ""
+
+#: templates/default/picking.html:14
+msgid "Qty Available"
+msgstr ""
+
+#: templates/default/picking.html:15
+msgid "Rack"
+msgstr ""
+
+#: templates/default/picking.html:16
+msgid "Row"
+msgstr ""
+
+#: templates/default/picking.html:17
+msgid "Case"
+msgstr ""
+
+#: templates/default/picking.html:21
+msgid "There are not pickings to process"
+msgstr ""
+
+#: templates/default/picking.html:52
+msgid "Qty added in this basket "
+msgstr ""
+
+#: templates/default/picking.html:62
+msgid "Process"
+msgstr ""
+
+#: templates/default/picking.html:68
+msgid "Grid Cart"
+msgstr ""
+
+#: templates/default/picking.html:81
+msgid "Send quantity products successfully"
+msgstr ""
+
+#: templates/default/picking.html:84
+msgid "Get more products/pickings to do"
+msgstr ""
+
+#: templates/default/picking.html:87
+msgid "Done"
+msgstr ""
+
+#: templates/default/picking.html:95
+msgid "Error!"
+msgstr ""
+
+#: templates/default/picking.html:98
+msgid "Qty are integer values? Review your cart and resend"
+msgstr ""
+
+#: templates/default/picking.html:101
+msgid "Check"
+msgstr ""
+

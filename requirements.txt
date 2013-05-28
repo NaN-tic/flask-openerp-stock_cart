@@ -1,0 +1,3 @@
+Flask-Babel>=0.8
+Flask-WTF>=0.8.3
+erppeek>=1.4.5
