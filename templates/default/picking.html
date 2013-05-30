@@ -22,7 +22,7 @@
         {% for product in products %} 
         <tr class="{% if product.qty_available < 0 %}stock-alert{% endif %}">
             <td><strong>{{ product.code }}</strong></td>
-            <td><a href="#{{ product.id }}" data-toggle="modal">{{ product.name }}</a></td>
+            <td><a href="#{{ product.id }}" data-toggle="modal" data-target="#{{ product.id }}">{{ product.name }}</a></td>
             <td><strong>{{ product.qty }}</strong></td>
             <td>{{ product.qty_available }}</td>
             <td>{% if product.loc_rack %}{{ product.loc_rack }}{% endif %}</td>

@@ -1,28 +1,11 @@
-<div id="help-modal" class="modal hide fade" tabindex="-1"></div>
-
-<script id="help-modal" type="text/javascript">
-    var $modal = $('#help-modal');
-
-    $('.nav .help').on('click', function(){
-      // create the backdrop and wait for next modal to be triggered
-      $('body').modalmanager('loading');
-
-      setTimeout(function(){
-         $modal.load('{{ url_for("help") }}', '', function(){
-          $modal.modal();
-        });
-      }, 1000);
-    });
-
-    $modal.on('click', '.update', function(){
-      $modal.modal('loading');
-      setTimeout(function(){
-        $modal
-          .modal('loading')
-          .find('.modal-body')
-            .prepend('<div class="alert alert-info fade in">' +
-              'Updated!<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-            '</div>');
-      }, 1000);
-    });
-</script> 
+<div id="help" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{{ _("Help") }}</h3>
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+         <button class="btn" data-dismiss="modal" aria-hidden="true">{{ _("Close") }}</button>
+    </div>
+</div>

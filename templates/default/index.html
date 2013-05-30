@@ -7,7 +7,7 @@
         <ul class="nav nav-pills">
             <li><a href="{{ url_for('cart') }}">{% if not session.cart %} {{ _("Select a cart") }} {% else %}{{ _("Change cart") }}{% endif %}</a></li>
             <li><a href="{{ url_for('picking') }}">{{ _("Process pickings") }}</a></li>
-            <li><a href="#" class="help" data-toggle="modal">{{ _("Help") }}</a></li>
+            <li><a href="{{ url_for('help') }}" data-toggle="modal" data-target="#help">{{ _("Help") }}</a></li>
         </ul>
     </div>
 </div>
