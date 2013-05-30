@@ -110,4 +110,110 @@ body {padding-top: 0px; padding-bottom: 40px; background-color: #f5f5f5}
 /* Picking */
 .basket { min-height:60px !important}
 #send-process { text-align: right}
+
+.row-stockcart {
+  width: 100%;
+  *zoom: 1;
+}
+
+.row-stockcart:before,
+.row-stockcart:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.row-stockcart:after {
+  clear: both;
+}
+
+.row-stockcart [class*="span"] {
+  display: block;
+  float: left;
+  width: 100%;
+  min-height: 30px;
+  margin-left: 2.127659574468085%;
+  *margin-left: 2.074468085106383%;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.row-stockcart [class*="span"]:first-child {
+  margin-left: 0;
+}
+
+.row-stockcart .controls-row [class*="span"] + [class*="span"] {
+  margin-left: 2.127659574468085%;
+}
+
+.row-stockcart .span12 {
+  width: 100%;
+  *width: 99.94680851063829%;
+}
+
+.row-stockcart .span11 {
+  width: 91.48936170212765%;
+  *width: 91.43617021276594%;
+}
+
+.row-stockcart .span10 {
+  width: 82.97872340425532%;
+  *width: 82.92553191489361%;
+}
+
+.row-stockcart .span9 {
+  width: 74.46808510638297%;
+  *width: 74.41489361702126%;
+}
+
+.row-stockcart .span8 {
+  width: 65.95744680851064%;
+  *width: 65.90425531914893%;
+}
+
+.row-stockcart .span7 {
+  width: 57.44680851063829%;
+  *width: 57.39361702127659%;
+}
+
+.row-stockcart .span6 {
+  width: 48.93617021276595%;
+  *width: 48.88297872340425%;
+}
+
+.row-stockcart .span5 {
+  width: 40.42553191489362%;
+  *width: 40.37234042553192%;
+}
+
+.row-stockcart .span4 {
+  width: 31.914893617021278%;
+  *width: 31.861702127659576%;
+}
+
+.row-stockcart .span3 {
+  width: 23.404255319148934%;
+  *width: 23.351063829787233%;
+}
+
+.row-stockcart .span2 {
+  width: 14.893617021276595%;
+  *width: 14.840425531914894%;
+}
+
+.row-stockcart .span1 {
+  width: 6.382978723404255%;
+  *width: 6.329787234042553%;
+}
+
+[class*="span"].hide,
+.row-stockcart [class*="span"].hide {
+  display: none;
+}
+
+[class*="span"].pull-right,
+.row-stockcart [class*="span"].pull-right {
+  float: right;
+}
 /* End picking */
