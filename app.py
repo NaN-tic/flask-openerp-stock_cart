@@ -135,6 +135,7 @@ def login():
     return render_template(get_template('login.html'), form=form)
 
 @app.route('/logout')
+@login_required
 def logout():
     '''Logout App'''
     Client = erp_connect()
@@ -231,6 +232,7 @@ def picking():
     return render_template(get_template('picking.html'), products=products, grid=picking_grid)
 
 @app.route('/basket', methods=['PUT', 'POST'])
+@login_required
 def basket():
     '''
     Process values from form basket
@@ -261,6 +263,7 @@ def basket():
     return jsonify(result=result)
 
 @app.route('/help')
+@login_required
 def help():
     '''Help - Documentation'''
     lang = get_lang()
