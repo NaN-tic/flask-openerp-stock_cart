@@ -2,6 +2,7 @@
 #The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
 import jinja2
+from flask.ext.babel import Babel, gettext as _
 
 def floatwithoutdecimal(text):
     """
@@ -33,3 +34,25 @@ def pickingname(pickings, arg):
         return None
     return pickings[str(arg)]
 jinja2.filters.FILTERS['pickingname'] = pickingname
+
+def productinfo(product):
+    """
+    Get product dict values and return str html.
+    """
+    product_info = []
+    if product.get('code'):
+        product_info.append('%s: %s' % (_(u'Code'), product.get('code')))
+    if product.get('ean13'):
+        product_info.append('%s: %s' % (_(u'EAN13'), product.get('ean13')))
+    if product.get('loc_rack'):
+        product_info.append('%s: %s' % (_(u'Rack'), product.get('loc_rack')))
+    if product.get('loc_row'):
+        product_info.append('%s: %s' % (_(u'Row'), product.get('loc_row')))
+    if product.get('loc_case'):
+        product_info.append('%s: %s' % (_(u'Case'), product.get('loc_case')))
+    if product.get('manufacturer'):
+        product_info.append('%s: %s' % (_(u'Manufacturer'), product.get('manufacturer')))
+    if product.get('location'):
+        product_info.append('%s: %s' % (_(u'Location'), product.get('location')))
+    return "<br/>".join(product_info)
+jinja2.filters.FILTERS['productinfo'] = productinfo

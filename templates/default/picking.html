@@ -38,9 +38,16 @@
     {% for product in products %}<div id="{{ product.id }}" class="modal hide fade" tabindex="-1" data-width="760">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3>{{ product.code }} - {{ product.name }}</h3>
+            <h3>{{ product.name }}
+              <i class="icon-info-sign product-info" data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{ product|productinfo }}"></i>
+            </h3>
         </div>
         <div class="modal-body">
+            <div class="row-stockcart">
+                <div class="span6"><strong>{{ _('Qty') }}:</strong> {{ product.qty }}</div>
+                <div class="span6{% if product.qty_available < 0 %} stock-alert{% endif %}"><strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}</div>
+            </div>
+            <hr/>
             <div class="row-stockcart">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
             {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
             <div class="row-stockcart">{% endif %}{% endif %}
@@ -103,7 +110,9 @@
 </div>
 
 <script type="text/javascript">
+$('.product-info').tooltip();
 {% if not products %}$("#send-process").hide();{% endif %}
+
 $("#basket-form").submit(function () {
     var data = $('#basket-form').serializeArray();
 
