@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             {% if not products %}<tr><td colspan="7">{{ _('There are not pickings to process') }}</td></tr>{% endif %}
-            {% for product in products %}<tr class="{% if product.qty_available < 0 %}stock-alert{% endif %}">
+            {% for product in products %}<tr class="{% if product.qty_available <= 0 %}stock-alert{% endif %}">
                 <td><strong>{{ product.code }}</strong></td>
                 <td><a href="#{{ product.id }}" data-toggle="modal" data-target="#{{ product.id }}">{{ product.name }}</a></td>
                 <td><strong>{{ product.qty }}</strong></td>
@@ -45,7 +45,7 @@
         <div class="modal-body">
             <div class="row-stockcart">
                 <div class="span6"><strong>{{ _('Qty') }}:</strong> {{ product.qty }}</div>
-                <div class="span6{% if product.qty_available < 0 %} stock-alert{% endif %}"><strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}</div>
+                <div class="span6{% if product.qty_available <= 0 %} stock-alert{% endif %}"><strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}</div>
             </div>
             <hr/>
             <div class="row-stockcart">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
@@ -55,7 +55,7 @@
                         <h4>{{ cell }} - {{ picking_cell_name }}</h4>{% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
                         <p>
                             <input type="number" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="qty-cart required input-mini" required><br/>
-                            {% if product.qty_available < 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
+                            {% if product.qty_available <= 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
                         </p>{% endif %}{% endfor %}
                     </div>{% set count = count + 1 %}{% endif %}{% endfor %}
             </div>
