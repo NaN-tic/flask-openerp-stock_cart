@@ -18,46 +18,46 @@
             </tr>
         </thead>
         <tbody>
-        {% if not products %}<tr><td colspan="7">{{ _('There are not pickings to process') }}</td></tr>{% endif %}
-        {% for product in products %} 
-        <tr class="{% if product.qty_available < 0 %}stock-alert{% endif %}">
-            <td><strong>{{ product.code }}</strong></td>
-            <td><a href="#{{ product.id }}" data-toggle="modal" data-target="#{{ product.id }}">{{ product.name }}</a></td>
-            <td><strong>{{ product.qty }}</strong></td>
-            <td>{{ product.qty_available }}</td>
-            <td>{% if product.loc_rack %}{{ product.loc_rack }}{% endif %}</td>
-            <td>{% if product.loc_row %}{{ product.loc_row }}{% endif %}</td>
-            <td>{% if product.loc_case %}{{ product.loc_case }}{% endif %}</td>
-        </tr>
-        {% endfor %}
+            {% if not products %}<tr><td colspan="7">{{ _('There are not pickings to process') }}</td></tr>{% endif %}
+            {% for product in products %}<tr class="{% if product.qty_available < 0 %}stock-alert{% endif %}">
+                <td><strong>{{ product.code }}</strong></td>
+                <td><a href="#{{ product.id }}" data-toggle="modal" data-target="#{{ product.id }}">{{ product.name }}</a></td>
+                <td><strong>{{ product.qty }}</strong></td>
+                <td>{{ product.qty_available }}</td>
+                <td>{% if product.loc_rack %}{{ product.loc_rack }}{% endif %}</td>
+                <td>{% if product.loc_row %}{{ product.loc_row }}{% endif %}</td>
+                <td>{% if product.loc_case %}{{ product.loc_case }}{% endif %}</td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
     </div>
 </div>
 
 <form action="#" id="basket-form" class="form-horizontal" method="POST">
-    {% for product in products %} <div id="{{ product.id }}" class="modal hide fade" tabindex="-1" data-width="760">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3>{{ product.code }} - {{ product.name }}</h3>
-    </div>
-    <div class="modal-body">
-        <div class="row-fluid">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
-        {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
-        <div class="row-fluid">{% endif %}{% endif %}
-                <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
-                    <h4>{{ cell }} - {{ picking_cell_name }}</h4>{% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
-                    <p>
-                        <input type="number" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required" required><br/>
-                        {{ _('Qty added in this basket ') }} {% if product.qty_available < 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
-                    </p>{% endif %}{% endfor %}
-                </div>{% set count = count + 1 %}{% endif %}{% endfor %}
+    {% for product in products %}<div id="{{ product.id }}" class="modal hide fade" tabindex="-1" data-width="760">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3>{{ product.code }} - {{ product.name }}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="row-fluid">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
+            {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
+            <div class="row-fluid">{% endif %}{% endif %}
+                    <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
+                        <h4>{{ cell }} - {{ picking_cell_name }}</h4>{% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
+                        <p>
+                            <input type="number" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required" required><br/>
+                            {{ _('Qty added in this basket ') }} {% if product.qty_available < 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
+                        </p>{% endif %}{% endfor %}
+                    </div>{% set count = count + 1 %}{% endif %}{% endfor %}
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn">Close</button>
         </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn">Close</button>
-    </div>
-    </div>{% endfor %}
+    {% endfor %}
     <div id="send-process">
         <button type="submit" class="btn btn-primary">{{ _('Process') }}</button>
     </div>
