@@ -7,14 +7,16 @@ import docutils.core
 def get_description(lang):
     '''Get Description module from doc rst'''
     description = ''
+    path = os.path.dirname(os.path.realpath(__file__))
 
-    doc_path = 'doc/%s/index.rst' % (lang)
+    doc_path = '%s/doc/%s/index.rst' % (path, lang)
     if os.path.exists(doc_path):
         return read_rst(doc_path)
 
-    doc_path = 'doc/index.rst'
+    doc_path = '%s/doc/index.rst' % (path)
     if os.path.exists(doc_path):
         return read_rst(doc_path)
+
     return description
 
 def read_rst(doc_path):
