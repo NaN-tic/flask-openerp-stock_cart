@@ -118,7 +118,7 @@ $("#basket-form").submit(function () {
 
     $.ajax({
         type: "POST",
-        url: "/basket",
+        url: "{{ url_for('basket') }}",
         contentType: "application/json; charset=utf-8",
         data:JSON.stringify(data),
         success: function(data) {
