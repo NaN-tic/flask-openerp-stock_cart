@@ -130,7 +130,7 @@ def login():
                 flash(_('You were logged in.'))
                 return redirect(url_for('index'))
         else:
-            flash(_('Error: Invalid username or password'))
+            flash(_('Error: Invalid username %s or password' % session.get('username')))
 
     return render_template(get_template('login.html'), form=form)
 
