@@ -73,10 +73,10 @@
 {% if grid|length %}<!-- legend -->
 <hr/>
 <h4>{{ _('Grid Cart') }}</h4>
-<div class="row-fluid">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
+<div class="row-stockcart">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
 {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
-<div class="row-fluid">{% endif %}{% endif %}
-        <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }}">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
+<div class="row-stockcart">{% endif %}{% endif %}
+        <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
             <strong>{{ cell }} - {{ picking_cell_name }}</strong>
         </div>{% set count = count + 1 %}{% endif %}{% endfor %}
 </div>{% endif %}
