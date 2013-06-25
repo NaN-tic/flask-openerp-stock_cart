@@ -35,7 +35,8 @@
 </div>
 
 <form action="#" id="basket-form" class="form-horizontal" method="POST">
-    {% for product in products %}<div id="{{ product.id }}" class="modal hide fade" tabindex="-1" data-width="760">
+    {% for product in products recursive %}{% if products[loop.index] %}{% set next_product = products[loop.index] %}{% endif %}
+    <div id="{{ product.id }}" class="modal hide fade" tabindex="-1" data-width="760">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3>{{ product.name }}
@@ -61,7 +62,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn">Close</button>
+            <button type="button" data-dismiss="modal" class="btn">{{ _('Close') }}</button>
+            {% if not loop.last %}<button id="{{product.id}}-{{ next_product['id'] }}" type="button" data-dismiss="modal" class="btn btn-primary next-product">{{ _('Next') }}</button>{% endif %}
         </div>
     </div>
     {% endfor %}
@@ -143,5 +145,12 @@ $(".qty-cart").on("keyup", function() {
     trigger: "focus",
     title: "{{ _('Qty added in this basket ') }} "
 });
+
+/* Next product */
+$('.next-product').click(function(){
+   var products = this.id.split('-');
+   $('#'+products[0]).modal('hide');
+   $('#'+products[1]).modal('show');
+})
 </script>
 {% endblock %}
