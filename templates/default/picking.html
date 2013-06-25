@@ -53,7 +53,7 @@
             {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
             <div class="row-stockcart">{% endif %}{% endif %}
                     <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
-                        <h4>{{ cell }} - {{ picking_cell_name }}</h4>{% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
+                        <h5>{{ cell }} - {{ picking_cell_name }}</h5>{% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
                         <p>
                             <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required input-mini" autofocus="autofocus" required><br/>
                             {% if product.qty_available <= 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
