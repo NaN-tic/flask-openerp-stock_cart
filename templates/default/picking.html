@@ -55,7 +55,7 @@
                     <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
                         <h4>{{ cell }} - {{ picking_cell_name }}</h4>{% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
                         <p>
-                            <input type="number" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="qty-cart required input-mini" required><br/>
+                            <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required input-mini" autofocus="autofocus" required><br/>
                             {% if product.qty_available <= 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
                         </p>{% endif %}{% endfor %}
                     </div>{% set count = count + 1 %}{% endif %}{% endfor %}
@@ -134,23 +134,16 @@ $("#basket-form").submit(function () {
        return false;
 });
 
-$(".qty-cart").on("keyup", function() {
-    if (this.value.length <= 3) {
-        $(this).tooltip("show");
-    } else {
-        $(this).tooltip("hide");
-    }
-}).tooltip({
-    placement: "right",
-    trigger: "focus",
-    title: "{{ _('Qty added in this basket ') }} "
-});
-
 /* Next product */
 $('.next-product').click(function(){
    var products = this.id.split('-');
    $('#'+products[0]).modal('hide');
    $('#'+products[1]).modal('show');
 })
+
+/* Active autofocus */
+$(".modal").on('shown', function() {
+    $(this).find("[autofocus]:first").focus();
+});
 </script>
 {% endblock %}
