@@ -1,5 +1,5 @@
 {% extends "default/layout.html" %}
-{% block title %}{{ _("Select a cart") }}{% endblock %}
+{% block title %}{{ _("Process pickings") }}: {{ session.cart_name }}{% endblock %}
 {% block head %}<script src="{{ url_for('static', filename='default/js/jquery.validate.js') }}" type="text/javascript"></script>{% endblock %}
 {% block body %}
 {% include 'default/nav.html' %}
