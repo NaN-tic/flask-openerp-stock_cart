@@ -231,37 +231,6 @@ def picking():
     print picking_grid
     return render_template(get_template('picking.html'), products=products, grid=picking_grid)
 
-@app.route('/basket', methods=['PUT', 'POST'])
-@login_required
-def basket():
-    '''
-    Process values from form basket
-    name: picking-product ID's
-    value: qty to add in basket
-    '''
-    cart = session.get('cart', None)
-    Client = erp_connect()
-
-    values = []
-    result = True
-    for data in request.json:
-
-        try:
-            move = int(data['name'])
-            qty = int(data['value'])
-        except:
-            result = False
-
-        values.append({
-            'move': move,
-            'qty': qty,
-            })
-
-    if result:
-        Client.execute('stock.picking', 'set_products_to_cart', cart, values)
-
-    return jsonify(result=result)
-
 @app.route('/validate', methods=['PUT', 'POST'])
 def validate():
     values = {}
