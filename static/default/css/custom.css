@@ -109,7 +109,7 @@ body {padding-top: 0px; padding-bottom: 40px; background-color: #f5f5f5}
 
 /* Picking */
 .basket { min-height:60px !important}
-#send-process { text-align: right}
+#send-pickings-done { text-align: right}
 
 .row-stockcart {
   width: 100%;
