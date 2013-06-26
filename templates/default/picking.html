@@ -120,6 +120,31 @@
     </div>
 </div>
 
+{% if grid|length %}
+<!-- Modal Window Pickings -->
+<div id="pickings" class="modal hide fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <form action="#" id="send-pickings-form" class="form-horizontal" method="POST">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{{ _('Pickings') }}</h3>
+    </div>
+    <div class="modal-body">
+        {% for g in grid %}{% set picking = loop.index %}{% set name = grid|pickingname(picking) %}{% set products = grid|pickingproducts(picking) %}
+        <h4>{{ picking}} - {{ name }}</h4>
+        <ul>
+            {% for product in products %}<li>{{ product['qty'] }} - {{ product['product_name'] }}</li>
+            {% endfor %}
+        </ul>
+        <input type="hidden" name="{{ name }}" value="1">
+        {% endfor %}
+    </div>
+    <div class="modal-footer">
+        <button id="send-pickings" type="button" data-dismiss="modal" class="btn btn-primary">{{ _('Done') }}</button>
+    </div>
+    </form>
+</div>
+{% endif %}
+
 <script type="text/javascript">
 $('.product-info').tooltip();
 
@@ -211,6 +236,25 @@ $('.last-product').click(function(){
     $.ajax({
         type: "POST",
         url: "{{ url_for('validate') }}",
+        contentType: "application/json; charset=utf-8",
+        data:JSON.stringify(data),
+        success: function(data) {
+            $('#pickings').modal('show');
+            },
+        error:function(request, status, error){
+            alert(request.responseText);
+            },
+        });
+})
+
+/* Send pickings */
+$('#send-pickings').click(function(){
+    var product = this.id;
+    var data = $('#send-pickings-form').serializeArray();
+
+    $.ajax({
+        type: "POST",
+        url: "{{ url_for('send_pickings') }}",
         contentType: "application/json; charset=utf-8",
         data:JSON.stringify(data),
         success: function(data) {

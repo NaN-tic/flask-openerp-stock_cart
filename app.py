@@ -228,7 +228,7 @@ def picking():
 
     Client = erp_connect()
     products, picking_grid = Client.execute('stock.picking', 'get_products_to_cart', cart, order)
-
+    print picking_grid
     return render_template(get_template('picking.html'), products=products, grid=picking_grid)
 
 @app.route('/basket', methods=['PUT', 'POST'])
@@ -274,6 +274,24 @@ def validate():
 
     if not result:
         response = jsonify({'message': _(u'Error when process moves:qty %(values)s.', values=values)})
+        response.status_code = 500
+        return response
+    return jsonify(result=True)
+
+@app.route('/send-pickings', methods=['PUT', 'POST'])
+def send_pickings():
+    '''Finish process: Send pickings''' 
+    cart = session.get('cart', None)
+    pickings = []
+    for data in request.json:
+        if data.get('name'):
+            pickings.append(data.get('name'))
+
+    Client = erp_connect()
+    result = Client.execute('stock.picking', 'stock_cart_finish', cart, pickings)
+
+    if not result:
+        response = jsonify({'message': _(u'Error when process pickings %(pickings)s.', pickings=pickings)})
         response.status_code = 500
         return response
     return jsonify(result=True)

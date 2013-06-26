@@ -28,12 +28,23 @@ def pickingname(pickings, arg):
     """
     Get picking name from dict.
 
-    * pickings = {'1': 'P1230', '2': 'P1231'}
+    * pickings = {'1': {'name': 'P1230', 'products': []}
     """
     if not arg:
         return None
-    return pickings[str(arg)]
+    return pickings[str(arg)]['name']
 jinja2.filters.FILTERS['pickingname'] = pickingname
+
+def pickingproducts(pickings, arg):
+    """
+    Get picking name from dict.
+
+    * pickings = {'1': {'name': 'P1230', 'products': []}
+    """
+    if not arg:
+        return None
+    return pickings[str(arg)]['products']
+jinja2.filters.FILTERS['pickingproducts'] = pickingproducts
 
 def productinfo(product):
     """
