@@ -34,52 +34,52 @@
     </div>
 </div>
 
-    {% for product in products recursive %}{% if products[loop.index] %}{% set next_product = products[loop.index] %}{% endif %}
-    <div id="{{ product.id }}" class="modal hide fade" tabindex="-1" data-width="760">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3>{{ product.name }}
-              <i class="icon-info-sign product-info" data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{ product|productinfo }}"></i>
-            </h3>
-        </div>
-        <div class="modal-body">
-            <div class="row-stockcart">
-                <div class="span6"><strong>{{ _('Qty') }}:</strong> {{ product.qty }}</div>
-                <div class="span6{% if product.qty_available <= 0 %} stock-alert{% endif %}"><strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}</div>
-            </div>
-            <div class="box-ean13">
-                <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus"> 
-                <a href="#{{product.ean13}}" class="get-ean13 btn btn-primary{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a> 
-                {{ _('or') }} 
-                <a href="#{{product.ean13}}" class="show-stockcart btn{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
-            </div>
-            <hr/>
-            <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
-            <div class="box-stockcart {{product.ean13}}">
-                <div class="row-stockcart">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
-                {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
-                <div class="row-stockcart">{% endif %}{% endif %}
-                        <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
-                            <h5>{{ cell }} - {{ picking_cell_name }}</h5>{% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
-                            <p>
-                                <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required input-mini" autofocus="autofocus" required><br/>
-                                {% if product.qty_available <= 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
-                            </p>{% endif %}{% endfor %}
-                        </div>{% set count = count + 1 %}{% endif %}{% endfor %}
-                </div>
-            </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn">{{ _('Close') }}</button>
-            {% if not loop.last %}<button id="{{product.id}}-{{ next_product['id'] }}" type="button" data-dismiss="modal" class="btn btn-primary next-product next-{{ product.ean13 }}">{{ _('Send and next') }}</button>{% endif %}
-            {% if loop.last %}<button id="{{product.id}}" type="button" data-dismiss="modal" class="btn btn-primary last-product">{{ _('Send and finish') }}</button>{% endif %}
-        </div>
+{% for product in products recursive %}{% if products[loop.index] %}{% set next_product = products[loop.index] %}{% endif %}
+<div id="{{ product.id }}" class="modal hide fade" tabindex="-1" data-width="760">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>{{ product.name }}
+          <i class="icon-info-sign product-info" data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{ product|productinfo }}"></i>
+        </h3>
     </div>
-    {% endfor %}
-    <div id="send-process">
-        <button type="submit" class="btn btn-primary">{{ _('Process') }}</button>
+    <div class="modal-body">
+        <div class="row-stockcart">
+            <div class="span6"><strong>{{ _('Qty') }}:</strong> {{ product.qty }}</div>
+            <div class="span6{% if product.qty_available <= 0 %} stock-alert{% endif %}"><strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}</div>
+        </div>
+        <div class="box-ean13">
+            <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus"> 
+            <a href="#{{product.ean13}}" class="get-ean13 btn btn-primary{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a> 
+            {{ _('or') }} 
+            <a href="#{{product.ean13}}" class="show-stockcart btn{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
+        </div>
+        <hr/>
+        <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
+        <div class="box-stockcart {{product.ean13}}">
+            <div class="row-stockcart">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
+            {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
+            <div class="row-stockcart">{% endif %}{% endif %}
+                    <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
+                        <h5>{{ cell }} - {{ picking_cell_name }}</h5>{% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
+                        <p>
+                            <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required input-mini" autofocus="autofocus" required><br/>
+                            {% if product.qty_available <= 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
+                        </p>{% endif %}{% endfor %}
+                    </div>{% set count = count + 1 %}{% endif %}{% endfor %}
+            </div>
+        </div>
+        </form>
     </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">{{ _('Close') }}</button>
+        {% if not loop.last %}<button id="{{product.id}}-{{ next_product['id'] }}" type="button" data-dismiss="modal" class="btn btn-primary next-product next-{{ product.ean13 }}">{{ _('Send and next') }}</button>{% endif %}
+        {% if loop.last %}<button id="{{product.id}}" type="button" data-dismiss="modal" class="btn btn-primary last-product">{{ _('Send and finish') }}</button>{% endif %}
+    </div>
+</div>
+{% endfor %}
+<div id="send-process">
+    <button type="submit" class="btn btn-primary">{{ _('Process') }}</button>
+</div>
 
 {% if grid|length %}<!-- legend -->
 <hr/>
