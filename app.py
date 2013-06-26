@@ -262,6 +262,22 @@ def basket():
 
     return jsonify(result=result)
 
+@app.route('/validate', methods=['PUT', 'POST'])
+def validate():
+    values = {}
+    for data in request.json:
+        if data.get('name') and data.get('value'):
+            values[data['name']] = data['value']
+
+    Client = erp_connect()
+    result = Client.execute('stock.move', 'set_cart_to_move', values)
+
+    if not result:
+        response = jsonify({'message': _(u'Error when process moves:qty %(values)s.', values=values)})
+        response.status_code = 500
+        return response
+    return jsonify(result=True)
+
 @app.route('/help')
 @login_required
 def help():

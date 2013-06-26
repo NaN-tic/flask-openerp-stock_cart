@@ -34,7 +34,6 @@
     </div>
 </div>
 
-<form action="#" id="basket-form" class="form-horizontal" method="POST">
     {% for product in products recursive %}{% if products[loop.index] %}{% set next_product = products[loop.index] %}{% endif %}
     <div id="{{ product.id }}" class="modal hide fade" tabindex="-1" data-width="760">
         <div class="modal-header">
@@ -50,9 +49,12 @@
             </div>
             <div class="box-ean13">
                 <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus"> 
-                <a href="#{{product.ean13}}" class="get-ean13 btn btn-primary">{{ _('Find') }}</a> {{ _('or') }} <a href="#{{product.ean13}}" class="show-stockcart btn">{{ _('Continue') }}</a>
+                <a href="#{{product.ean13}}" class="get-ean13 btn btn-primary{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a> 
+                {{ _('or') }} 
+                <a href="#{{product.ean13}}" class="show-stockcart btn{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
             </div>
             <hr/>
+            <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
             <div class="box-stockcart {{product.ean13}}">
                 <div class="row-stockcart">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
                 {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
@@ -66,17 +68,18 @@
                         </div>{% set count = count + 1 %}{% endif %}{% endfor %}
                 </div>
             </div>
+            </form>
         </div>
         <div class="modal-footer">
             <button type="button" data-dismiss="modal" class="btn">{{ _('Close') }}</button>
-            {% if not loop.last %}<button id="{{product.id}}-{{ next_product['id'] }}" type="button" data-dismiss="modal" class="btn btn-primary next-product next-{{ product.ean13 }}">{{ _('Next') }}</button>{% endif %}
+            {% if not loop.last %}<button id="{{product.id}}-{{ next_product['id'] }}" type="button" data-dismiss="modal" class="btn btn-primary next-product next-{{ product.ean13 }}">{{ _('Send and next') }}</button>{% endif %}
+            {% if loop.last %}<button id="{{product.id}}" type="button" data-dismiss="modal" class="btn btn-primary last-product">{{ _('Send and finish') }}</button>{% endif %}
         </div>
     </div>
     {% endfor %}
     <div id="send-process">
         <button type="submit" class="btn btn-primary">{{ _('Process') }}</button>
     </div>
-</form>
 
 {% if grid|length %}<!-- legend -->
 <hr/>
@@ -122,27 +125,45 @@ $('.product-info').tooltip();
 
 /* Box Stockcart */
 $(".box-stockcart").hide();
-$(".next-product").hide();
+$(".next-product").attr("disabled", "disabled");
+$(".last-product").attr("disabled", "disabled");
+
+/* Get EAN13 if is valid */
 $(".get-ean13").click(function(event){
     var boxean = $(this).attr('href').replace('#', '.');
     var ean = boxean.slice(1, boxean.length);
     var value = $('#ean-'+ean).val();
+    var classes = $(this).attr('class').split(" ");
+
     if(value != ean){
         alert("{{ _('Not find EAN: ') }}"+value);
         return False;
     }
     $(boxean).show();
-    $('.next-'+ean).show();
+    if( $.inArray('last-prod', classes) > 0){
+        $('.last-product').removeAttr("disabled"); 
+    } else {
+        $('.next-'+ean).removeAttr("disabled"); 
+    }
 });
+
+/* Pass EAN13 if is valid */
 $(".show-stockcart").click(function(event){
     var boxean = $(this).attr('href').replace('#', '.');
     var ean = boxean.slice(1, boxean.length);
+    var classes = $(this).attr('class').split(" ");
+
     $(boxean).show();
-    $('.next-'+ean).show();
+    if( $.inArray('last-prod', classes) > 0){
+        $('.last-product').removeAttr("disabled"); 
+    } else {
+        $('.next-'+ean).removeAttr("disabled"); 
+    }
 });
 
 {% if not products %}$("#send-process").hide();{% endif %}
 
+/* REMOVE THIS METHOD */
 $("#basket-form").submit(function () {
     var data = $('#basket-form').serializeArray();
 
@@ -164,9 +185,41 @@ $("#basket-form").submit(function () {
 
 /* Next product */
 $('.next-product').click(function(){
-   var products = this.id.split('-');
-   $('#'+products[0]).modal('hide');
-   $('#'+products[1]).modal('show');
+    var products = this.id.split('-');
+    var data = $('#'+products[0]+'-form').serializeArray();
+
+    $.ajax({
+        type: "POST",
+        url: "{{ url_for('validate') }}",
+        contentType: "application/json; charset=utf-8",
+        data:JSON.stringify(data),
+        success: function(data) {
+            $('#'+products[0]).modal('hide');
+            $('#'+products[1]).modal('show');
+            },
+        error:function(request, status, error){
+            alert(request.responseText);
+            },
+        });
+})
+
+/* Last product */
+$('.last-product').click(function(){
+    var product = this.id;
+    var data = $('#'+product+'-form').serializeArray();
+
+    $.ajax({
+        type: "POST",
+        url: "{{ url_for('validate') }}",
+        contentType: "application/json; charset=utf-8",
+        data:JSON.stringify(data),
+        success: function(data) {
+            $('#send-done').modal('show');
+            },
+        error:function(request, status, error){
+            alert(request.responseText);
+            },
+        });
 })
 
 /* Active autofocus */
