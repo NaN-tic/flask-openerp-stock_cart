@@ -197,7 +197,7 @@ $('.next-product').click(function(){
 
     $.ajax({
         type: "POST",
-        url: "{{ url_for('validate') }}",
+        url: "{{ url_for('send_move') }}",
         contentType: "application/json; charset=utf-8",
         data:JSON.stringify(data),
         success: function(data) {
@@ -217,7 +217,7 @@ $('.last-product').click(function(){
 
     $.ajax({
         type: "POST",
-        url: "{{ url_for('validate') }}",
+        url: "{{ url_for('send_move') }}",
         contentType: "application/json; charset=utf-8",
         data:JSON.stringify(data),
         success: function(data) {

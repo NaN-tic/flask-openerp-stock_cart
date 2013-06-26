@@ -231,8 +231,8 @@ def picking():
     print picking_grid
     return render_template(get_template('picking.html'), products=products, grid=picking_grid)
 
-@app.route('/validate', methods=['PUT', 'POST'])
-def validate():
+@app.route('/send-move', methods=['PUT', 'POST'])
+def send_move():
     values = {}
     for data in request.json:
         if data.get('name') and data.get('value'):
