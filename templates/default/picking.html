@@ -190,26 +190,6 @@ $(".show-stockcart").click(function(event){
 
 {% if not products %}$("#send-pickings-done").hide();{% endif %}
 
-/* REMOVE THIS METHOD */
-$("#basket-form").submit(function () {
-    var data = $('#basket-form').serializeArray();
-
-    $.ajax({
-        type: "POST",
-        url: "{{ url_for('basket') }}",
-        contentType: "application/json; charset=utf-8",
-        data:JSON.stringify(data),
-        success: function(data) {
-            $('#send-done').modal('show');
-            $("#send-process").hide();
-            },
-        error:function(data){
-            $('#send-error').modal('show');
-            },
-        });
-       return false;
-});
-
 /* Next product */
 $('.next-product').click(function(){
     var products = this.id.split('-');
