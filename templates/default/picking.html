@@ -73,7 +73,7 @@
     <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn">{{ _('Close') }}</button>
         {% if not loop.last %}<button id="{{product.id}}-{{ next_product['id'] }}" type="button" data-dismiss="modal" class="btn btn-primary next-product next-{{ product.ean13 }}">{{ _('Send and next') }}</button>{% endif %}
-        {% if loop.last %}<button id="{{product.id}}" type="button" data-dismiss="modal" class="btn btn-primary last-product">{{ _('Send and finish') }}</button>{% endif %}
+        {% if loop.last %}<button id="{{product.id}}" type="button" data-dismiss="modal" class="btn btn-primary last-product">{{ _('Send and Done') }}</button>{% endif %}
     </div>
 </div>
 {% endfor %}
