@@ -96,10 +96,13 @@
 <div id="send-done" class="modal hide fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3>{{ _('Send quantity products successfully') }}</h3>
+        <h3>{{ _('Pickings have been sent and process successfully') }}</h3>
     </div>
     <div class="modal-body">
-    <p><a href="{{ url_for('picking') }}">{{ _('Get more products/pickings to do') }}</a></p>
+    <p>{{ _('What do you do?') }}</p>
+    <p>
+        <a href="{{ url_for('picking') }}">{{ _('Do more pickings to delivery') }}</a> {{_('or')}} <a href="{{ url_for('logout') }}">{{ _('logout') }}</a>
+    </p>
     </div>
     <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn">{{ _('Done') }}</button>
