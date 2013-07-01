@@ -235,6 +235,8 @@ def picking():
 def send_move():
     values = {}
     for data in request.json:
+        if data.get('name').split('-')[0] == 'ean':
+            continue
         if data.get('name') and data.get('value'):
             values[data['name']] = data['value']
 
