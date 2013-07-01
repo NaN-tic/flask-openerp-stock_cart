@@ -43,18 +43,18 @@
         </h3>
     </div>
     <div class="modal-body">
+        <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
         <div class="row-stockcart">
             <div class="span6"><strong>{{ _('Qty') }}:</strong> {{ product.qty }}</div>
             <div class="span6{% if product.qty_available <= 0 %} stock-alert{% endif %}"><strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}</div>
         </div>
         <div class="box-ean13">
             <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus"> 
-            <a href="#{{product.ean13}}" class="get-ean13 btn btn-primary{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a> 
+            <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a> 
             {{ _('or') }} 
             <a href="#{{product.ean13}}" class="show-stockcart btn{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
         </div>
         <hr/>
-        <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
         <div class="box-stockcart {{product.ean13}}">
             <div class="row-stockcart">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
             {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
@@ -69,6 +69,14 @@
             </div>
         </div>
         </form>
+        <script type="text/javascript">
+        $('#ean-{{product.ean13}}').change(function() {
+            var value = $('#ean-{{product.ean13}}').val();
+            if(value == '{{product.ean13}}'){
+                $('#{{product.ean13}}').trigger('click');
+            }
+        });
+        </script>
     </div>
     <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn">{{ _('Close') }}</button>
