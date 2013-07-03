@@ -228,7 +228,6 @@ def picking():
 
     Client = erp_connect()
     products, picking_grid = Client.execute('stock.picking', 'get_products_to_cart', cart, order)
-    print picking_grid
     return render_template(get_template('picking.html'), products=products, grid=picking_grid)
 
 @app.route('/send-move', methods=['PUT', 'POST'])
