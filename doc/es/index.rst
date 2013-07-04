@@ -47,3 +47,7 @@ Preguntas frecuentes
   pero deseas otra vez que se procese, puedes editar la información de carro, usuario
   y empaquetando sin información para que la próxima vez que solicite albaranes esté disponible
   (siempre que el albarán esté en estado reservado).
+* No hay ningún carro disponible para seleccionar. Esto es debido que el usuario cerró el
+  cliente sin salir de la sesión. Existe un control de carro para varios usuarios no
+  puedan usar el mismo carro. Si desea liberar el usuario del carro, acceda al ERP y en la
+  configuración de los carro, elimine el usuario asignado en el carro.
