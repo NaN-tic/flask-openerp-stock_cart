@@ -36,5 +36,14 @@ finalizados y poder recebir nuevos albaranes.
 Preguntas frecuentes
 --------------------
 
+* Sólo dispondrá de **albaranes de salida** y con el estado **Reservado**.
 * No veo un producto que esta en un albarán. Asegúrase que este producto disponga del número
   EAN. Si no dispone de ningún código EAN13 deberá añadirlo.
+* Dispongo de albaranes reservados pero no los veo. En el albarán dispone de la información:
+  Carro (el carro que se le ha asignado), usuario (el usuario que se le ha asignado)
+  y empaquetando (está en proceso).
+  Cuando solicite nuevos albaranes, si estos ya estaban asignados (usuario y empaquetando)
+  se mostraran estos para que los finalice. En el caso que un albarán ya estaba procesado
+  pero deseas otra vez que se procese, puedes editar la información de carro, usuario
+  y empaquetando sin información para que la próxima vez que solicite albaranes esté disponible
+  (siempre que el albarán esté en estado reservado).
