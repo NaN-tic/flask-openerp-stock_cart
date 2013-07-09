@@ -143,7 +143,7 @@
             </thead>
             <tbody>
                 {% for product in products %}<tr>
-                    <td>{{ product['product_code'] }</td>
+                    <td>{{ product['product_code'] }}</td>
                     <td>{{ product['product_name'] }}</td>
                     <td>{{ product['qty'] }}</td>
                     {% set move = product|productmove() %}<td id="qty-{{ move }}"></td>
