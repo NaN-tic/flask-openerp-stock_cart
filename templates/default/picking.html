@@ -35,28 +35,26 @@
 </div>
 
 {% for product in products recursive %}{% if products[loop.index] %}{% set next_product = products[loop.index] %}{% endif %}
-<div id="{{ product.id }}" class="modal hide fade" tabindex="-1" data-width="760">
+<div id="{{ product.id }}" class="modal hide fade modal-product" tabindex="-1" data-width="760">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3>{{ product.name }}
+        <h3 class="product-title">{{ product.name }}
           <i class="icon-info-sign product-info" data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{ product|productinfo }}"></i>
         </h3>
     </div>
     <div class="modal-body">
         <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
         <div class="row-stockcart">
-            <div class="span6"><strong>{{ _('Reference') }}:</strong> {{ product.code }}</div>
-            <div class="span6"><strong>{{ _('Manufacturer') }}:</strong> {{ product.manufacturer }}</div>
-        </div>
-        <div class="row-stockcart">
-            <div class="span6"><strong>{{ _('Qty') }}:</strong> {{ product.qty }}</div>
-            <div class="span6{% if product.qty_available <= 0 %} stock-alert{% endif %}"><strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}</div>
-        </div>
-        <div class="box-ean13">
-            <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus"> 
-            <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
-            <a href="#{{product.ean13}}" class="clean-ean13 btn">{{ _('Clean') }}</a>
-            <a href="#{{product.ean13}}" class="show-stockcart btn{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
+            <div class="span6 box-ean13">
+                <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus"> 
+                <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
+                <a href="#{{product.ean13}}" class="clean-ean13 btn">{{ _('Clean') }}</a>
+                <a href="#{{product.ean13}}" class="show-stockcart btn{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
+            </div>
+            <div class="span3"><strong>{{ _('Reference') }}:</strong> {{ product.code }}<br/>
+            <strong>{{ _('Manufacturer') }}:</strong> {{ product.manufacturer }}</div>
+            <div class="span3"><strong>{{ _('Qty') }}:</strong> {{ product.qty }}<br/>
+            <strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}</div>
         </div>
         <hr/>
         <div class="box-stockcart {{product.ean13}}">
@@ -64,11 +62,9 @@
             {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
             <div class="row-stockcart">{% endif %}{% endif %}
                     <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
-                        <h5>{{ cell }} - {{ picking_cell_name }}</h5>{% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
-                        <p>
-                            <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required input-mini" autofocus="autofocus" required><br/>
-                            {% if product.qty_available <= 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
-                        </p>{% endif %}{% endfor %}
+                        <strong>{{ cell }} - {{ picking_cell_name }}</strong> {% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
+                            <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required input-mini input-qty" autofocus="autofocus" required> {% if product.qty_available <= 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
+                        {% endif %}{% endfor %}
                     </div>{% set count = count + 1 %}{% endif %}{% endfor %}
             </div>
         </div>
@@ -162,6 +158,7 @@
 {% endif %}
 
 <script type="text/javascript">
+$('.modal-product').css({width: '1100px', 'margin-left': function () { return -($(this).width() / 2);}});
 $('.product-info').tooltip();
 
 /* Box Stockcart */

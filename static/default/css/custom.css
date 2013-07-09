@@ -108,7 +108,6 @@ body {padding-top: 0px; padding-bottom: 40px; background-color: #f5f5f5}
 /* End Index */
 
 /* Picking */
-.basket { min-height:60px !important}
 #send-pickings-done { text-align: right}
 
 .row-stockcart {
@@ -216,4 +215,13 @@ body {padding-top: 0px; padding-bottom: 40px; background-color: #f5f5f5}
 .row-stockcart [class*="span"].pull-right {
   float: right;
 }
+
+.product-title {
+  font-size: 17.5px;
+  line-height: 20px;
+}
+.input-qty {
+  height: 12px !important;
+}
+
 /* End picking */
