@@ -67,3 +67,10 @@ def productinfo(product):
         product_info.append('%s: %s' % (_(u'Location'), product.get('location')))
     return "<br/>".join(product_info)
 jinja2.filters.FILTERS['productinfo'] = productinfo
+
+def productmove(product):
+    """
+    Get move from dict.
+    """
+    return product.get('move')
+jinja2.filters.FILTERS['productmove'] = productmove

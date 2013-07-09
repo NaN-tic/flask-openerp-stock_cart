@@ -282,6 +282,16 @@ def send_pickings():
         return response
     return jsonify(result=True)
 
+@app.route('/qty-pickings', methods=['PUT', 'POST'])
+def qty_pickings():
+    '''Get Qty from pickings
+    ERP return dict {'Picking number': {'move':'qty'}}
+    '''
+    Client = erp_connect()
+    result = Client.execute('stock.picking', 'stock_cart_qty', request.json)
+
+    return jsonify(result=result)
+
 @app.route('/help')
 @login_required
 def help():
