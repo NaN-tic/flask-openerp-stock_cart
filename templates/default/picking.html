@@ -45,6 +45,10 @@
     <div class="modal-body">
         <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
         <div class="row-stockcart">
+            <div class="span6"><strong>{{ _('Reference') }}:</strong> {{ product.code }}</div>
+            <div class="span6"><strong>{{ _('Manufacturer') }}:</strong> {{ product.manufacturer }}</div>
+        </div>
+        <div class="row-stockcart">
             <div class="span6"><strong>{{ _('Qty') }}:</strong> {{ product.qty }}</div>
             <div class="span6{% if product.qty_available <= 0 %} stock-alert{% endif %}"><strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}</div>
         </div>
