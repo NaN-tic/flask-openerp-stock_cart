@@ -253,10 +253,8 @@ def print_picking():
     '''Print picking
     Get picking name and send to print
     ''' 
-    cart = session.get('cart', None)
-
     Client = erp_connect()
-    result = Client.execute('stock.picking', 'stock_cart_print', cart, [request.json])
+    result = Client.execute('stock.picking', 'stock_cart_print',  [request.json])
 
     if not result:
         response = jsonify({'message': _(u'Error when print pickings %(pickings)s.', pickings=pickings)})
