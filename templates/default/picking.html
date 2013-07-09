@@ -54,8 +54,8 @@
         </div>
         <div class="box-ean13">
             <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus"> 
-            <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a> 
-            {{ _('or') }} 
+            <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
+            <a href="#{{product.ean13}}" class="clean-ean13 btn">{{ _('Clean') }}</a>
             <a href="#{{product.ean13}}" class="show-stockcart btn{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
         </div>
         <hr/>
@@ -198,6 +198,14 @@ $(".show-stockcart").click(function(event){
     } else {
         $('.next-'+ean).removeAttr("disabled"); 
     }
+});
+
+$(".clean-ean13").click(function(event){
+    var boxean = $(this).attr('href').replace('#', '.');
+    var ean = boxean.slice(1, boxean.length);
+    var classes = $(this).attr('class').split(" ");
+
+    $('#ean-'+ean).val('');
 });
 
 {% if not products %}$("#send-pickings-done").hide();{% endif %}
