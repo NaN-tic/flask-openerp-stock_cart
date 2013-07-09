@@ -248,6 +248,22 @@ def send_move():
         return response
     return jsonify(result=True)
 
+@app.route('/print-picking', methods=['PUT', 'POST'])
+def print_picking():
+    '''Print picking
+    Get picking name and send to print
+    ''' 
+    cart = session.get('cart', None)
+
+    Client = erp_connect()
+    result = Client.execute('stock.picking', 'stock_cart_print', cart, [request.json])
+
+    if not result:
+        response = jsonify({'message': _(u'Error when print pickings %(pickings)s.', pickings=pickings)})
+        response.status_code = 500
+        return response
+    return jsonify(result=True)
+
 @app.route('/send-pickings', methods=['PUT', 'POST'])
 def send_pickings():
     '''Finish process: Send pickings''' 
