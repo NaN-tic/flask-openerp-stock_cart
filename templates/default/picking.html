@@ -160,6 +160,20 @@
 <script type="text/javascript">
 $('.product-info').tooltip();
 
+
+$('.modal-product').on('show', function(e) {
+    var modal = $(this);
+    modal.css('position', "fixed")
+        .css('height','auto')
+        .css('width', 'auto')
+        .css('margin','0')
+        .css('top', "3%") 
+        .css('left', "3%")
+        .css('right', "3%")
+        .css('bottom', "3%");
+    return this;
+});
+
 /* Box Stockcart */
 $(".box-stockcart").hide();
 $(".next-product").attr("disabled", "disabled");
