@@ -1,0 +1,22 @@
+{% extends "default/layout.html" %}{% from "default/_helpers.html" import render_field %}
+{% block title %}{{ _("Product location") }}{% endblock %}
+{% block body %}
+{% include 'default/nav.html' %}
+<div class="row">
+    <div class="span12">
+        <h2>{{ _("Product location") }}</h2>
+        <p>{{ _("Add new location product by EAN13") }}</p>
+        <form id="location-form"  action="{{ url_for('location') }}" class="form-horizontal" method="POST">
+            {{ render_field(form.rack, class_="", placeholder=_("Rack")) }}
+            {{ render_field(form.row, class_="", placeholder=_("Row")) }}
+            {{ render_field(form.case, class_="", placeholder=_("Case")) }}
+            {{ render_field(form.ean13, class_="", placeholder=_("EAN13")) }}
+            <hr/>
+            <div class="controls">
+                <button class="btn btn-large btn-primary btn-small" type="submit">{{ _("Save") }}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

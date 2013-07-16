@@ -10,6 +10,7 @@ from functools import wraps
 
 from flask import Flask, render_template, request, jsonify, abort, session, redirect, url_for, flash
 from flask.ext.babel import Babel, gettext as _
+from wtforms import Form, TextField, validators
 
 from apphelp import get_description
 from form import *
@@ -289,6 +290,57 @@ def qty_pickings():
     result = Client.execute('stock.picking', 'stock_cart_qty', request.json)
 
     return jsonify(result=result)
+
+
+class LocationForm(Form):
+    """
+    A form location product
+    """
+    rack = TextField('Rack', [validators.Required()])
+    row = TextField('Row', [validators.Required()])
+    case = TextField('Case', [validators.Required()])
+    ean13 = TextField('EAN13', [validators.Required()])
+
+    def validate(self):
+        rv = Form.validate(self)
+        if not self.rack.data:
+            return False
+        if not self.row.data:
+            return False
+        if not self.case.data:
+            return False
+        if not self.ean13.data:
+            return False
+        return True
+
+
+@app.route('/location', methods=['GET', 'POST'])
+@login_required
+def location():
+    '''Save new product location'''
+    form = LocationForm(request.form)
+
+    if request.method == 'POST' and form.validate():
+        values = {
+            'loc_rack': form.rack.data,
+            'loc_row': form.row.data,
+            'loc_case': form.case.data,
+            }
+        ean13 = form.ean13.data
+
+        Client = erp_connect()
+        product = Client.search('product.product',[
+                ('ean13', '=', ean13),
+                ])
+        if not product:
+            flash('Product EAN13 %s not found' % ean13)
+        else:
+            Product = Client.model('product.product')
+            p = Product.get(product[0])
+            p.write(values)
+            flash('Save product EAN13 %s' % ean13)
+
+    return render_template(get_template('location.html'), form=form)
 
 @app.route('/help')
 @login_required
