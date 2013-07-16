@@ -296,18 +296,12 @@ class LocationForm(Form):
     """
     A form location product
     """
-    rack = TextField('Rack', [validators.Required()])
-    row = TextField('Row', [validators.Required()])
-    case = TextField('Case', [validators.Required()])
+    location = TextField('Location', [validators.Required()], description=_('Location separated by "-": rack-row-case'))
     ean13 = TextField('EAN13', [validators.Required()])
 
     def validate(self):
         rv = Form.validate(self)
-        if not self.rack.data:
-            return False
-        if not self.row.data:
-            return False
-        if not self.case.data:
+        if not self.location.data:
             return False
         if not self.ean13.data:
             return False
@@ -321,11 +315,20 @@ def location():
     form = LocationForm(request.form)
 
     if request.method == 'POST' and form.validate():
-        values = {
-            'loc_rack': form.rack.data,
-            'loc_row': form.row.data,
-            'loc_case': form.case.data,
-            }
+        location = form.location.data
+        loc = location.split('-')
+
+        values = {}
+        if len(loc) == 3:
+            values['loc_rack'] = loc[0]
+            values['loc_row'] = loc[1]
+            values['loc_case'] = loc[2]
+        if len(loc) == 2:
+            values['loc_rack'] = loc[0]
+            values['loc_row'] = loc[1]
+        if len(loc) == 1:
+            values['loc_rack'] = loc[0]
+
         ean13 = form.ean13.data
 
         Client = erp_connect()
@@ -339,6 +342,7 @@ def location():
             p = Product.get(product[0])
             p.write(values)
             flash('Save product EAN13 %s' % ean13)
+        form.ean13.data = None
 
     return render_template(get_template('location.html'), form=form)
 
