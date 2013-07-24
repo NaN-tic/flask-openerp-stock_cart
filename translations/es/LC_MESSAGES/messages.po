@@ -1,0 +1,333 @@
+# Spanish translations for PROJECT.
+# Copyright (C) 2013 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2013-07-24 09:43+0200\n"
+"PO-Revision-Date: 2013-07-24 10:08+0100\n"
+"Last-Translator: Raimon Esteve <resteve@zikzakmedia.com>\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
+
+#: app.py:64
+msgid "Can't connect to ERP server. Check network-ports or ERP server was running."
+msgstr "No se puede conectar con el ERP. Compruebe la red y puertos o si el servidor está activo."
+
+#: app.py:128
+#, python-format
+msgid "Error: Not access in %(key)s - %(value)skey"
+msgstr "Error. No dispone de acceso a %(key)s - %(value)skey"
+
+#: app.py:131
+msgid "You were logged in."
+msgstr "Se ha identificado en la aplicación."
+
+#: app.py:134
+#, python-format
+msgid "Error: Invalid username %s or password"
+msgstr "Error. Usuario %s o contraseña no válidos"
+
+#: app.py:164
+msgid "You were logged out."
+msgstr "Ha salido de la aplicación."
+
+#: app.py:208
+#, python-format
+msgid "Cart %(name)s is working by user %(user)s."
+msgstr "Carrito %(name)s es usado por el usuario %(user)s."
+
+#: app.py:210
+#, python-format
+msgid "Not find some cart by %(id)s."
+msgstr "No se ha encontrado ningún carrito por %(id)s."
+
+#: app.py:212
+msgid "Error: Cart ID not valid or empty"
+msgstr "Error: El ID del carrito no es correcto o vacío."
+
+#: app.py:215
+#, python-format
+msgid "Order products by: %(order)s."
+msgstr "Ordenación de productos por: %(order)s."
+
+#: app.py:247
+#, python-format
+msgid "Error when process moves:qty %(values)s."
+msgstr "Error cuando se estaba procesando los movimientos:qty %(values)s."
+
+#: app.py:261
+#, python-format
+msgid "Error when print pickings %(pickings)s."
+msgstr "Error cuando se imprime los albaranes %(pickings)s."
+
+#: app.py:279
+#, python-format
+msgid "Error when process pickings %(pickings)s."
+msgstr "Error cuando se procesaban los albaranes %(pickings)s."
+
+#: app.py:299
+msgid "Location separated by \"-\": rack-row-case"
+msgstr "Ubicación separada por \"-\": estante-fila-caja"
+
+#: defaultfilters.py:55
+#: templates/default/picking.html:11
+#: templates/default/picking.html:134
+msgid "Code"
+msgstr "Código"
+
+#: defaultfilters.py:57
+#: templates/default/location.html:11
+msgid "EAN13"
+msgstr "EAN13"
+
+#: defaultfilters.py:59
+#: templates/default/picking.html:15
+msgid "Rack"
+msgstr "Estante"
+
+#: defaultfilters.py:61
+#: templates/default/picking.html:16
+msgid "Row"
+msgstr "Fila"
+
+#: defaultfilters.py:63
+#: templates/default/picking.html:17
+msgid "Case"
+msgstr "Caja"
+
+#: defaultfilters.py:65
+#: templates/default/nav.html:22
+#: templates/default/picking.html:55
+msgid "Manufacturer"
+msgstr "Fabricante"
+
+#: defaultfilters.py:67
+#: templates/default/location.html:10
+#: templates/default/nav.html:14
+#: templates/default/nav.html:21
+msgid "Location"
+msgstr "Ubicación"
+
+#: templates/default/cart.html:2
+#: templates/default/index.html:8
+#: templates/default/index.html:18
+#: templates/default/nav.html:24
+msgid "Select a cart"
+msgstr "Seleccionar un carrito"
+
+#: templates/default/cart.html:7
+msgid "Order products by"
+msgstr "Ordenar productos por"
+
+#: templates/default/cart.html:11
+msgid "Name"
+msgstr "Nombre"
+
+#: templates/default/cart.html:12
+msgid "Baskets"
+msgstr "Cestas"
+
+#: templates/default/cart.html:13
+msgid "User"
+msgstr "Usuario"
+
+#: templates/default/cart.html:23
+msgid "Get this cart"
+msgstr "Usar este carro"
+
+#: templates/default/footer.html:4
+#: templates/default/index.html:10
+#: templates/default/nav.html:25
+msgid "Help"
+msgstr "Ayuda"
+
+#: templates/default/footer.html:9
+#: templates/default/picking.html:82
+msgid "Close"
+msgstr "Cerrar"
+
+#: templates/default/index.html:2
+msgid "Dashboard"
+msgstr "Escritorio"
+
+#: templates/default/index.html:8
+#: templates/default/nav.html:24
+msgid "Change cart"
+msgstr "Cambiar de carro"
+
+#: templates/default/index.html:9
+#: templates/default/index.html:24
+#: templates/default/nav.html:13
+#: templates/default/picking.html:2
+msgid "Process pickings"
+msgstr "Procesar albaranes"
+
+#: templates/default/index.html:19
+msgid "Go to your preferences a select a cart do you work. Remember when not working in warehouse, do logout"
+msgstr "Ir a preferencias y selecciona el carrito que usará. Recuerde cuando ya no trabaje en el almacén, salir de la aplicación."
+
+#: templates/default/index.html:19
+#: templates/default/index.html:25
+msgid "Go"
+msgstr "Ir"
+
+#: templates/default/index.html:25
+msgid "When process pickings, select products in your warehouse and put in you backet cart."
+msgstr "Cuando procese los albaranes, recoge los productos en su almacén y añade en su carrito."
+
+#: templates/default/index.html:30
+msgid "Make picking"
+msgstr "Realizar empaquetado"
+
+#: templates/default/index.html:31
+msgid "When finish selection products, return your picking area and make delivery package."
+msgstr "Cuando finalize la recogida de productos, vuelve al muelle de salida para finalizar el paquete."
+
+#: templates/default/location.html:2
+#: templates/default/location.html:7
+msgid "Product location"
+msgstr "Ubicación del producto"
+
+#: templates/default/location.html:8
+msgid "Add new location product by EAN13"
+msgstr "Añade una nueva ubicación del producto por EAN13"
+
+#: templates/default/location.html:14
+msgid "Save"
+msgstr "Guardar"
+
+#: templates/default/login.html:2
+#: templates/default/login.html:47
+msgid "Login"
+msgstr "Inicia sesión"
+
+#: templates/default/login.html:14
+msgid "Add a user name"
+msgstr "Inserte nombre de usuario"
+
+#: templates/default/login.html:15
+msgid "Add a password"
+msgstr "Inserte contraseña"
+
+#: templates/default/login.html:34
+msgid "Username"
+msgstr "Usuario"
+
+#: templates/default/login.html:40
+msgid "Password"
+msgstr "Contraseña"
+
+#: templates/default/nav.html:18
+msgid "Welcome"
+msgstr "Bienvenido"
+
+#: templates/default/nav.html:20
+msgid "Order by"
+msgstr "Ordenar por"
+
+#: templates/default/nav.html:26
+msgid "Logout"
+msgstr "Salir"
+
+#: templates/default/picking.html:12
+#: templates/default/picking.html:135
+msgid "Product"
+msgstr "Producto"
+
+#: templates/default/picking.html:13
+#: templates/default/picking.html:56
+#: templates/default/picking.html:66
+#: templates/default/picking.html:137
+msgid "Qty"
+msgstr "Ctda."
+
+#: templates/default/picking.html:14
+#: templates/default/picking.html:57
+msgid "Qty Available"
+msgstr "Ctda. disponible"
+
+#: templates/default/picking.html:21
+msgid "There are not pickings to process"
+msgstr "No hay albaranes para procesar"
+
+#: templates/default/picking.html:50
+msgid "Find"
+msgstr "Buscar"
+
+#: templates/default/picking.html:51
+msgid "Clean"
+msgstr "Limpiar"
+
+#: templates/default/picking.html:52
+msgid "Continue"
+msgstr "Continuar"
+
+#: templates/default/picking.html:54
+msgid "Reference"
+msgstr "Referencia"
+
+#: templates/default/picking.html:83
+msgid "Send and next"
+msgstr "Enviar y siguiente"
+
+#: templates/default/picking.html:84
+msgid "Send and Done"
+msgstr "Enviar y finalizar"
+
+#: templates/default/picking.html:89
+msgid "Pickings info and Done"
+msgstr "Información y finalizar"
+
+#: templates/default/picking.html:94
+msgid "Grid Cart"
+msgstr "Cestas del carrito"
+
+#: templates/default/picking.html:107
+msgid "Pickings have been sent and process successfully"
+msgstr "Los albaranes se han enviado y procesado."
+
+#: templates/default/picking.html:110
+msgid "What do you do?"
+msgstr "Que puedes hacer?"
+
+#: templates/default/picking.html:112
+msgid "Do more pickings to delivery"
+msgstr "Realizar más albaranes para empaquetar"
+
+#: templates/default/picking.html:112
+msgid "or"
+msgstr "o bien"
+
+#: templates/default/picking.html:112
+msgid "logout"
+msgstr "salir"
+
+#: templates/default/picking.html:116
+#: templates/default/picking.html:154
+msgid "Done"
+msgstr "Realizado"
+
+#: templates/default/picking.html:126
+msgid "Pickings"
+msgstr "Albaranes"
+
+#: templates/default/picking.html:130
+msgid "Print"
+msgstr "Imprimir"
+
+#: templates/default/picking.html:136
+msgid "Ordered"
+msgstr "Ordenado"
+
+#: templates/default/picking.html:190
+msgid "Not find EAN: "
+msgstr "No se encuentra EAN:"
+
