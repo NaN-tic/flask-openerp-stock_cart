@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-28 11:34+0200\n"
+"POT-Creation-Date: 2013-07-24 09:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,35 +33,85 @@ msgid "You were logged in."
 msgstr ""
 
 #: app.py:134
-msgid "Error: Invalid username or password"
+#, python-format
+msgid "Error: Invalid username %s or password"
 msgstr ""
 
-#: app.py:163
+#: app.py:164
 msgid "You were logged out."
 msgstr ""
 
-#: app.py:207
+#: app.py:208
 #, python-format
 msgid "Cart %(name)s is working by user %(user)s."
 msgstr ""
 
-#: app.py:209
+#: app.py:210
 #, python-format
 msgid "Not find some cart by %(id)s."
 msgstr ""
 
-#: app.py:211
+#: app.py:212
 msgid "Error: Cart ID not valid or empty"
 msgstr ""
 
-#: app.py:214
+#: app.py:215
 #, python-format
 msgid "Order products by: %(order)s."
 msgstr ""
 
+#: app.py:247
+#, python-format
+msgid "Error when process moves:qty %(values)s."
+msgstr ""
+
+#: app.py:261
+#, python-format
+msgid "Error when print pickings %(pickings)s."
+msgstr ""
+
+#: app.py:279
+#, python-format
+msgid "Error when process pickings %(pickings)s."
+msgstr ""
+
+#: app.py:299
+msgid "Location separated by \"-\": rack-row-case"
+msgstr ""
+
+#: defaultfilters.py:55 templates/default/picking.html:11
+#: templates/default/picking.html:134
+msgid "Code"
+msgstr ""
+
+#: defaultfilters.py:57 templates/default/location.html:11
+msgid "EAN13"
+msgstr ""
+
+#: defaultfilters.py:59 templates/default/picking.html:15
+msgid "Rack"
+msgstr ""
+
+#: defaultfilters.py:61 templates/default/picking.html:16
+msgid "Row"
+msgstr ""
+
+#: defaultfilters.py:63 templates/default/picking.html:17
+msgid "Case"
+msgstr ""
+
+#: defaultfilters.py:65 templates/default/nav.html:22
+#: templates/default/picking.html:55
+msgid "Manufacturer"
+msgstr ""
+
+#: defaultfilters.py:67 templates/default/location.html:10
+#: templates/default/nav.html:14 templates/default/nav.html:21
+msgid "Location"
+msgstr ""
+
 #: templates/default/cart.html:2 templates/default/index.html:8
-#: templates/default/index.html:18 templates/default/nav.html:23
-#: templates/default/picking.html:2
+#: templates/default/index.html:18 templates/default/nav.html:24
 msgid "Select a cart"
 msgstr ""
 
@@ -85,7 +135,12 @@ msgstr ""
 msgid "Get this cart"
 msgstr ""
 
-#: templates/default/help.html:9
+#: templates/default/footer.html:4 templates/default/index.html:10
+#: templates/default/nav.html:25
+msgid "Help"
+msgstr ""
+
+#: templates/default/footer.html:9 templates/default/picking.html:82
 msgid "Close"
 msgstr ""
 
@@ -93,17 +148,13 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: templates/default/index.html:8 templates/default/nav.html:23
+#: templates/default/index.html:8 templates/default/nav.html:24
 msgid "Change cart"
 msgstr ""
 
 #: templates/default/index.html:9 templates/default/index.html:24
-#: templates/default/nav.html:13
+#: templates/default/nav.html:13 templates/default/picking.html:2
 msgid "Process pickings"
-msgstr ""
-
-#: templates/default/index.html:10 templates/default/nav.html:24
-msgid "Help"
 msgstr ""
 
 #: templates/default/index.html:19
@@ -132,6 +183,18 @@ msgid ""
 "delivery package."
 msgstr ""
 
+#: templates/default/location.html:2 templates/default/location.html:7
+msgid "Product location"
+msgstr ""
+
+#: templates/default/location.html:8
+msgid "Add new location product by EAN13"
+msgstr ""
+
+#: templates/default/location.html:14
+msgid "Save"
+msgstr ""
+
 #: templates/default/login.html:2 templates/default/login.html:47
 msgid "Login"
 msgstr ""
@@ -152,91 +215,104 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: templates/default/nav.html:17
+#: templates/default/nav.html:18
 msgid "Welcome"
 msgstr ""
 
-#: templates/default/nav.html:19
+#: templates/default/nav.html:20
 msgid "Order by"
 msgstr ""
 
-#: templates/default/nav.html:20
-msgid "Location"
-msgstr ""
-
-#: templates/default/nav.html:21
-msgid "Manufacturer"
-msgstr ""
-
-#: templates/default/nav.html:25
+#: templates/default/nav.html:26
 msgid "Logout"
 msgstr ""
 
-#: templates/default/picking.html:11
-msgid "Code"
-msgstr ""
-
-#: templates/default/picking.html:12
+#: templates/default/picking.html:12 templates/default/picking.html:135
 msgid "Product"
 msgstr ""
 
-#: templates/default/picking.html:13 templates/default/picking.html:52
+#: templates/default/picking.html:13 templates/default/picking.html:56
+#: templates/default/picking.html:66 templates/default/picking.html:137
 msgid "Qty"
 msgstr ""
 
-#: templates/default/picking.html:14
+#: templates/default/picking.html:14 templates/default/picking.html:57
 msgid "Qty Available"
-msgstr ""
-
-#: templates/default/picking.html:15
-msgid "Rack"
-msgstr ""
-
-#: templates/default/picking.html:16
-msgid "Row"
-msgstr ""
-
-#: templates/default/picking.html:17
-msgid "Case"
 msgstr ""
 
 #: templates/default/picking.html:21
 msgid "There are not pickings to process"
 msgstr ""
 
+#: templates/default/picking.html:50
+msgid "Find"
+msgstr ""
+
+#: templates/default/picking.html:51
+msgid "Clean"
+msgstr ""
+
 #: templates/default/picking.html:52
-msgid "Qty added in this basket "
+msgid "Continue"
 msgstr ""
 
-#: templates/default/picking.html:62
-msgid "Process"
+#: templates/default/picking.html:54
+msgid "Reference"
 msgstr ""
 
-#: templates/default/picking.html:68
-msgid "Grid Cart"
-msgstr ""
-
-#: templates/default/picking.html:81
-msgid "Send quantity products successfully"
+#: templates/default/picking.html:83
+msgid "Send and next"
 msgstr ""
 
 #: templates/default/picking.html:84
-msgid "Get more products/pickings to do"
+msgid "Send and Done"
 msgstr ""
 
-#: templates/default/picking.html:87
+#: templates/default/picking.html:89
+msgid "Pickings info and Done"
+msgstr ""
+
+#: templates/default/picking.html:94
+msgid "Grid Cart"
+msgstr ""
+
+#: templates/default/picking.html:107
+msgid "Pickings have been sent and process successfully"
+msgstr ""
+
+#: templates/default/picking.html:110
+msgid "What do you do?"
+msgstr ""
+
+#: templates/default/picking.html:112
+msgid "Do more pickings to delivery"
+msgstr ""
+
+#: templates/default/picking.html:112
+msgid "or"
+msgstr ""
+
+#: templates/default/picking.html:112
+msgid "logout"
+msgstr ""
+
+#: templates/default/picking.html:116 templates/default/picking.html:154
 msgid "Done"
 msgstr ""
 
-#: templates/default/picking.html:95
-msgid "Error!"
+#: templates/default/picking.html:126
+msgid "Pickings"
 msgstr ""
 
-#: templates/default/picking.html:98
-msgid "Qty are integer values? Review your cart and resend"
+#: templates/default/picking.html:130
+msgid "Print"
 msgstr ""
 
-#: templates/default/picking.html:101
-msgid "Check"
+#: templates/default/picking.html:136
+msgid "Ordered"
+msgstr ""
+
+#: templates/default/picking.html:190
+msgid "Not find EAN: "
 msgstr ""
 
