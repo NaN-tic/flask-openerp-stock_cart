@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-07-24 09:43+0200\n"
-"PO-Revision-Date: 2013-07-24 10:08+0100\n"
+"PO-Revision-Date: 2013-07-24 10:14+0100\n"
 "Last-Translator: Raimon Esteve <resteve@zikzakmedia.com>\n"
 "Language-Team: es <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -207,7 +207,7 @@ msgstr "Guardar"
 #: templates/default/login.html:2
 #: templates/default/login.html:47
 msgid "Login"
-msgstr "Inicia sesión"
+msgstr "Iniciar sesión"
 
 #: templates/default/login.html:14
 msgid "Add a user name"
