@@ -184,11 +184,14 @@ $(".get-ean13").click(function(event){
     var boxean = $(this).attr('href').replace('#', '.');
     var ean = boxean.slice(1, boxean.length);
     var value = $('#ean-'+ean).val();
+    var value2 = '2'+value; /* search ean13 started by 2 */
     var classes = $(this).attr('class').split(" ");
 
     if(value != ean){
-        alert("{{ _('Not find EAN: ') }}"+value);
-        return False;
+        if((value != ean) && (value2 != ean)){
+            alert("{{ _('Not find EAN: ') }}"+value);
+            return False;
+        }
     }
     $(boxean).show();
     if( $.inArray('last-prod', classes) > 0){
