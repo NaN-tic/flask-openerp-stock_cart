@@ -296,7 +296,7 @@ class LocationForm(Form):
     """
     A form location product
     """
-    location = TextField('Location', [validators.Required()], description=_('Location separated by "-": rack-row-case'))
+    location = TextField('Location', [validators.Required()], description=_('Location separated by " " (space):rack row case'))
     ean13 = TextField('EAN13', [validators.Required()])
 
     def validate(self):
@@ -316,7 +316,8 @@ def location():
 
     if request.method == 'POST' and form.validate():
         location = form.location.data
-        loc = location.split('-')
+        location = ' '.join(location.split())
+        loc = location.split(' ')
 
         values = {}
         if len(loc) == 3:

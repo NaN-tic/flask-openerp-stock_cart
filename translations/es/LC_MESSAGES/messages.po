@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-07-24 09:43+0200\n"
-"PO-Revision-Date: 2013-07-24 10:14+0100\n"
+"PO-Revision-Date: 2013-09-30 09:58+0100\n"
 "Last-Translator: Raimon Esteve <resteve@zikzakmedia.com>\n"
 "Language-Team: es <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -74,8 +74,8 @@ msgid "Error when process pickings %(pickings)s."
 msgstr "Error cuando se procesaban los albaranes %(pickings)s."
 
 #: app.py:299
-msgid "Location separated by \"-\": rack-row-case"
-msgstr "Ubicación separada por \"-\": estante-fila-caja"
+msgid "Location separated by \" \" (space):rack row case"
+msgstr "Ubicación separada por \" \" (espacio):estante fila caja"
 
 #: defaultfilters.py:55
 #: templates/default/picking.html:11
@@ -113,6 +113,7 @@ msgstr "Fabricante"
 #: templates/default/location.html:10
 #: templates/default/nav.html:14
 #: templates/default/nav.html:21
+#: app.py:299
 msgid "Location"
 msgstr "Ubicación"
 
