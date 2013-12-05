@@ -1,4 +1,4 @@
-{% macro render_field(field, class_="") %}
+{% macro render_field(field, class_="", auto_focus=False) %}
 <div class="clearfix {% if field.errors %}error{% endif %}">
   {% if field.label %}
   <label for="{{ field.name }}" class="control-label">{{ field.label.text }}
@@ -9,7 +9,11 @@
     {% if field.flags.required %}
       {% set class_ = class_ + " required" %}
     {% endif %}
-    {{ field(class_=class_, **kwargs) }}
+    {% if auto_focus %}
+        {{ field(autofocus=auto_focus, class_=class_, **kwargs) }}
+    {% else %}
+        {{ field(class_=class_, **kwargs) }}
+    {% endif %}
     {% if field.description %}
     <br/><span class="help-inline">{{ field.description }}</span>
     {% endif %}
