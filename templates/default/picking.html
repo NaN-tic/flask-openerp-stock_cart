@@ -45,16 +45,24 @@
     <div class="modal-body">
         <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
         <div class="row-stockcart">
-            <div class="span6 box-ean13">
+            <div class="span3 box-ean13">
                 <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus" class="input-small"> 
                 <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary btn-small{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
                 <a href="#{{product.ean13}}" class="clean-ean13 btn btn-small">{{ _('Clean') }}</a>
                 <a href="#{{product.ean13}}" class="show-stockcart btn btn-small{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
             </div>
             <div class="span3"><strong>{{ _('Reference') }}:</strong> {{ product.code }}<br/>
-            <strong>{{ _('Manufacturer') }}:</strong> {{ product.manufacturer }}</div>
-            <div class="span3"><strong>{{ _('Qty') }}:</strong> {{ product.qty }}<br/>
-            <strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}</div>
+                <strong>{{ _('Manufacturer') }}:</strong> {{ product.manufacturer }}
+            </div>
+            <div class="span3">
+                <strong>{{ _('Qty') }}:</strong> {{ product.qty }}<br/>
+                <strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}
+            </div>
+            <div class="span3">
+                <strong>{{ _("Rack") }}:</strong> {% if product.loc_rack %}{{ product.loc_rack }}{% endif %}<br/>
+                <strong>{{ _("Row") }}:</strong> {% if product.loc_row %}{{ product.loc_row }}{% endif %}<br/>
+                <strong>{{ _("Case") }}:</strong> {% if product.loc_case %}{{ product.loc_case }}{% endif %}
+            </div>
         </div>
         <hr/>
         <div class="box-stockcart {{product.ean13}}">
