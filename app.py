@@ -308,7 +308,7 @@ def qty_pickings():
 
 class LocationForm(Form):
     """
-    A form location product
+    A form add location product
     """
     location = TextField('Location', [validators.Required()], description=_('Location separated by " " (space):rack row case'))
     ean13 = TextField('EAN13', [validators.Required()])
@@ -347,19 +347,53 @@ def location():
         ean13 = form.ean13.data
 
         Client = erp_connect()
-        product = Client.search('product.product',[
+        products = Client.search('product.product',[
                 ('ean13', '=', ean13),
                 ])
-        if not product:
+        if not products:
             flash('Product EAN13 %s not found' % ean13)
         else:
             Product = Client.model('product.product')
-            p = Product.get(product[0])
+            p = Product.get(products[0])
             p.write(values)
             flash('Save product EAN13 %s' % ean13)
         form.ean13.data = None
 
     return render_template(get_template('location.html'), form=form)
+
+@app.route('/product-location', methods=['POST'])
+@login_required
+def product_location():
+    '''Get product location'''
+    values = {}
+    for data in request.json:
+        values[data['name']] = data['value']
+
+    ean13 = values.get('product-ean13')
+
+    Client = erp_connect()
+    products = Client.search('product.product',[
+            ('ean13', '=', ean13),
+            ])
+    if not products:
+        data['location'] = _(u'Not found EAN13')
+    else:
+        Product = Client.model('product.product')
+        p = Product.get(products[0])
+        location = []
+        if p.loc_rack:
+            location.append(p.loc_rack)
+        if p.loc_row:
+            location.append(p.loc_row)
+        if p.loc_case:
+            location.append(p.loc_case)
+
+        if location:
+            data['location'] = _(u'Location %s: %s' % (ean13, '-'.join(location)))
+        else:
+            data['location'] = _(u'Location is empty. Add %s location' % ean13)
+
+    return jsonify(data)
 
 @app.route('/help')
 @login_required
