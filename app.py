@@ -310,7 +310,7 @@ class LocationForm(Form):
     """
     A form add location product
     """
-    location = TextField('Location', [validators.Required()], description=_('Location separated by " " (space):rack row case'))
+    location = TextField(_('Location'), [validators.Required()], description=_('Location separated by " " (space):rack row case'))
     ean13 = TextField('EAN13', [validators.Required()])
 
     def validate(self):

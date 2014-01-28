@@ -7,19 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-07-24 09:43+0200\n"
-"PO-Revision-Date: 2013-09-30 09:58+0100\n"
+"POT-Creation-Date: 2014-01-28 15:17+0100\n"
+"PO-Revision-Date: 2014-01-28 15:15+0100\n"
 "Last-Translator: Raimon Esteve <resteve@zikzakmedia.com>\n"
 "Language-Team: es <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.6\n"
+"Generated-By: Babel 1.3\n"
 
 #: app.py:64
-msgid "Can't connect to ERP server. Check network-ports or ERP server was running."
-msgstr "No se puede conectar con el ERP. Compruebe la red y puertos o si el servidor está activo."
+msgid ""
+"Can't connect to ERP server. Check network-ports or ERP server was "
+"running."
+msgstr ""
+"No se puede conectar con el ERP. Compruebe la red y puertos o si el "
+"servidor está activo."
 
 #: app.py:128
 #, python-format
@@ -68,59 +72,70 @@ msgstr "Error cuando se estaba procesando los movimientos:qty %(values)s."
 msgid "Error when print pickings %(pickings)s."
 msgstr "Error cuando se imprime los albaranes %(pickings)s."
 
-#: app.py:279
+#: app.py:275
+#, python-format
+msgid "Error when send pickings %(pickings)s to carrier."
+msgstr "Error cuando se envía los albaranes %(pickings)s al mensajero."
+
+#: app.py:293
 #, python-format
 msgid "Error when process pickings %(pickings)s."
 msgstr "Error cuando se procesaban los albaranes %(pickings)s."
 
-#: app.py:299
+#: app.py:313 defaultfilters.py:67 templates/default/location.html:39
+#: templates/default/nav.html:14 templates/default/nav.html:21
+msgid "Location"
+msgstr "Ubicación"
+
+#: app.py:313
 msgid "Location separated by \" \" (space):rack row case"
 msgstr "Ubicación separada por \" \" (espacio):estante fila caja"
 
-#: defaultfilters.py:55
-#: templates/default/picking.html:11
-#: templates/default/picking.html:134
+#: app.py:379
+msgid "Not found EAN13"
+msgstr "No se ha encontrado EAN13"
+
+#: app.py:392
+#, python-format
+msgid "Location %s: %s"
+msgstr "Ubicación %s: %s"
+
+#: app.py:394
+#, python-format
+msgid "Location is empty. Add %s location"
+msgstr "La ubicación está vacío. Añade una ubicación para %s"
+
+#: defaultfilters.py:55 templates/default/picking.html:11
+#: templates/default/picking.html:146
 msgid "Code"
 msgstr "Código"
 
-#: defaultfilters.py:57
-#: templates/default/location.html:11
+#: defaultfilters.py:57 templates/default/location.html:40
 msgid "EAN13"
 msgstr "EAN13"
 
-#: defaultfilters.py:59
-#: templates/default/picking.html:15
+#: defaultfilters.py:59 templates/default/picking.html:15
+#: templates/default/picking.html:62
 msgid "Rack"
 msgstr "Estante"
 
-#: defaultfilters.py:61
-#: templates/default/picking.html:16
+#: defaultfilters.py:61 templates/default/picking.html:16
+#: templates/default/picking.html:63
 msgid "Row"
 msgstr "Fila"
 
-#: defaultfilters.py:63
-#: templates/default/picking.html:17
+#: defaultfilters.py:63 templates/default/picking.html:17
+#: templates/default/picking.html:64
 msgid "Case"
 msgstr "Caja"
 
-#: defaultfilters.py:65
-#: templates/default/nav.html:22
+#: defaultfilters.py:65 templates/default/nav.html:22
 #: templates/default/picking.html:55
 msgid "Manufacturer"
 msgstr "Fabricante"
 
-#: defaultfilters.py:67
-#: templates/default/location.html:10
-#: templates/default/nav.html:14
-#: templates/default/nav.html:21
-#: app.py:299
-msgid "Location"
-msgstr "Ubicación"
-
-#: templates/default/cart.html:2
-#: templates/default/index.html:8
-#: templates/default/index.html:18
-#: templates/default/nav.html:24
+#: templates/default/cart.html:2 templates/default/index.html:8
+#: templates/default/index.html:18 templates/default/nav.html:24
 msgid "Select a cart"
 msgstr "Seleccionar un carrito"
 
@@ -144,14 +159,12 @@ msgstr "Usuario"
 msgid "Get this cart"
 msgstr "Usar este carro"
 
-#: templates/default/footer.html:4
-#: templates/default/index.html:10
+#: templates/default/footer.html:4 templates/default/index.html:10
 #: templates/default/nav.html:25
 msgid "Help"
 msgstr "Ayuda"
 
-#: templates/default/footer.html:9
-#: templates/default/picking.html:82
+#: templates/default/footer.html:9 templates/default/picking.html:90
 msgid "Close"
 msgstr "Cerrar"
 
@@ -159,54 +172,72 @@ msgstr "Cerrar"
 msgid "Dashboard"
 msgstr "Escritorio"
 
-#: templates/default/index.html:8
-#: templates/default/nav.html:24
+#: templates/default/index.html:8 templates/default/nav.html:24
 msgid "Change cart"
 msgstr "Cambiar de carro"
 
-#: templates/default/index.html:9
-#: templates/default/index.html:24
-#: templates/default/nav.html:13
-#: templates/default/picking.html:2
+#: templates/default/index.html:9 templates/default/index.html:24
+#: templates/default/nav.html:13 templates/default/picking.html:2
 msgid "Process pickings"
 msgstr "Procesar albaranes"
 
 #: templates/default/index.html:19
-msgid "Go to your preferences a select a cart do you work. Remember when not working in warehouse, do logout"
-msgstr "Ir a preferencias y selecciona el carrito que usará. Recuerde cuando ya no trabaje en el almacén, salir de la aplicación."
+msgid ""
+"Go to your preferences a select a cart do you work. Remember when not "
+"working in warehouse, do logout"
+msgstr ""
+"Ir a preferencias y selecciona el carrito que usará. Recuerde cuando ya "
+"no trabaje en el almacén, salir de la aplicación."
 
-#: templates/default/index.html:19
-#: templates/default/index.html:25
+#: templates/default/index.html:19 templates/default/index.html:25
 msgid "Go"
 msgstr "Ir"
 
 #: templates/default/index.html:25
-msgid "When process pickings, select products in your warehouse and put in you backet cart."
-msgstr "Cuando procese los albaranes, recoge los productos en su almacén y añade en su carrito."
+msgid ""
+"When process pickings, select products in your warehouse and put in you "
+"backet cart."
+msgstr ""
+"Cuando procese los albaranes, recoge los productos en su almacén y añade "
+"en su carrito."
 
 #: templates/default/index.html:30
 msgid "Make picking"
 msgstr "Realizar empaquetado"
 
 #: templates/default/index.html:31
-msgid "When finish selection products, return your picking area and make delivery package."
-msgstr "Cuando finalize la recogida de productos, vuelve al muelle de salida para finalizar el paquete."
+msgid ""
+"When finish selection products, return your picking area and make "
+"delivery package."
+msgstr ""
+"Cuando finalize la recogida de productos, vuelve al muelle de salida para"
+" finalizar el paquete."
 
-#: templates/default/location.html:2
-#: templates/default/location.html:7
+#: templates/default/location.html:2 templates/default/location.html:7
 msgid "Product location"
 msgstr "Ubicación del producto"
 
-#: templates/default/location.html:8
-msgid "Add new location product by EAN13"
-msgstr "Añade una nueva ubicación del producto por EAN13"
+#: templates/default/location.html:27
+msgid "Error connection server"
+msgstr "Error en la conexión con el servidor"
 
-#: templates/default/location.html:14
+#: templates/default/location.html:37
+msgid "Add new product location"
+msgstr "Añade una nueva ubicación para el producto"
+
+#: templates/default/location.html:43
 msgid "Save"
 msgstr "Guardar"
 
-#: templates/default/login.html:2
-#: templates/default/login.html:47
+#: templates/default/location.html:48
+msgid "Search location by product"
+msgstr "Buscar una ubicación para el producto"
+
+#: templates/default/location.html:56
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/default/login.html:2 templates/default/login.html:47
 msgid "Login"
 msgstr "Iniciar sesión"
 
@@ -238,20 +269,16 @@ msgstr "Ordenar por"
 msgid "Logout"
 msgstr "Salir"
 
-#: templates/default/picking.html:12
-#: templates/default/picking.html:135
+#: templates/default/picking.html:12 templates/default/picking.html:147
 msgid "Product"
 msgstr "Producto"
 
-#: templates/default/picking.html:13
-#: templates/default/picking.html:56
-#: templates/default/picking.html:66
-#: templates/default/picking.html:137
+#: templates/default/picking.html:13 templates/default/picking.html:58
+#: templates/default/picking.html:74 templates/default/picking.html:149
 msgid "Qty"
 msgstr "Ctda."
 
-#: templates/default/picking.html:14
-#: templates/default/picking.html:57
+#: templates/default/picking.html:14 templates/default/picking.html:59
 msgid "Qty Available"
 msgstr "Ctda. disponible"
 
@@ -275,60 +302,63 @@ msgstr "Continuar"
 msgid "Reference"
 msgstr "Referencia"
 
-#: templates/default/picking.html:83
+#: templates/default/picking.html:91
 msgid "Send and next"
 msgstr "Enviar y siguiente"
 
-#: templates/default/picking.html:84
+#: templates/default/picking.html:92
 msgid "Send and Done"
 msgstr "Enviar y finalizar"
 
-#: templates/default/picking.html:89
+#: templates/default/picking.html:97
 msgid "Pickings info and Done"
 msgstr "Información y finalizar"
 
-#: templates/default/picking.html:94
+#: templates/default/picking.html:102
 msgid "Grid Cart"
 msgstr "Cestas del carrito"
 
-#: templates/default/picking.html:107
+#: templates/default/picking.html:115
 msgid "Pickings have been sent and process successfully"
 msgstr "Los albaranes se han enviado y procesado."
 
-#: templates/default/picking.html:110
+#: templates/default/picking.html:118
 msgid "What do you do?"
 msgstr "Que puedes hacer?"
 
-#: templates/default/picking.html:112
+#: templates/default/picking.html:120
 msgid "Do more pickings to delivery"
 msgstr "Realizar más albaranes para empaquetar"
 
-#: templates/default/picking.html:112
+#: templates/default/picking.html:120
 msgid "or"
 msgstr "o bien"
 
-#: templates/default/picking.html:112
+#: templates/default/picking.html:120
 msgid "logout"
 msgstr "salir"
 
-#: templates/default/picking.html:116
-#: templates/default/picking.html:154
+#: templates/default/picking.html:124 templates/default/picking.html:166
 msgid "Done"
 msgstr "Realizado"
 
-#: templates/default/picking.html:126
+#: templates/default/picking.html:134
 msgid "Pickings"
 msgstr "Albaranes"
 
-#: templates/default/picking.html:130
+#: templates/default/picking.html:140
 msgid "Print"
 msgstr "Imprimir"
 
-#: templates/default/picking.html:136
+#: templates/default/picking.html:141
+msgid "Carrier"
+msgstr "Mensajero"
+
+#: templates/default/picking.html:148
 msgid "Ordered"
 msgstr "Ordenado"
 
-#: templates/default/picking.html:190
+#: templates/default/picking.html:204
 msgid "Not find EAN: "
 msgstr "No se encuentra EAN:"
 
