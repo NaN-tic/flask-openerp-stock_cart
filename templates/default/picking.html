@@ -11,10 +11,8 @@
                 <th>{{ _("Code") }}</th>
                 <th>{{ _("Product") }}</th>
                 <th>{{ _("Qty") }}</th>
-                <th>{{ _("Qty Available") }}</th>
-                <th>{{ _("Rack") }}</th>
-                <th>{{ _("Row") }}</th>
-                <th>{{ _("Case") }}</th>
+                <th title="{{ _("Qty Available") }}">{{ _("Qty") }}</th>
+                <th>{{ _("Location") }}</th>
             </tr>
         </thead>
         <tbody>
@@ -24,9 +22,7 @@
                 <td><a href="#{{ product.id }}" data-toggle="modal" data-target="#{{ product.id }}">{{ product.name }}</a></td>
                 <td><strong>{{ product.qty }}</strong></td>
                 <td>{{ product.qty_available }}</td>
-                <td>{% if product.loc_rack %}{{ product.loc_rack }}{% endif %}</td>
-                <td>{% if product.loc_row %}{{ product.loc_row }}{% endif %}</td>
-                <td>{% if product.loc_case %}{{ product.loc_case }}{% endif %}</td>
+                <td>{% if product.loc_rack %}{{ product.loc_rack }}{% endif %}-{% if product.loc_row %}{{ product.loc_row }}{% endif %}-{% if product.loc_case %}{{ product.loc_case }}{% endif %}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -44,24 +40,31 @@
     </div>
     <div class="modal-body">
         <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
+        <div class="row">
+            <div id="{{product.ean13}}" class="collapse on">
+                <div class="span6">
+                    <strong>{{ _('Reference') }}:</strong> {{ product.code }}<br/>
+                    <strong>{{ _('EAN13') }}:</strong> {{product.ean13}}<br/>
+                    <strong>{{ _('Manufacturer') }}:</strong> {{ product.manufacturer }}
+                </div>
+                <div class="span4">
+                    <strong>{{ _('Qty') }}:</strong> {{ product.qty }}<br/>
+                    <strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}
+                </div>
+                <div class="span4">
+                    <strong>{{ _("Rack") }}:</strong> {% if product.loc_rack %}{{ product.loc_rack }}{% endif %}<br/>
+                    <strong>{{ _("Row") }}:</strong> {% if product.loc_row %}{{ product.loc_row }}{% endif %}<br/>
+                    <strong>{{ _("Case") }}:</strong> {% if product.loc_case %}{{ product.loc_case }}{% endif %}
+                </div>
+            </div>
+        </div>
         <div class="row-stockcart">
-            <div class="span3 box-ean13">
+            <div class="span12 box-ean13">
                 <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus" class="input-small"> 
                 <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary btn-small{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
                 <a href="#{{product.ean13}}" class="clean-ean13 btn btn-small">{{ _('Clean') }}</a>
                 <a href="#{{product.ean13}}" class="show-stockcart btn btn-small{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
-            </div>
-            <div class="span3"><strong>{{ _('Reference') }}:</strong> {{ product.code }}<br/>
-                <strong>{{ _('Manufacturer') }}:</strong> {{ product.manufacturer }}
-            </div>
-            <div class="span3">
-                <strong>{{ _('Qty') }}:</strong> {{ product.qty }}<br/>
-                <strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}
-            </div>
-            <div class="span3">
-                <strong>{{ _("Rack") }}:</strong> {% if product.loc_rack %}{{ product.loc_rack }}{% endif %}<br/>
-                <strong>{{ _("Row") }}:</strong> {% if product.loc_row %}{{ product.loc_row }}{% endif %}<br/>
-                <strong>{{ _("Case") }}:</strong> {% if product.loc_case %}{{ product.loc_case }}{% endif %}
+                <a href="#{{product.ean13}}" class="btn btn-info" data-toggle="collapse" data-target="#{{product.ean13}}">{{ _('Info') }}</a>
             </div>
         </div>
         <hr/>
@@ -70,7 +73,8 @@
             {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
             <div class="row-stockcart">{% endif %}{% endif %}
                     <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
-                        <strong>{{ cell }} - {{ picking_cell_name }}</strong> {% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
+                        <strong title="{{ picking_cell_name }}">{{ cell }}</strong>
+                        {% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
                             <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required input-mini input-qty" autofocus="autofocus" required> {% if product.qty_available <= 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
                         {% endif %}{% endfor %}
                     </div>{% set count = count + 1 %}{% endif %}{% endfor %}

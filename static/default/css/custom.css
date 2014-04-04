@@ -1,5 +1,7 @@
 body {padding-top: 0px; padding-bottom: 40px; background-color: #f5f5f5}
 
+.well {padding: 5px; margin-bottom: 5px} /* rewrite well bootstrap attribute
+
 .error {color:#FF0000; font-size: 13px !important}
 .stock-alert {color:#FF0000 !important}
 
