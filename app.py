@@ -255,7 +255,7 @@ def print_picking():
     Get picking name and send to print
     ''' 
     Client = erp_connect()
-    result = Client.execute('stock.picking', 'stock_cart_print',  [request.json])
+    result = Client.execute('stock.picking', 'stock_cart_print', [request.json])
 
     if not result:
         response = jsonify({'message': _(u'Error when print pickings %(pickings)s.', pickings=pickings)})
@@ -269,7 +269,7 @@ def carrier_picking():
     Get picking name and send to carrier
     ''' 
     Client = erp_connect()
-    result = Client.execute('stock.picking', 'stock_cart_carrier',  [request.json])
+    result = Client.execute('stock.picking', 'stock_cart_carrier', [request.json])
 
     if not result:
         response = jsonify({'message': _(u'Error when send pickings %(pickings)s to carrier.', pickings=pickings)})
@@ -291,6 +291,42 @@ def send_pickings():
 
     if not result:
         response = jsonify({'message': _(u'Error when process pickings %(pickings)s.', pickings=pickings)})
+        response.status_code = 500
+        return response
+    return jsonify(result=True)
+
+@app.route('/print-pickings', methods=['PUT', 'POST'])
+def print_pickings():
+    '''Print All pickings''' 
+    cart = session.get('cart', None)
+    pickings = []
+    for data in request.json:
+        if data.get('name'):
+            pickings.append(data.get('name'))
+
+    Client = erp_connect()
+    result = Client.execute('stock.picking', 'stock_cart_print', pickings)
+
+    if not result:
+        response = jsonify({'message': _(u'Error when print pickings %(pickings)s.', pickings=pickings)})
+        response.status_code = 500
+        return response
+    return jsonify(result=True)
+
+@app.route('/carrier-pickings', methods=['PUT', 'POST'])
+def carrier_pickings():
+    '''Carrier All pickings''' 
+    cart = session.get('cart', None)
+    pickings = []
+    for data in request.json:
+        if data.get('name'):
+            pickings.append(data.get('name'))
+
+    Client = erp_connect()
+    result = Client.execute('stock.picking', 'stock_cart_carrier', pickings)
+
+    if not result:
+        response = jsonify({'message': _(u'Error when delivery pickings %(pickings)s.', pickings=pickings)})
         response.status_code = 500
         return response
     return jsonify(result=True)

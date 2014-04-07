@@ -167,6 +167,8 @@
         {% endfor %}
     </div>
     <div class="modal-footer">
+        <button id="print-pickings" type="button" data-dismiss="modal" class="btn btn-primary">{{ _('Print') }}</button>
+        <button id="carrier-pickings" type="button" data-dismiss="modal" class="btn btn-primary">{{ _('Carrier') }}</button>
         <button id="send-pickings" type="button" data-dismiss="modal" class="btn btn-primary">{{ _('Done') }}</button>
     </div>
     </form>
@@ -175,7 +177,6 @@
 
 <script type="text/javascript">
 $('.product-info').tooltip();
-
 
 $('.modal-product').on('show', function(e) {
     var modal = $(this);
@@ -328,6 +329,44 @@ $('#send-pickings').click(function(){
         data:JSON.stringify(data),
         success: function(data) {
             $('#send-done').modal('show');
+            },
+        error:function(request, status, error){
+            alert(request.responseText);
+            },
+        });
+})
+
+/* Print pickings */
+$('#print-pickings').click(function(){
+    var product = this.id;
+    var data = $('#send-pickings-form').serializeArray();
+
+    $.ajax({
+        type: "POST",
+        url: "{{ url_for('print_pickings') }}",
+        contentType: "application/json; charset=utf-8",
+        data:JSON.stringify(data),
+        success: function(data) {
+            alert("{{ _('Send shipments to printer') }}");
+            },
+        error:function(request, status, error){
+            alert(request.responseText);
+            },
+        });
+})
+
+/* Carrier pickings */
+$('#carrier-pickings').click(function(){
+    var product = this.id;
+    var data = $('#send-pickings-form').serializeArray();
+
+    $.ajax({
+        type: "POST",
+        url: "{{ url_for('carrier_pickings') }}",
+        contentType: "application/json; charset=utf-8",
+        data:JSON.stringify(data),
+        success: function(data) {
+            alert("{{ _('Send shipments to carrier') }}");
             },
         error:function(request, status, error){
             alert(request.responseText);
