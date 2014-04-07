@@ -298,7 +298,6 @@ def send_pickings():
 @app.route('/print-pickings', methods=['PUT', 'POST'])
 def print_pickings():
     '''Print All pickings''' 
-    cart = session.get('cart', None)
     pickings = []
     for data in request.json:
         if data.get('name'):
@@ -316,7 +315,6 @@ def print_pickings():
 @app.route('/carrier-pickings', methods=['PUT', 'POST'])
 def carrier_pickings():
     '''Carrier All pickings''' 
-    cart = session.get('cart', None)
     pickings = []
     for data in request.json:
         if data.get('name'):
