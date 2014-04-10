@@ -381,8 +381,9 @@ def location():
         ean13 = form.ean13.data
 
         Client = erp_connect()
-        products = Client.search('product.product',[
+        products = Client.search('product.product',['|',
                 ('ean13', '=', ean13),
+                ('ean13_ids.name', '=', ean13),
                 ])
         if not products:
             flash('Product EAN13 %s not found' % ean13)
@@ -406,8 +407,9 @@ def product_location():
     ean13 = values.get('product-ean13')
 
     Client = erp_connect()
-    products = Client.search('product.product',[
+    products = Client.search('product.product',['|',
             ('ean13', '=', ean13),
+            ('ean13_ids.name', '=', ean13),
             ])
     if not products:
         data['location'] = _(u'Not found EAN13')
