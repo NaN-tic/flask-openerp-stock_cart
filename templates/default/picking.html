@@ -56,9 +56,9 @@
                 <div class="row-stockcart">
                     <div class="span12 box-ean13">
                         <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus" class="input-small"> 
-                        <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary btn-small{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
-                        <a href="#{{product.ean13}}" class="clean-ean13 btn btn-small">{{ _('Clean') }}</a>
-                        <a href="#{{product.ean13}}" class="show-stockcart btn btn-small{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
+                        <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
+                        <a href="#{{product.ean13}}" class="clean-ean13 btn btn-sm">{{ _('Clean') }}</a>
+                        <a href="#{{product.ean13}}" class="show-stockcart btn btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
                         <a href="#{{product.ean13}}" class="btn btn-info" data-toggle="collapse" data-target="#{{product.ean13}}">{{ _('Info') }}</a>
                     </div>
                 </div>
@@ -94,9 +94,9 @@
                 </script>
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-small">{{ _('Close') }}</button>
-                {% if not loop.last %}<button id="{{product.id}}-{{ next_product['id'] }}" type="button" data-dismiss="modal" class="btn btn-primary btn-small next-product next-{{ product.ean13 }}">{{ _('Send and next') }}</button>{% endif %}
-                {% if loop.last %}<button id="{{product.id}}" type="button" data-dismiss="modal" class="btn btn-primary btn-small last-product">{{ _('Send and Done') }}</button>{% endif %}
+                <button type="button" data-dismiss="modal" class="btn btn-sm">{{ _('Close') }}</button>
+                {% if not loop.last %}<button id="{{product.id}}-{{ next_product['id'] }}" type="button" data-dismiss="modal" class="btn btn-primary btn-sm next-product next-{{ product.ean13 }}">{{ _('Send and next') }}</button>{% endif %}
+                {% if loop.last %}<button id="{{product.id}}" type="button" data-dismiss="modal" class="btn btn-primary btn-sm last-product">{{ _('Send and Done') }}</button>{% endif %}
             </div>
         </div>
     </div>
@@ -151,8 +151,8 @@
                 <div class="row">
                     <div class="span14">
                         <span class="picking-title"> <span class="picking-name">{{ picking}} - {{ name }}</span></span>
-                        <a href="#{{name}}" id="print-{{name}}" class="btn btn-mini btn-success print-picking">{{ _('Print') }}</a>
-                        <a href="#{{name}}" id="carrier-{{name}}" class="btn btn-mini btn-success carrier-picking">{{ _('Carrier') }}</a>
+                        <a href="#{{name}}" id="print-{{name}}" class="btn btn-xs btn-success print-picking">{{ _('Print') }}</a>
+                        <a href="#{{name}}" id="carrier-{{name}}" class="btn btn-xs btn-success carrier-picking">{{ _('Carrier') }}</a>
                     </div>
                 </div>
                 <table class="table table-striped table-condensed">
@@ -178,9 +178,9 @@
                 {% endfor %}
             </div>
             <div class="modal-footer">
-                <button id="print-pickings" type="button" data-dismiss="modal" class="btn btn-small btn-primary">{{ _('Print') }}</button>
-                <button id="carrier-pickings" type="button" data-dismiss="modal" class="btn btn-small btn-primary">{{ _('Carrier') }}</button>
-                <button id="send-pickings" type="button" data-dismiss="modal" class="btn btn-small btn-primary">{{ _('Done') }}</button>
+                <button id="print-pickings" type="button" data-dismiss="modal" class="btn btn-sm btn-primary">{{ _('Print') }}</button>
+                <button id="carrier-pickings" type="button" data-dismiss="modal" class="btn btn-sm btn-primary">{{ _('Carrier') }}</button>
+                <button id="send-pickings" type="button" data-dismiss="modal" class="btn btn-sm btn-primary">{{ _('Done') }}</button>
             </div>
             </form>
         </div>
