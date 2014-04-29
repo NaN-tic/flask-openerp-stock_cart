@@ -1,53 +1,18 @@
 {% extends "default/layout.html" %}
 {% block title %}{{ _("Login") }}{% endblock %}
 {% block body %}
-<script src="{{ url_for('static', filename='default/js/jquery.validate.js') }}" type="text/javascript"></script>
-
-<script type="text/javascript">
-$().ready(function() {
-    $("#login-form").validate({
-        rules: {
-            username: "required",
-            password: "required",
-        },
-        messages: {
-            username: "{{ _('Add a user name') }}",
-            password: "{{ _('Add a password') }}",
-        }
-    });
-});
-</script>
-
-<div class="login-box">
+<div class="login-box container">
     <form id="login-form" class="login-form" method="POST" action="">
-        <fieldset>
-            <div id="legend">
-                <legend class="">{{ config['TITLE'] }}</legend>
-            </div>
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}<ul class=error>
-                {% for message in messages %}<li>{{ message }}</li>{% endfor %}
-            </ul>{% endif %}
-            {% endwith %}
-            {{ form.csrf_token }}
-            <div class="control-group">
-                <label class="control-label" for="username">{{ _("Username") }}</label>
-                <div class="controls">
-                    {{ form.username(size=20) }}
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="password">{{ _("Password") }}</label>
-                <div class="controls">
-                    {{ form.password(size=20) }}
-                </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <button class="btn btn-large btn-primary" type="submit">{{ _("Login") }}</button>
-                </div>
-            </div>
-        </fieldset>
+        <h2 class="form-signin-heading">{{ config['TITLE'] }}</h2>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}<ul class=error>
+            {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+        </ul>{% endif %}
+        {% endwith %}
+        {{ form.csrf_token }}
+        <input id="username" name="username" class="form-control" placeholder="{{ _('Username') }}" required autofocus value="{{data.username}}">
+        <input id="password" name="password" type="password" class="form-control" placeholder="{{ _('Password') }}" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">{{ _("Login") }}</button>
     </form>
 </div>
 {% endblock %}

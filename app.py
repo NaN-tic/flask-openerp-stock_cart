@@ -110,8 +110,9 @@ def index():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     '''Login'''
-    form = LoginForm()
+    data = {}
 
+    form = LoginForm()
     if form.validate_on_submit():
         username = request.form.get('username')
         password = bz2.compress(request.form.get('password'))
@@ -132,8 +133,9 @@ def login():
                 return redirect(url_for('index'))
         else:
             flash(_('Error: Invalid username %s or password' % session.get('username')))
+        data['username'] = username
 
-    return render_template(get_template('login.html'), form=form)
+    return render_template(get_template('login.html'), form=form, data=data)
 
 @app.route('/logout')
 @login_required
