@@ -10,7 +10,7 @@
         </ul>{% endif %}
         {% endwith %}
         {{ form.csrf_token }}
-        <input id="username" name="username" class="form-control" placeholder="{{ _('Username') }}" required autofocus value="{{data.username}}">
+        <input id="username" name="username" type="text" class="form-control" placeholder="{{ _('Username') }}" required autofocus value="{{data.username}}">
         <input id="password" name="password" type="password" class="form-control" placeholder="{{ _('Password') }}" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">{{ _("Login") }}</button>
     </form>

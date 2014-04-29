@@ -35,7 +35,7 @@
 {% with messages = get_flashed_messages() %}{% if messages %}
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span12 well">
+        <div class="col-md-12 well">
             <ul class=error>
                 {% for message in messages %}<li>{{ message }}</li>{% endfor %}
             </ul>
