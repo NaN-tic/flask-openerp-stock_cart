@@ -88,17 +88,8 @@ body {padding-top: 0px; padding-bottom: 40px; background-color: #f5f5f5}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  .masthead,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
-  }
+  .masthead, .footer {padding-right: 0; padding-left: 0; margin-bottom: 10px}
 }
-
-/* Index */
-.index-box { padding-top: 10px}
-
-/* End Index */
 
 /* Picking */
 #send-pickings-done { text-align: right}
