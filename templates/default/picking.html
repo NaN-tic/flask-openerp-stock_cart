@@ -31,70 +31,74 @@
 </div>
 
 {% for product in products recursive %}{% if products[loop.index] %}{% set next_product = products[loop.index] %}{% endif %}
-<div id="{{ product.id }}" class="modal hide fade modal-product" tabindex="-1">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 class="product-title">{{ product.name }}
-          <i class="icon-info-sign product-info" data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{ product|productinfo }}"></i>
-        </h3>
-    </div>
-    <div class="modal-body">
-        <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
-            <div id="{{product.ean13}}" class="collapse on row-fluid">
-                <div class="span6">
-                    <strong>{{ _('Reference') }}:</strong> {{ product.code }}<br/>
-                    <strong>{{ _('EAN13') }}:</strong> {{product.ean13}}<br/>
-                    <strong>{{ _('Manufacturer') }}:</strong> {{ product.manufacturer }}
+<div id="{{ product.id }}" class="modal fade modal-product" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">{{ product.name }}
+                  <i class="icon-info-sign product-info" data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{ product|productinfo }}"></i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
+                    <div id="{{product.ean13}}" class="collapse on row-fluid">
+                        <div class="span6">
+                            <strong>{{ _('Reference') }}:</strong> {{ product.code }}<br/>
+                            <strong>{{ _('EAN13') }}:</strong> {{product.ean13}}<br/>
+                            <strong>{{ _('Manufacturer') }}:</strong> {{ product.manufacturer }}
+                        </div>
+                        <div class="span6">
+                            <strong>{{ _('Qty') }}:</strong> {{ product.qty }}<br/>
+                            <strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}
+                        </div>
+                    </div>
+                <div class="row-stockcart">
+                    <div class="span12 box-ean13">
+                        <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus" class="input-small"> 
+                        <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary btn-small{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
+                        <a href="#{{product.ean13}}" class="clean-ean13 btn btn-small">{{ _('Clean') }}</a>
+                        <a href="#{{product.ean13}}" class="show-stockcart btn btn-small{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
+                        <a href="#{{product.ean13}}" class="btn btn-info" data-toggle="collapse" data-target="#{{product.ean13}}">{{ _('Info') }}</a>
+                    </div>
                 </div>
-                <div class="span6">
-                    <strong>{{ _('Qty') }}:</strong> {{ product.qty }}<br/>
-                    <strong>{{ _('Qty Available') }}:</strong> {{ product.qty_available }}
+                <hr/>
+                <div class="row-stockcart-info">
+                    <div class="span12">
+                        <strong>{{ _("Rack") }}:</strong> {% if product.loc_rack %}{{ product.loc_rack }} {% endif %}
+                        <strong>{{ _("Row") }}:</strong> {% if product.loc_row %}{{ product.loc_row }} {% endif %}
+                        <strong>{{ _("Case") }}:</strong> {% if product.loc_case %}{{ product.loc_case }}{% endif %}
+                    </div>
                 </div>
+                <hr/>
+                <div class="box-stockcart {{product.ean13}}">
+                    <div class="row-stockcart">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
+                    {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
+                    <div class="row-stockcart">{% endif %}{% endif %}
+                            <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
+                                <strong title="{{ picking_cell_name }}">{{ cell }}</strong>
+                                {% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
+                                    <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required input-mini input-qty" autofocus="autofocus" required> {% if product.qty_available <= 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
+                                {% endif %}{% endfor %}
+                            </div>{% set count = count + 1 %}{% endif %}{% endfor %}
+                    </div>
+                </div>
+                </form>
+                <script type="text/javascript">
+                $('#ean-{{product.ean13}}').change(function() {
+                    var value = $('#ean-{{product.ean13}}').val();
+                    if(value == '{{product.ean13}}'){
+                        $('#{{product.ean13}}').trigger('click');
+                    }
+                });
+                </script>
             </div>
-        <div class="row-stockcart">
-            <div class="span12 box-ean13">
-                <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus" class="input-small"> 
-                <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary btn-small{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
-                <a href="#{{product.ean13}}" class="clean-ean13 btn btn-small">{{ _('Clean') }}</a>
-                <a href="#{{product.ean13}}" class="show-stockcart btn btn-small{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
-                <a href="#{{product.ean13}}" class="btn btn-info" data-toggle="collapse" data-target="#{{product.ean13}}">{{ _('Info') }}</a>
-            </div>
-        </div>
-        <hr/>
-        <div class="row-stockcart-info">
-            <div class="span12">
-                <strong>{{ _("Rack") }}:</strong> {% if product.loc_rack %}{{ product.loc_rack }} {% endif %}
-                <strong>{{ _("Row") }}:</strong> {% if product.loc_row %}{{ product.loc_row }} {% endif %}
-                <strong>{{ _("Case") }}:</strong> {% if product.loc_case %}{{ product.loc_case }}{% endif %}
-            </div>
-        </div>
-        <hr/>
-        <div class="box-stockcart {{product.ean13}}">
-            <div class="row-stockcart">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
-            {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
-            <div class="row-stockcart">{% endif %}{% endif %}
-                    <div class="span{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
-                        <strong title="{{ picking_cell_name }}">{{ cell }}</strong>
-                        {% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
-                            <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required input-mini input-qty" autofocus="autofocus" required> {% if product.qty_available <= 0 %}<span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
-                        {% endif %}{% endfor %}
-                    </div>{% set count = count + 1 %}{% endif %}{% endfor %}
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-small">{{ _('Close') }}</button>
+                {% if not loop.last %}<button id="{{product.id}}-{{ next_product['id'] }}" type="button" data-dismiss="modal" class="btn btn-primary btn-small next-product next-{{ product.ean13 }}">{{ _('Send and next') }}</button>{% endif %}
+                {% if loop.last %}<button id="{{product.id}}" type="button" data-dismiss="modal" class="btn btn-primary btn-small last-product">{{ _('Send and Done') }}</button>{% endif %}
             </div>
         </div>
-        </form>
-        <script type="text/javascript">
-        $('#ean-{{product.ean13}}').change(function() {
-            var value = $('#ean-{{product.ean13}}').val();
-            if(value == '{{product.ean13}}'){
-                $('#{{product.ean13}}').trigger('click');
-            }
-        });
-        </script>
-    </div>
-    <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-small">{{ _('Close') }}</button>
-        {% if not loop.last %}<button id="{{product.id}}-{{ next_product['id'] }}" type="button" data-dismiss="modal" class="btn btn-primary btn-small next-product next-{{ product.ean13 }}">{{ _('Send and next') }}</button>{% endif %}
-        {% if loop.last %}<button id="{{product.id}}" type="button" data-dismiss="modal" class="btn btn-primary btn-small last-product">{{ _('Send and Done') }}</button>{% endif %}
     </div>
 </div>
 {% endfor %}
@@ -114,67 +118,73 @@
 </div>{% endif %}
 
 <!-- Modal Window done -->
-<div id="send-done" class="modal hide fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3>{{ _('Pickings have been sent and process successfully') }}</h3>
-    </div>
-    <div class="modal-body">
-    <p>{{ _('What do you do?') }}</p>
-    <p>
-        <a href="{{ url_for('picking') }}">{{ _('Do more pickings to delivery') }}</a> {{_('or')}} <a href="{{ url_for('logout') }}">{{ _('logout') }}</a>
-    </p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn">{{ _('Done') }}</button>
+<div id="send-done" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">{{ _('Pickings have been sent and process successfully') }}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{ _('What do you do?') }}</p>
+                <p><a href="{{ url_for('picking') }}">{{ _('Do more pickings to delivery') }}</a> {{_('or')}} <a href="{{ url_for('logout') }}">{{ _('logout') }}</a></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn">{{ _('Done') }}</button>
+            </div>
+        </div>
     </div>
 </div>
 
 {% if grid|length %}
 <!-- Modal Window Pickings -->
-<div id="pickings" class="modal hide fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
-    <form action="#" id="send-pickings-form" class="form-horizontal" method="POST">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3>{{ _('Pickings') }}</h3>
-    </div>
-    <div class="modal-body">
-        {% for g in grid %}{% set picking = loop.index %}{% set name = grid|pickingname(picking) %}{% set products = grid|pickingproducts(picking) %}
-        <div class="row">
-            <div class="span14">
-                <span class="picking-title"> <span class="picking-name">{{ picking}} - {{ name }}</span></span>
-                <a href="#{{name}}" id="print-{{name}}" class="btn btn-mini btn-success print-picking">{{ _('Print') }}</a>
-                <a href="#{{name}}" id="carrier-{{name}}" class="btn btn-mini btn-success carrier-picking">{{ _('Carrier') }}</a>
+<div id="pickings" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="#" id="send-pickings-form" class="form-horizontal" method="POST">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">{{ _('Pickings') }}</h4>
             </div>
-        </div>
-        <table class="table table-striped table-condensed">
-            <thead>
-                <tr>
-                    <th>{{ _("Code") }}</th>
-                    <th>{{ _("Product") }}</th>
-                    <th>{{ _("Ordered") }}</th>
-                    <th>{{ _("Qty") }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for product in products %}<tr>
-                    <td>{{ product['product_code'] }}</td>
-                    <td>{{ product['product_name'] }}</td>
-                    <td>{{ product['qty'] }}</td>
-                    {% set move = product|productmove() %}<td id="qty-{{ move }}"></td>
-                </tr>
+            <div class="modal-body">
+                {% for g in grid %}{% set picking = loop.index %}{% set name = grid|pickingname(picking) %}{% set products = grid|pickingproducts(picking) %}
+                <div class="row">
+                    <div class="span14">
+                        <span class="picking-title"> <span class="picking-name">{{ picking}} - {{ name }}</span></span>
+                        <a href="#{{name}}" id="print-{{name}}" class="btn btn-mini btn-success print-picking">{{ _('Print') }}</a>
+                        <a href="#{{name}}" id="carrier-{{name}}" class="btn btn-mini btn-success carrier-picking">{{ _('Carrier') }}</a>
+                    </div>
+                </div>
+                <table class="table table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <th>{{ _("Code") }}</th>
+                            <th>{{ _("Product") }}</th>
+                            <th>{{ _("Ordered") }}</th>
+                            <th>{{ _("Qty") }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}<tr>
+                            <td>{{ product['product_code'] }}</td>
+                            <td>{{ product['product_name'] }}</td>
+                            <td>{{ product['qty'] }}</td>
+                            {% set move = product|productmove() %}<td id="qty-{{ move }}"></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <input type="hidden" name="{{ name }}" value="1">
                 {% endfor %}
-            </tbody>
-        </table>
-        <input type="hidden" name="{{ name }}" value="1">
-        {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button id="print-pickings" type="button" data-dismiss="modal" class="btn btn-small btn-primary">{{ _('Print') }}</button>
+                <button id="carrier-pickings" type="button" data-dismiss="modal" class="btn btn-small btn-primary">{{ _('Carrier') }}</button>
+                <button id="send-pickings" type="button" data-dismiss="modal" class="btn btn-small btn-primary">{{ _('Done') }}</button>
+            </div>
+            </form>
+        </div>
     </div>
-    <div class="modal-footer">
-        <button id="print-pickings" type="button" data-dismiss="modal" class="btn btn-small btn-primary">{{ _('Print') }}</button>
-        <button id="carrier-pickings" type="button" data-dismiss="modal" class="btn btn-small btn-primary">{{ _('Carrier') }}</button>
-        <button id="send-pickings" type="button" data-dismiss="modal" class="btn btn-small btn-primary">{{ _('Done') }}</button>
-    </div>
-    </form>
 </div>
 {% endif %}
 
