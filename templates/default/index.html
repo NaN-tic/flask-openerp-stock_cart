@@ -2,14 +2,12 @@
 {% block title %}{{ _("Dashboard") }}{% endblock %}
 {% block body %}
 {% include 'default/nav.html' %}
-<div class="container-fluid">
-    <div class="subnav">
-        <ul class="nav nav-pills">
-            <li><a href="{{ url_for('cart') }}">{% if not session.cart %} {{ _("Select a cart") }} {% else %}{{ _("Change cart") }}{% endif %}</a></li>
-            <li><a href="{{ url_for('picking') }}">{{ _("Process pickings") }}</a></li>
-            <li><a href="{{ url_for('help') }}" data-toggle="modal" data-target="#help">{{ _("Help") }}</a></li>
-        </ul>
-    </div>
+<div class="masthead">
+    <ul class="nav nav-justified">
+        <li><a href="{{ url_for('cart') }}">{% if not session.cart %} {{ _("Select a cart") }} {% else %}{{ _("Change cart") }}{% endif %}</a></li>
+        <li><a href="{{ url_for('picking') }}">{{ _("Process pickings") }}</a></li>
+        <li><a href="{{ url_for('help') }}" data-toggle="modal" data-target="#help">{{ _("Help") }}</a></li>
+    </ul>
 </div>
 
 <div class="row index-box">
