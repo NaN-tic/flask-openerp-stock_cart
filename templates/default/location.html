@@ -35,7 +35,8 @@ $(function() {
 <div class="row">
     <div class="col-md-6">
         <h4>{{ _("Add new product location") }}:</h4>
-        <form id="location-form"  action="{{ url_for('location') }}" class="form-horizontal" method="POST">
+        {% with errors = get_flashed_messages(category_filter=["location"]) %}{% if errors %}<ul class=error>{% for msg in errors %}<li>{{ msg }}</li>{% endfor %}</ul>{% endif %}{% endwith %}
+        <form id="location-form" action="{{ url_for('location') }}" class="form-horizontal" method="POST">
             {{ render_field(form.location, class_="", placeholder=_("Location")) }}
             {{ render_field(form.ean13, class_="", placeholder=_("EAN13"), auto_focus=True) }}
             <hr/>
@@ -46,7 +47,7 @@ $(function() {
     </div>
     <div class="col-md-6">
         <h4>{{ _("Search location by product") }}:</h4>
-        <form id="product-form"  action="#" class="form-horizontal" method="POST">
+        <form id="product-form" action="#" class="form-horizontal" method="POST">
             <div class="clearfix ">
                 <input class="required" id="product-ean13" name="product-ean13" placeholder="EAN13" type="text" value="">
             </div>

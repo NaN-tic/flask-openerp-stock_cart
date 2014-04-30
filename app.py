@@ -388,12 +388,12 @@ def location():
                 ('ean13_ids.name', '=', ean13),
                 ])
         if not products:
-            flash('Product EAN13 %s not found' % ean13)
+            flash('Product EAN13 %s not found' % ean13, 'location')
         else:
             Product = Client.model('product.product')
             p = Product.get(products[0])
             p.write(values)
-            flash('Save product EAN13 %s' % ean13)
+            flash('Save product EAN13 %s' % ean13, 'location')
         form.ean13.data = None
 
     return render_template(get_template('location.html'), form=form)
