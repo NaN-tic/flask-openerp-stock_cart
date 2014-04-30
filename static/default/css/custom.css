@@ -7,6 +7,8 @@ body {padding-top: 0px; padding-bottom: 40px; background-color: #f5f5f5}
 .navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {color: #ffffff; background-color:transparent}
 .navbar-custom .navbar-brand {color:#D2D2D2}
 
+.modal-footer-button { padding: 5px 5px 5px}
+
 .error {color:#FF0000; font-size: 13px !important}
 .stock-alert {color:#FF0000 !important}
 
@@ -204,20 +206,11 @@ body {padding-top: 0px; padding-bottom: 40px; background-color: #f5f5f5}
   font-size: 17.5px;
   line-height: 20px;
 }
+
 .input-qty {
-  height: 12px !important;
+  padding: 0px !important;
+  width: 55px !important;
 }
-
-.picking-title {
-  margin: 10px 0;
-  font-family: inherit;
-  font-weight: bold;
-  line-height: 20px;
-  color: inherit;
-  text-rendering: optimizelegibility;
-  font-size: 17.5px;
-}
-
 /* End picking */
 
 /* Modal */

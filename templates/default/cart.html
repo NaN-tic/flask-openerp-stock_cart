@@ -5,13 +5,12 @@
 <div class="row">
     <div class="col-md-12">
         {% if session.order %}<p>{{ _("Order products by") }}: <strong>{{ session.order }}</strong></p>{% endif %}
-        <table class="table table-striped table-condensed">
+        <table class="table table-striped table-condensed table-responsive">
             <thead>
                 <tr>
                     <th>{{ _("Name") }}</th>
                     <th>{{ _("Baskets") }}</th>
                     <th>{{ _("User") }}</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -19,8 +18,7 @@
             <tr>
                 <td>{{ cart.name }}</td>
                 <td>{{ cart.rows*cart.columns }}</td>
-                <td>{% if cart.user_id %}{{ cart.user_id }}{% endif %}</td>
-                <td>{% if not cart.user_id %}<a href="{{ url_for('cart') }}?cart={{ cart.id }}" class="label label-success">{{ _("Get this cart") }}</a>{% endif %}</td>
+                <td>{% if cart.user_id %}{{ cart.user_id }}{% else %}<a href="{{ url_for('cart') }}?cart={{ cart.id }}" class="btn btn-sm btn-success">{{ _("Get this cart") }}</a>{% endif %}</td>
             </tr>
             {% endfor %}
             </tbody>
