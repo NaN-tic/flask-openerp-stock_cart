@@ -440,11 +440,137 @@ def product_get_location():
             location.append(p.loc_case)
 
         if location:
-            result['message'] = _(u'Location %s: %s' % (ean13, '-'.join(location)))
+            result['message'] = _(u'Location: %s' % ('-'.join(location)))
             result['color'] = 'green'
         else:
             result['message'] = _(u'Location is empty. Add a location EAN13 %s' % ean13)
             result['color'] = 'red'
+
+    return jsonify(result)
+
+
+class StockForm(Form):
+    """
+    A form add stock product
+    """
+    ean13 = TextField('EAN13', [validators.Required()])
+    qty = TextField(_('Qty'), [validators.Required()], description=_('Add quantity available'))
+
+    def validate(self):
+        rv = Form.validate(self)
+        if not self.ean13.data:
+            return False
+        if not self.qty.data:
+            return False
+        return True
+
+
+@app.route('/stock', methods=['GET', 'POST'])
+@login_required
+def stock():
+    '''Product Stock'''
+    form = StockForm(request.form)
+
+    return render_template(get_template('stock.html'), form=form)
+
+@app.route('/stock-save', methods=['POST'])
+@login_required
+def stock_save():
+    '''Save stock from EAN product'''
+    result = {}
+
+    values = {}
+    for data in request.json:
+        values[data['name']] = data['value']
+
+    ean13 = values.get('ean13')
+    qty = values.get('qty')
+
+    try:
+        qty = int(qty)
+    except:
+        result['message'] = _(u'Quantity %s is not numeric' % (qty))
+        result['color'] = 'red'
+        return jsonify(result)
+
+    Client = erp_connect()
+    products = Client.search('product.product',['|',
+            ('ean13', '=', ean13),
+            ('ean13_ids.name', '=', ean13),
+            ])
+    if not products:
+        result['message'] = _(u'Not found EAN13')
+        result['color'] = 'red'
+    else:
+        Product = Client.model('product.product')
+        p = Product.get(products[0])
+
+        Inventory = Client.model('stock.inventory')
+
+        lines = {
+            #~ 'location_id': 
+            'product_id': p.id,
+            'product_uom': p.uom_id.id,
+            'product_qty': qty,
+            }
+        values = {
+            'name': '[%s] %s' % (p.code, p.name),
+            'inventory_line_id': [(0, 0, lines)]
+            }
+        inventory = Inventory.create(values)
+
+        done = False
+        confirm = Client.execute('stock.inventory', 'action_confirm', [inventory.id])
+        if confirm:
+            done = Client.execute('stock.inventory', 'action_done', [inventory.id])
+        if done:
+            result['message'] = _(u'Save quantity. EAN13: %s - Qty: %s' % (ean13, qty))
+            result['color'] = 'green'
+        else:
+            result['message'] = _(u'Save quantity error. EAN13: %s' % (ean13))
+            result['color'] = 'red'
+
+    return jsonify(result)
+
+@app.route('/product-get-stock', methods=['POST'])
+@login_required
+def product_get_stock():
+    '''Get Stock from EAN product'''
+    result = {}
+
+    values = {}
+    for data in request.json:
+        values[data['name']] = data['value']
+
+    ean13 = values.get('product-ean13')
+
+    Client = erp_connect()
+    products = Client.search('product.product',['|',
+            ('ean13', '=', ean13),
+            ('ean13_ids.name', '=', ean13),
+            ])
+    if not products:
+        result['message'] = _(u'Not found EAN13')
+        result['color'] = 'red'
+    else:
+        Product = Client.model('product.product')
+        p = Product.get(products[0])
+        location = []
+        if p.loc_rack:
+            location.append(p.loc_rack)
+        if p.loc_row:
+            location.append(p.loc_row)
+        if p.loc_case:
+            location.append(p.loc_case)
+
+        if location:
+            result['message'] = _(u'Location: %s' % ('-'.join(location)))
+            result['color'] = 'green'
+        else:
+            result['message'] = _(u'Location is empty. Add a location EAN13 %s' % ean13)
+            result['color'] = 'red'
+
+        result['stock'] = _(u'Stock: %s' % p.qty_available)
 
     return jsonify(result)
 
