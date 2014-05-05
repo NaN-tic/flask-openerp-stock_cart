@@ -93,7 +93,7 @@
                                 <div class="form-group" >
                                     <strong class="control-label col-xs-2 col-lg-2" title="{{ picking_cell_name }}">{{ cell }}</strong>
                                     {% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
-                                    <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required form-control input-qty" autofocus="autofocus" required>{% if product.qty_available <= 0 %} <span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}{% endif %}{% endfor %}
+                                    <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required form-control input-qty" required>{% if product.qty_available <= 0 %} <span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}{% endif %}{% endfor %}
                                 </div>
                             </div>{% set count = count + 1 %}{% endif %}{% endfor %}
                     </div>
@@ -434,7 +434,7 @@ $('#pickings-info').click(function(){
 })
 
 /* Active autofocus */
-$(".modal").on('shown', function() {
+$(".modal").on('shown.bs.modal', function() {
     $(this).find("[autofocus]:first").focus();
 });
 </script>
