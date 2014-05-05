@@ -9,22 +9,46 @@
 </div>
 
 <script type="text/javascript">
-$(function() {  
-    $("#product-location").click(function() {  
-        $('#ploc-data').text('Enviant dades...');
+$(function() {
+    $("#product-save-location").click(function() {  
+        $('#message-save').text('{{ _("Sending") }}...');
+
+        var data = $('#location-form').serializeArray();
+
+        $.ajax({
+            type: "POST",
+            url: "{{ url_for('product_save_location') }}",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+            success: function(data) {
+                $('#message-save').text(data.message);
+                $('#message-save').css('color', data.color);
+                },
+            error:function(data){
+                $('#message-save').text("{{ _('Error connection server') }}");
+                $('#message-save').css('color', 'red');
+                },
+            });
+        return false;
+    });  
+
+    $("#product-get-location").click(function() {  
+        $('#message-get').text('{{ _("Sending") }}...');
 
         var data = $('#product-form').serializeArray();
 
         $.ajax({
             type: "POST",
-            url: "{{ url_for('product_location') }}",
+            url: "{{ url_for('product_get_location') }}",
             contentType: "application/json; charset=utf-8",
             data:JSON.stringify(data),
             success: function(data) {
-                $('#ploc-data').text(data.location);
+                $('#message-get').text(data.message);
+                $('#message-get').css('color', data.color);
                 },
             error:function(data){
-                $('#ploc-data').text("{{ _('Error connection server') }}");
+                $('#message-get').text("{{ _('Error connection server') }}");
+                $('#message-get').css('color', 'red');
                 },
             });
         return false;
@@ -35,13 +59,13 @@ $(function() {
 <div class="row">
     <div class="col-md-6">
         <h4>{{ _("Add new product location") }}:</h4>
-        {% with errors = get_flashed_messages(category_filter=["location"]) %}{% if errors %}<ul class=error>{% for msg in errors %}<li>{{ msg }}</li>{% endfor %}</ul>{% endif %}{% endwith %}
-        <form id="location-form" action="{{ url_for('location') }}" class="form-horizontal" method="POST">
+        <form id="location-form" action="#" class="form-horizontal" method="POST">
             {{ render_field(form.location, class_="", placeholder=_("Location")) }}
             {{ render_field(form.ean13, class_="", placeholder=_("EAN13"), auto_focus=True) }}
+            <div id="message-save"></div>
             <hr/>
             <div class="controls">
-                <button class="btn btn-primary btn-sm" type="submit">{{ _("Save") }}</button>
+                <button id="product-save-location" class="btn btn-primary btn-sm" type="submit">{{ _("Save") }}</button>
             </div>
         </form>
     </div>
@@ -51,10 +75,10 @@ $(function() {
             <div class="clearfix ">
                 <input class="required" id="product-ean13" name="product-ean13" placeholder="EAN13" type="text" value="">
             </div>
-            <div id="ploc-data"></div>
+            <div id="message-get"></div>
             <hr/>
             <div class="controls">
-                <button id="product-location" class="btn btn-primary btn-sm" type="submit">{{ _("Search") }}</button>
+                <button id="product-get-location" class="btn btn-primary btn-sm" type="submit">{{ _("Search") }}</button>
             </div>
         </form>
     </div>

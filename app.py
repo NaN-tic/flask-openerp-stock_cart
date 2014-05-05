@@ -361,15 +361,38 @@ class LocationForm(Form):
 @app.route('/location', methods=['GET', 'POST'])
 @login_required
 def location():
-    '''Save new product location'''
+    '''Product location'''
     form = LocationForm(request.form)
 
-    if request.method == 'POST' and form.validate():
-        location = form.location.data
-        location = ' '.join(location.split())
-        loc = location.split(' ')
+    return render_template(get_template('location.html'), form=form)
+
+@app.route('/product-save-location', methods=['POST'])
+@login_required
+def product_save_location():
+    '''Save location from EAN product'''
+    result = {}
+
+    values = {}
+    for data in request.json:
+        values[data['name']] = data['value']
+
+    ean13 = values.get('ean13')
+    location = values.get('location')
+
+    Client = erp_connect()
+    products = Client.search('product.product',['|',
+            ('ean13', '=', ean13),
+            ('ean13_ids.name', '=', ean13),
+            ])
+    if not products:
+        result['message'] = _(u'Not found EAN13')
+        result['color'] = 'red'
+    else:
+        Product = Client.model('product.product')
+        p = Product.get(products[0])
 
         values = {}
+        loc = location.split(' ')
         if len(loc) == 3:
             values['loc_rack'] = loc[0]
             values['loc_row'] = loc[1]
@@ -379,29 +402,18 @@ def location():
             values['loc_row'] = loc[1]
         if len(loc) == 1:
             values['loc_rack'] = loc[0]
+        p.write(values)
+        result['message'] = _(u'Save location. EAN13 %s - %s' % (ean13, location))
+        result['color'] = 'green'
 
-        ean13 = form.ean13.data
+    return jsonify(result)
 
-        Client = erp_connect()
-        products = Client.search('product.product',['|',
-                ('ean13', '=', ean13),
-                ('ean13_ids.name', '=', ean13),
-                ])
-        if not products:
-            flash('Product EAN13 %s not found' % ean13, 'location')
-        else:
-            Product = Client.model('product.product')
-            p = Product.get(products[0])
-            p.write(values)
-            flash('Save product EAN13 %s' % ean13, 'location')
-        form.ean13.data = None
-
-    return render_template(get_template('location.html'), form=form)
-
-@app.route('/product-location', methods=['POST'])
+@app.route('/product-get-location', methods=['POST'])
 @login_required
-def product_location():
-    '''Get product location'''
+def product_get_location():
+    '''Get location from EAN product'''
+    result = {}
+
     values = {}
     for data in request.json:
         values[data['name']] = data['value']
@@ -414,7 +426,8 @@ def product_location():
             ('ean13_ids.name', '=', ean13),
             ])
     if not products:
-        data['location'] = _(u'Not found EAN13')
+        result['message'] = _(u'Not found EAN13')
+        result['color'] = 'red'
     else:
         Product = Client.model('product.product')
         p = Product.get(products[0])
@@ -427,11 +440,13 @@ def product_location():
             location.append(p.loc_case)
 
         if location:
-            data['location'] = _(u'Location %s: %s' % (ean13, '-'.join(location)))
+            result['message'] = _(u'Location %s: %s' % (ean13, '-'.join(location)))
+            result['color'] = 'green'
         else:
-            data['location'] = _(u'Location is empty. Add %s location' % ean13)
+            result['message'] = _(u'Location is empty. Add a location EAN13 %s' % ean13)
+            result['color'] = 'red'
 
-    return jsonify(data)
+    return jsonify(result)
 
 @app.route('/help')
 @login_required
