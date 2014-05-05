@@ -25,7 +25,7 @@ $(function() {
                 $('#message-save').css('color', data.color);
                 },
             error:function(data){
-                $('#message-save').text("{{ _('Error connection server') }}");
+                $('#message-save').text("{{ _('Wrong user access or connection server error. Try again.') }}");
                 $('#message-save').css('color', 'red');
                 },
             });
@@ -47,7 +47,7 @@ $(function() {
                 $('#message-get').css('color', data.color);
                 },
             error:function(data){
-                $('#message-get').text("{{ _('Error connection server') }}");
+                $('#message-get').text("{{ _('Wrong user access or connection server error. Try again.') }}");
                 $('#message-get').css('color', 'red');
                 },
             });
