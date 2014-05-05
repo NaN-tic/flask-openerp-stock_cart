@@ -239,6 +239,7 @@ $(".get-ean13").click(function(event){
     if(value != ean){
         if((value != ean) && (value2 != ean)){
             alert("{{ _('Not find EAN: ') }}"+value);
+            $('#ean-'+ean).val('');
             return False;
         }
     }
