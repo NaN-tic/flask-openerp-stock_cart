@@ -574,6 +574,24 @@ def product_get_stock():
 
     return jsonify(result)
 
+@app.route('/find-product-ean', methods=['POST'])
+@login_required
+def find_product_ean():
+    '''Find product by EAN'''
+    result = False
+
+    ean13 = request.json
+
+    Client = erp_connect()
+    products = Client.search('product.product',['|',
+            ('ean13', '=', ean13),
+            ('ean13_ids.name', '=', ean13),
+            ])
+    if products:
+        result = True
+
+    return jsonify(result=result)
+
 @app.route('/help')
 @login_required
 def help():

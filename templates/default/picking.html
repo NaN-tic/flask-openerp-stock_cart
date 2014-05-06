@@ -81,6 +81,7 @@
                             <a href="#{{product.ean13}}" class="clean-ean13 btn btn-link btn-sm">{{ _('Clean') }}</a>
                             <a href="#{{product.ean13}}" class="show-stockcart btn btn-link btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
                             <a href="#{{product.ean13}}" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#{{product.ean13}}">{{ _('Info') }}</a>
+                            <div id="message-{{product.ean13}}"></div>
                         </div>
                     </div>
                 </div>
@@ -232,23 +233,35 @@ $(".last-product").attr("disabled", "disabled");
 $(".get-ean13").click(function(event){
     var boxean = $(this).attr('href').replace('#', '.');
     var ean = boxean.slice(1, boxean.length);
-    var value = $('#ean-'+ean).val();
-    var value2 = '2'+value; /* search ean13 started by 2 */
-    var classes = $(this).attr('class').split(" ");
+    var data = $('#ean-'+ean).val();
+    var ean13 = data
 
-    if(value != ean){
-        if((value != ean) && (value2 != ean)){
-            alert("{{ _('Not find EAN: ') }}"+value);
-            $('#ean-'+ean).val('');
-            return False;
-        }
-    }
-    $(boxean).show();
-    if( $.inArray('last-prod', classes) > 0){
-        $('.last-product').removeAttr("disabled"); 
-    } else {
-        $('.next-'+ean).removeAttr("disabled"); 
-    }
+    $.ajax({
+        type: "POST",
+        url: "{{ url_for('find_product_ean') }}",
+        contentType: "application/json; charset=utf-8",
+        data:JSON.stringify(data),
+        success: function(data) {
+            if (data.result){
+                $('#message-'+ean).text('');
+                $(boxean).show();
+                if( $.inArray('last-prod', classes) > 0){
+                    $('.last-product').removeAttr("disabled"); 
+                } else {
+                    $('.next-'+ean).removeAttr("disabled"); 
+                }
+            } else {
+                $('#message-'+ean).text("{{ _('Not find EAN: ') }}"+ean13);
+                $('#message-'+ean).css('color', 'red');
+                $('#ean-'+ean).val('');
+            }
+            },
+        error:function(data){
+            $('#message-'+ean).text("{{ _('Wrong user access or connection server error. Try again.') }}");
+            $('#message-'+ean).css('color', 'red');
+            },
+        });
+    return False;
 });
 
 /* Pass EAN13 if is valid */
