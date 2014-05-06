@@ -60,18 +60,6 @@ $(function() {
 
 <div class="row">
     <div class="col-md-6">
-        <h4>{{ _("Add new stock product (inventory)") }}:</h4>
-        <form id="stock-form" action="#" class="form-horizontal" method="POST">
-            {{ render_field(form.ean13, class_="", placeholder=_("EAN13"), auto_focus=True) }}
-            {{ render_field(form.qty, class_="", placeholder=_("Qty")) }}
-            <div id="message-save"></div>
-            <hr/>
-            <div class="controls">
-                <button id="product-save-stock" class="btn btn-primary btn-sm" type="submit">{{ _("Save") }}</button>
-            </div>
-        </form>
-    </div>
-    <div class="col-md-6">
         <h4>{{ _("Search location and quantity by product") }}:</h4>
         <form id="product-form" action="#" class="form-horizontal" method="POST">
             <div class="clearfix ">
@@ -82,6 +70,18 @@ $(function() {
             <hr/>
             <div class="controls">
                 <button id="product-get-stock" class="btn btn-primary btn-sm" type="submit">{{ _("Search") }}</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h4>{{ _("Add new stock product (inventory)") }}:</h4>
+        <form id="stock-form" action="#" class="form-horizontal" method="POST">
+            {{ render_field(form.ean13, class_="", placeholder=_("EAN13"), auto_focus=True) }}
+            {{ render_field(form.qty, class_="", placeholder=_("Qty")) }}
+            <div id="message-save"></div>
+            <hr/>
+            <div class="controls">
+                <button id="product-save-stock" class="btn btn-primary btn-sm" type="submit">{{ _("Save") }}</button>
             </div>
         </form>
     </div>
