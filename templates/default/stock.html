@@ -63,7 +63,7 @@ $(function() {
         <h4>{{ _("Search location and quantity by product") }}:</h4>
         <form id="product-form" action="#" class="form-horizontal" method="POST">
             <div class="clearfix ">
-                <input class="required" id="product-ean13" name="product-ean13" placeholder="EAN13" type="text" value="">
+                <input class="required ean-input" id="product-ean13" name="product-ean13" placeholder="EAN13" type="text" value="" autofocus="autofocus">
             </div>
             <div id="message-get"></div>
             <div id="message-stock"></div>
@@ -76,7 +76,7 @@ $(function() {
     <div class="col-md-6">
         <h4>{{ _("Add new stock product (inventory)") }}:</h4>
         <form id="stock-form" action="#" class="form-horizontal" method="POST">
-            {{ render_field(form.ean13, class_="", placeholder=_("EAN13"), auto_focus=True) }}
+            {{ render_field(form.ean13, class_="ean-input", placeholder=_("EAN13")) }}
             {{ render_field(form.qty, class_="", placeholder=_("Qty")) }}
             <div id="message-save"></div>
             <hr/>
@@ -86,5 +86,9 @@ $(function() {
         </form>
     </div>
 </div>
+<script type="text/javascript">
+/* Desactive Keyword ean input field */
+$( "ean-input" ).blur(function() {});
+</script>
 {% endblock %}
 
