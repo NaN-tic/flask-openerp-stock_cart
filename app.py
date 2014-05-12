@@ -10,6 +10,7 @@ from functools import wraps
 
 from flask import Flask, render_template, request, jsonify, abort, session, redirect, url_for, flash
 from flask.ext.babel import Babel, gettext as _
+from flask.ext.wtf.html5 import IntegerField
 from wtforms import Form, TextField, validators
 
 from apphelp import get_description
@@ -347,7 +348,7 @@ class LocationForm(Form):
     A form add location product
     """
     location = TextField(_('Location'), [validators.Required()], description=_('Location separated by " " (space):rack row case'))
-    ean13 = TextField('EAN13', [validators.Required()])
+    ean13 = IntegerField('EAN13', [validators.Required()])
 
     def validate(self):
         rv = Form.validate(self)
@@ -453,8 +454,8 @@ class StockForm(Form):
     """
     A form add stock product
     """
-    ean13 = TextField('EAN13', [validators.Required()])
-    qty = TextField(_('Qty'), [validators.Required()], description=_('Add quantity available'))
+    ean13 = IntegerField('EAN13', [validators.Required()])
+    qty = IntegerField(_('Qty'), [validators.Required()], description=_('Add quantity available'))
 
     def validate(self):
         rv = Form.validate(self)
