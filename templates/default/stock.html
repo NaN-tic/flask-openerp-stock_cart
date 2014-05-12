@@ -2,9 +2,9 @@
 {% block title %}{{ _("Inventory") }}{% endblock %}
 {% block body %}
 {% include 'default/nav.html' %}
-<div class="row">
+<div class="row visible-lg visible-md">
     <div class="col-md-12">
-        <h2>{{ _("Inventory") }}</h2>
+        <h2 class="title-box">{{ _("Inventory") }}</h2>
     </div>
 </div>
 
@@ -59,31 +59,39 @@ $(function() {
 </script>
 
 <div class="row">
-    <div class="col-md-6">
-        <h4>{{ _("Search location and quantity by product") }}:</h4>
-        <form id="product-form" action="#" class="form-horizontal" method="POST">
-            <div class="clearfix ">
-                <input class="required ean-input" id="product-ean13" name="product-ean13" placeholder="EAN13" type="text" value="" autofocus="autofocus">
+    <div class="col-md-12">
+        <ul id="stockTab" class="nav nav-tabs">
+          <li class="active"><a href="#search" data-toggle="tab">{{ _("Search") }}</a></li>
+          <li><a href="#new" data-toggle="tab">{{ _("New") }}</a></li>
+        </ul>
+        <div id="locationTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="search">
+                <h3 class="title-box-form">{{ _("Search location and quantity by product") }}:</h3>
+                <form id="product-form" action="#" class="form-horizontal" method="POST">
+                    <div class="clearfix ">
+                        <input class="required ean-input" id="product-ean13" name="product-ean13" placeholder="EAN13" type="text" value="" autofocus="autofocus">
+                    </div>
+                    <div id="message-get"></div>
+                    <div id="message-stock"></div>
+                    <hr/>
+                    <div class="controls">
+                        <button id="product-get-stock" class="btn btn-primary btn-sm" type="submit">{{ _("Search") }}</button>
+                    </div>
+                </form>
             </div>
-            <div id="message-get"></div>
-            <div id="message-stock"></div>
-            <hr/>
-            <div class="controls">
-                <button id="product-get-stock" class="btn btn-primary btn-sm" type="submit">{{ _("Search") }}</button>
+            <div class="tab-pane fade" id="new">
+                <h3 class="title-box-form">{{ _("Add new stock product (inventory)") }}:</h3>
+                <form id="stock-form" action="#" class="form-horizontal" method="POST">
+                    {{ render_field(form.ean13, class_="ean-input", placeholder=_("EAN13")) }}
+                    {{ render_field(form.qty, class_="", placeholder=_("Qty")) }}
+                    <div id="message-save"></div>
+                    <hr/>
+                    <div class="controls">
+                        <button id="product-save-stock" class="btn btn-primary btn-sm" type="submit">{{ _("Save") }}</button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    <div class="col-md-6">
-        <h4>{{ _("Add new stock product (inventory)") }}:</h4>
-        <form id="stock-form" action="#" class="form-horizontal" method="POST">
-            {{ render_field(form.ean13, class_="ean-input", placeholder=_("EAN13")) }}
-            {{ render_field(form.qty, class_="", placeholder=_("Qty")) }}
-            <div id="message-save"></div>
-            <hr/>
-            <div class="controls">
-                <button id="product-save-stock" class="btn btn-primary btn-sm" type="submit">{{ _("Save") }}</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
