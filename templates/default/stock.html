@@ -23,6 +23,7 @@ $(function() {
             success: function(data) {
                 $('#message-save').text(data.message);
                 $('#message-save').css('color', data.color);
+                $('#ean13').val('');
                 },
             error:function(data){
                 $('#message-save').text("{{ _('Wrong user access or connection server error. Try again.') }}");
@@ -47,6 +48,7 @@ $(function() {
                 $('#message-get').text(data.message);
                 $('#message-stock').text(data.stock);
                 $('#message-get').css('color', data.color);
+                $('#product-ean13').val('');
                 },
             error:function(data){
                 $('#message-get').text("{{ _('Wrong user access or connection server error. Try again.') }}");
@@ -67,13 +69,12 @@ $(function() {
         <div id="locationTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="search">
                 <h3 class="title-box-form">{{ _("Search location and quantity by product") }}:</h3>
+                <div id="message-get"></div>
+                <div id="message-stock"></div>
                 <form id="product-form" action="#" class="form-horizontal" method="POST">
                     <div class="clearfix ">
                         <input class="required ean-input" id="product-ean13" name="product-ean13" placeholder="EAN13" type="text" value="" autofocus="autofocus">
                     </div>
-                    <div id="message-get"></div>
-                    <div id="message-stock"></div>
-                    <hr/>
                     <div class="controls">
                         <button id="product-get-stock" class="btn btn-primary btn-sm" type="submit">{{ _("Search") }}</button>
                     </div>
@@ -81,11 +82,10 @@ $(function() {
             </div>
             <div class="tab-pane fade" id="new">
                 <h3 class="title-box-form">{{ _("Add new stock product (inventory)") }}:</h3>
+                <div id="message-save"></div>
                 <form id="stock-form" action="#" class="form-horizontal" method="POST">
-                    {{ render_field(form.ean13, class_="ean-input", placeholder=_("EAN13")) }}
                     {{ render_field(form.qty, class_="", placeholder=_("Qty")) }}
-                    <div id="message-save"></div>
-                    <hr/>
+                    {{ render_field(form.ean13, class_="ean-input", placeholder=_("EAN13")) }}
                     <div class="controls">
                         <button id="product-save-stock" class="btn btn-primary btn-sm" type="submit">{{ _("Save") }}</button>
                     </div>

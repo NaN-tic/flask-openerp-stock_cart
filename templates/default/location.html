@@ -23,6 +23,7 @@ $(function() {
             success: function(data) {
                 $('#message-save').text(data.message);
                 $('#message-save').css('color', data.color);
+                $('#ean13').val('');
                 },
             error:function(data){
                 $('#message-save').text("{{ _('Wrong user access or connection server error. Try again.') }}");
@@ -45,6 +46,7 @@ $(function() {
             success: function(data) {
                 $('#message-get').text(data.message);
                 $('#message-get').css('color', data.color);
+                $('#product-ean13').val('');
                 },
             error:function(data){
                 $('#message-get').text("{{ _('Wrong user access or connection server error. Try again.') }}");
@@ -65,12 +67,11 @@ $(function() {
         <div id="locationTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="search">
                 <h3 class="title-box-form">{{ _("Search location by product") }}:</h3>
+                <div id="message-get"></div>
                 <form id="product-form" action="#" class="form-horizontal" method="POST">
                     <div class="clearfix ">
                         <input class="required ean-input" id="product-ean13" name="product-ean13" placeholder="EAN13" type="text" value="" autofocus="autofocus">
                     </div>
-                    <div id="message-get"></div>
-                    <hr/>
                     <div class="controls">
                         <button id="product-get-location" class="btn btn-primary btn-sm" type="submit">{{ _("Search") }}</button>
                     </div>
@@ -78,11 +79,10 @@ $(function() {
             </div>
             <div class="tab-pane fade" id="new">
                 <h3 class="title-box-form">{{ _("Add new product location") }}:</h3>
+                <div id="message-save"></div>
                 <form id="location-form" action="#" class="form-horizontal" method="POST">
                     {{ render_field(form.location, class_="", placeholder=_("Location")) }}
                     {{ render_field(form.ean13, class_="ean-input", placeholder=_("EAN13")) }}
-                    <div id="message-save"></div>
-                    <hr/>
                     <div class="controls">
                         <button id="product-save-location" class="btn btn-primary btn-sm" type="submit">{{ _("Save") }}</button>
                     </div>
