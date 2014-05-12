@@ -385,7 +385,7 @@ def product_save_location():
             ('ean13_ids.name', '=', ean13),
             ])
     if not products:
-        result['message'] = _(u'Not found EAN13')
+        result['message'] = _(u'Not found EAN13: %s' % ean13)
         result['color'] = 'red'
     else:
         Product = Client.model('product.product')
@@ -426,7 +426,7 @@ def product_get_location():
             ('ean13_ids.name', '=', ean13),
             ])
     if not products:
-        result['message'] = _(u'Not found EAN13')
+        result['message'] = _(u'Not found EAN13: %s' % ean13)
         result['color'] = 'red'
     else:
         Product = Client.model('product.product')
@@ -499,7 +499,7 @@ def stock_save():
             ('ean13_ids.name', '=', ean13),
             ])
     if not products:
-        result['message'] = _(u'Not found EAN13')
+        result['message'] = _(u'Not found EAN13: %s' % ean13)
         result['color'] = 'red'
     else:
         Product = Client.model('product.product')
@@ -550,7 +550,7 @@ def product_get_stock():
             ('ean13_ids.name', '=', ean13),
             ])
     if not products:
-        result['message'] = _(u'Not found EAN13')
+        result['message'] = _(u'Not found EAN13: %s' % ean13)
         result['color'] = 'red'
     else:
         Product = Client.model('product.product')
