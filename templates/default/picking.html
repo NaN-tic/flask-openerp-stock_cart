@@ -38,7 +38,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title">
                     <div class="visible-md visible-lg">
-                        {{ product.name }} <i class="glyphicon glyphicon-info-sign product-info" data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{ product|productinfo }}"></i><br/>
+                        [{{ product.code }}] {{ product.name }} <i class="glyphicon glyphicon-info-sign product-info" data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{ product|productinfo }}"></i><br/>
                         <h5>
                         <strong>{{ _("Rack") }}:</strong> {% if product.loc_rack %}{{ product.loc_rack }} {% endif %}
                         <strong>{{ _("Row") }}:</strong> {% if product.loc_row %}{{ product.loc_row }} {% endif %}
@@ -46,7 +46,7 @@
                         </h5>
                     </div>
                     <div class="visible-xs visible-sm">
-                        {% if product.name|length > 20 %}{{ product.name[:20] }}...{% else %}{{ product.name }}{% endif %} <i class="glyphicon glyphicon-info-sign product-info" data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{ product|productinfo }}"></i>
+                        [{{ product.code }}] {% if product.name|length > 14 %}{{ product.name[:14] }}...{% else %}{{ product.name }}{% endif %} <i class="glyphicon glyphicon-info-sign product-info" data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{ product|productinfo }}"></i>
                         <h5>
                         <strong>{{ _("Rack") }}:</strong> {% if product.loc_rack %}{{ product.loc_rack }} {% endif %}
                         <strong>{{ _("Row") }}:</strong> {% if product.loc_row %}{{ product.loc_row }} {% endif %}
