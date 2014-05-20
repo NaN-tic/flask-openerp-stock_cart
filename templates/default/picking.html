@@ -77,7 +77,7 @@
                             <div class="col-md-3">
                                 <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus" class="form-control input-xs ean-input">
                             </div>
-                            <a id="{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
+                            <a id="search-{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
                             <a href="#{{product.ean13}}" class="clean-ean13 btn btn-link btn-sm">{{ _('Clean') }}</a>
                             <a href="#{{product.ean13}}" class="show-stockcart btn btn-link btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
                             <a href="#{{product.ean13}}" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#{{product.ean13}}">{{ _('Info') }}</a>
@@ -104,7 +104,7 @@
                 $('#ean-{{product.ean13}}').change(function() {
                     var value = $('#ean-{{product.ean13}}').val();
                     if(value == '{{product.ean13}}'){
-                        $('#{{product.ean13}}').trigger('click');
+                        $('#search-{{product.ean13}}').trigger('click');
                     }
                 });
                 </script>
