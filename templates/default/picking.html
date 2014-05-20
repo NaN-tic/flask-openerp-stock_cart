@@ -102,10 +102,7 @@
                 </form>
                 <script type="text/javascript">
                 $('#ean-{{product.ean13}}').change(function() {
-                    var value = $('#ean-{{product.ean13}}').val();
-                    if(value == '{{product.ean13}}'){
-                        $('#search-{{product.ean13}}').trigger('click');
-                    }
+                    $('#search-{{product.ean13}}').trigger('click');
                 });
                 </script>
             </div>
