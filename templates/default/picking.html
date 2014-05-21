@@ -242,11 +242,7 @@ $(".get-ean13").click(function(event){
             if (data.result){
                 $('#message-'+ean).text('');
                 $(boxean).show();
-                if( $.inArray('last-prod', classes) > 0){
-                    $('.last-product').removeAttr("disabled"); 
-                } else {
-                    $('.next-'+ean).removeAttr("disabled"); 
-                }
+                $('.next-'+ean13).removeAttr("disabled"); 
             } else {
                 $('#message-'+ean).text("{{ _('Not find EAN: ') }}"+ean13);
                 $('#message-'+ean).css('color', 'red');
