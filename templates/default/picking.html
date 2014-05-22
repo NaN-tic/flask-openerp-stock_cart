@@ -251,6 +251,7 @@ $(".get-ean13").click(function(event){
                 $('#message-'+ean).text("{{ _('Not find EAN: ') }}"+ean13);
                 $('#message-'+ean).css('color', 'red');
                 $('#ean-'+ean).val('');
+                $('#ean-'+ean).focus();
             }
             },
         error:function(data){
