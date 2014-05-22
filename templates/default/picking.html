@@ -165,7 +165,9 @@
                     <div class="col-md-12">
                         <h4><span class="picking-name">{{ picking}} - {{ name }} </span>
                         <a href="#{{name}}" id="print-{{name}}" class="btn btn-xs btn-success print-picking">{{ _('Print') }}</a>
+<!--
                         <a href="#{{name}}" id="carrier-{{name}}" class="btn btn-xs btn-success carrier-picking">{{ _('Carrier') }}</a>
+-->
                         </h4>
                     </div>
                 </div>
@@ -196,7 +198,9 @@
             <div class="modal-footer modal-footer-button">
                 <button id="details-pickings" type="button" data-toggle="collapse" data-target=".picking-detail" class="btn btn-xs btn-default">{{ _('Details') }}</button>
                 <button id="print-pickings" type="button" data-dismiss="modal" class="btn btn-xs btn-success">{{ _('Print') }}</button>
+<!--
                 <button id="carrier-pickings" type="button" data-dismiss="modal" class="btn btn-xs btn-success">{{ _('Carrier') }}</button>
+-->
                 <button id="send-pickings" type="button" data-dismiss="modal" class="btn btn-sm btn-primary">{{ _('Done') }}</button>
             </div>
             </form>
@@ -242,7 +246,7 @@ $(".get-ean13").click(function(event){
             if (data.result){
                 $('#message-'+ean).text('');
                 $(boxean).show();
-                $('.next-'+ean13).removeAttr("disabled"); 
+                $('.next-'+ean).removeAttr("disabled"); 
             } else {
                 $('#message-'+ean).text("{{ _('Not find EAN: ') }}"+ean13);
                 $('#message-'+ean).css('color', 'red');
