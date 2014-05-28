@@ -586,6 +586,7 @@ def find_product_ean():
 
     Client = erp_connect()
     products = Client.search('product.product',[
+            ('ean13', '=', ean),
             ('ean13', '=', ean13),
             ])
     if not products:
