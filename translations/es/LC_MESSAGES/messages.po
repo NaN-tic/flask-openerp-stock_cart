@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-01-28 15:17+0100\n"
-"PO-Revision-Date: 2014-01-28 15:15+0100\n"
+"POT-Creation-Date: 2014-05-28 09:47+0200\n"
+"PO-Revision-Date: 2014-05-28 09:53+0100\n"
 "Last-Translator: Raimon Esteve <resteve@zikzakmedia.com>\n"
 "Language-Team: es <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -17,125 +17,186 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-#: app.py:64
-msgid ""
-"Can't connect to ERP server. Check network-ports or ERP server was "
-"running."
-msgstr ""
-"No se puede conectar con el ERP. Compruebe la red y puertos o si el "
-"servidor está activo."
+#: app.py:65
+msgid "Can't connect to ERP server. Check network-ports or ERP server was running."
+msgstr "No se puede conectar con el ERP. Compruebe la red y puertos o si el servidor está activo."
 
-#: app.py:128
+#: app.py:130
 #, python-format
 msgid "Error: Not access in %(key)s - %(value)skey"
 msgstr "Error. No dispone de acceso a %(key)s - %(value)skey"
 
-#: app.py:131
+#: app.py:133
 msgid "You were logged in."
 msgstr "Se ha identificado en la aplicación."
 
-#: app.py:134
+#: app.py:136
 #, python-format
 msgid "Error: Invalid username %s or password"
 msgstr "Error. Usuario %s o contraseña no válidos"
 
-#: app.py:164
+#: app.py:167
 msgid "You were logged out."
 msgstr "Ha salido de la aplicación."
 
-#: app.py:208
+#: app.py:211
 #, python-format
 msgid "Cart %(name)s is working by user %(user)s."
 msgstr "Carrito %(name)s es usado por el usuario %(user)s."
 
-#: app.py:210
+#: app.py:213
 #, python-format
 msgid "Not find some cart by %(id)s."
 msgstr "No se ha encontrado ningún carrito por %(id)s."
 
-#: app.py:212
+#: app.py:215
 msgid "Error: Cart ID not valid or empty"
 msgstr "Error: El ID del carrito no es correcto o vacío."
 
-#: app.py:215
+#: app.py:218
 #, python-format
 msgid "Order products by: %(order)s."
 msgstr "Ordenación de productos por: %(order)s."
 
-#: app.py:247
+#: app.py:250
 #, python-format
 msgid "Error when process moves:qty %(values)s."
 msgstr "Error cuando se estaba procesando los movimientos:qty %(values)s."
 
-#: app.py:261
+#: app.py:264
+#: app.py:313
 #, python-format
 msgid "Error when print pickings %(pickings)s."
 msgstr "Error cuando se imprime los albaranes %(pickings)s."
 
-#: app.py:275
+#: app.py:278
 #, python-format
 msgid "Error when send pickings %(pickings)s to carrier."
 msgstr "Error cuando se envía los albaranes %(pickings)s al mensajero."
 
-#: app.py:293
+#: app.py:296
 #, python-format
 msgid "Error when process pickings %(pickings)s."
 msgstr "Error cuando se procesaban los albaranes %(pickings)s."
 
-#: app.py:313 defaultfilters.py:67 templates/default/location.html:39
-#: templates/default/nav.html:14 templates/default/nav.html:21
+#: app.py:330
+#, python-format
+msgid "Error when delivery pickings %(pickings)s."
+msgstr "Error cuando en la entraga de los albaranes %(pickings)s."
+
+#: app.py:350
+#: defaultfilters.py:67
+#: templates/default/location.html:84
+#: templates/default/nav.html:16
+#: templates/default/nav.html:23
+#: templates/default/picking.html:15
 msgid "Location"
 msgstr "Ubicación"
 
-#: app.py:313
+#: app.py:350
 msgid "Location separated by \" \" (space):rack row case"
 msgstr "Ubicación separada por \" \" (espacio):estante fila caja"
 
-#: app.py:379
-msgid "Not found EAN13"
-msgstr "No se ha encontrado EAN13"
-
-#: app.py:392
+#: app.py:389
+#: app.py:430
+#: app.py:503
+#: app.py:554
 #, python-format
-msgid "Location %s: %s"
-msgstr "Ubicación %s: %s"
+msgid "Not found EAN13: %s"
+msgstr "No se ha encontrado EAN13: %s"
 
-#: app.py:394
+#: app.py:407
 #, python-format
-msgid "Location is empty. Add %s location"
+msgid "Save location. EAN13 %s - %s"
+msgstr "Guardado ubicación %s - %s"
+
+#: app.py:444
+#: app.py:568
+#, python-format
+msgid "Location: %s"
+msgstr "Ubicación: %s"
+
+#: app.py:447
+#: app.py:571
+#, python-format
+msgid "Location is empty. Add a location EAN13 %s"
 msgstr "La ubicación está vacío. Añade una ubicación para %s"
 
-#: defaultfilters.py:55 templates/default/picking.html:11
-#: templates/default/picking.html:146
+#: app.py:458
+#: templates/default/picking.html:13
+#: templates/default/picking.html:14
+#: templates/default/picking.html:70
+#: templates/default/picking.html:97
+#: templates/default/picking.html:181
+#: templates/default/stock.html:87
+msgid "Qty"
+msgstr "Ctda."
+
+#: app.py:458
+msgid "Add quantity available"
+msgstr "Añade ctda. disponible"
+
+#: app.py:493
+#, python-format
+msgid "Quantity %s is not numeric"
+msgstr "La cantidad %s no es numérico"
+
+#: app.py:528
+#, python-format
+msgid "Save quantity. EAN13: %s - Qty: %s"
+msgstr "Guardado cantidad. EAN13: %s - Ctda- %s"
+
+#: app.py:531
+#, python-format
+msgid "Save quantity error. EAN13: %s"
+msgstr "Error guardando la cantidad. EAN13 %s"
+
+#: app.py:574
+#, python-format
+msgid "Stock: %s"
+msgstr "Stock: %s"
+
+#: defaultfilters.py:55
+#: templates/default/picking.html:11
+#: templates/default/picking.html:178
 msgid "Code"
 msgstr "Código"
 
-#: defaultfilters.py:57 templates/default/location.html:40
+#: defaultfilters.py:57
+#: templates/default/location.html:85
+#: templates/default/picking.html:66
+#: templates/default/stock.html:88
 msgid "EAN13"
 msgstr "EAN13"
 
-#: defaultfilters.py:59 templates/default/picking.html:15
-#: templates/default/picking.html:62
+#: defaultfilters.py:59
+#: templates/default/picking.html:43
+#: templates/default/picking.html:51
 msgid "Rack"
 msgstr "Estante"
 
-#: defaultfilters.py:61 templates/default/picking.html:16
-#: templates/default/picking.html:63
+#: defaultfilters.py:61
+#: templates/default/picking.html:44
+#: templates/default/picking.html:52
 msgid "Row"
 msgstr "Fila"
 
-#: defaultfilters.py:63 templates/default/picking.html:17
-#: templates/default/picking.html:64
+#: defaultfilters.py:63
+#: templates/default/picking.html:45
+#: templates/default/picking.html:53
 msgid "Case"
 msgstr "Caja"
 
-#: defaultfilters.py:65 templates/default/nav.html:22
-#: templates/default/picking.html:55
+#: defaultfilters.py:65
+#: templates/default/nav.html:24
+#: templates/default/picking.html:67
 msgid "Manufacturer"
 msgstr "Fabricante"
 
-#: templates/default/cart.html:2 templates/default/index.html:8
-#: templates/default/index.html:18 templates/default/nav.html:24
+#: templates/default/cart.html:2
+#: templates/default/index.html:7
+#: templates/default/index.html:16
+#: templates/default/nav.html:26
 msgid "Select a cart"
 msgstr "Seleccionar un carrito"
 
@@ -155,16 +216,18 @@ msgstr "Cestas"
 msgid "User"
 msgstr "Usuario"
 
-#: templates/default/cart.html:23
+#: templates/default/cart.html:21
 msgid "Get this cart"
 msgstr "Usar este carro"
 
-#: templates/default/footer.html:4 templates/default/index.html:10
-#: templates/default/nav.html:25
+#: templates/default/help.html:3
+#: templates/default/index.html:9
+#: templates/default/nav.html:27
 msgid "Help"
 msgstr "Ayuda"
 
-#: templates/default/footer.html:9 templates/default/picking.html:90
+#: templates/default/help.html:9
+#: templates/default/picking.html:110
 msgid "Close"
 msgstr "Cerrar"
 
@@ -172,193 +235,244 @@ msgstr "Cerrar"
 msgid "Dashboard"
 msgstr "Escritorio"
 
-#: templates/default/index.html:8 templates/default/nav.html:24
+#: templates/default/index.html:7
+#: templates/default/nav.html:26
 msgid "Change cart"
 msgstr "Cambiar de carro"
 
-#: templates/default/index.html:9 templates/default/index.html:24
-#: templates/default/nav.html:13 templates/default/picking.html:2
+#: templates/default/index.html:8
+#: templates/default/index.html:22
+#: templates/default/nav.html:15
+#: templates/default/picking.html:2
 msgid "Process pickings"
 msgstr "Procesar albaranes"
 
-#: templates/default/index.html:19
-msgid ""
-"Go to your preferences a select a cart do you work. Remember when not "
-"working in warehouse, do logout"
-msgstr ""
-"Ir a preferencias y selecciona el carrito que usará. Recuerde cuando ya "
-"no trabaje en el almacén, salir de la aplicación."
+#: templates/default/index.html:17
+msgid "Go to your preferences a select a cart do you work. Remember when not working in warehouse, do logout"
+msgstr "Ir a preferencias y selecciona el carrito que usará. Recuerde cuando ya no trabaje en el almacén, salir de la aplicación."
 
-#: templates/default/index.html:19 templates/default/index.html:25
+#: templates/default/index.html:17
+#: templates/default/index.html:23
 msgid "Go"
 msgstr "Ir"
 
-#: templates/default/index.html:25
-msgid ""
-"When process pickings, select products in your warehouse and put in you "
-"backet cart."
-msgstr ""
-"Cuando procese los albaranes, recoge los productos en su almacén y añade "
-"en su carrito."
+#: templates/default/index.html:23
+msgid "When process pickings, select products in your warehouse and put in you backet cart."
+msgstr "Cuando procese los albaranes, recoge los productos en su almacén y añade en su carrito."
 
-#: templates/default/index.html:30
+#: templates/default/index.html:28
 msgid "Make picking"
 msgstr "Realizar empaquetado"
 
-#: templates/default/index.html:31
-msgid ""
-"When finish selection products, return your picking area and make "
-"delivery package."
-msgstr ""
-"Cuando finalize la recogida de productos, vuelve al muelle de salida para"
-" finalizar el paquete."
+#: templates/default/index.html:29
+msgid "When finish selection products, return your picking area and make delivery package."
+msgstr "Cuando finalize la recogida de productos, vuelve al muelle de salida para finalizar el paquete."
 
-#: templates/default/location.html:2 templates/default/location.html:7
+#: templates/default/location.html:2
+#: templates/default/location.html:7
 msgid "Product location"
 msgstr "Ubicación del producto"
 
-#: templates/default/location.html:27
-msgid "Error connection server"
-msgstr "Error en la conexión con el servidor"
-
+#: templates/default/location.html:14
 #: templates/default/location.html:37
-msgid "Add new product location"
-msgstr "Añade una nueva ubicación para el producto"
+#: templates/default/stock.html:14
+#: templates/default/stock.html:37
+msgid "Sending"
+msgstr "Enviando"
 
-#: templates/default/location.html:43
-msgid "Save"
-msgstr "Guardar"
+#: templates/default/location.html:29
+#: templates/default/location.html:52
+#: templates/default/picking.html:258
+#: templates/default/stock.html:29
+#: templates/default/stock.html:54
+msgid "Wrong user access or connection server error. Try again."
+msgstr "Error acceso usuario o conexión servidor. Intente más tarde"
 
-#: templates/default/location.html:48
-msgid "Search location by product"
-msgstr "Buscar una ubicación para el producto"
-
-#: templates/default/location.html:56
+#: templates/default/location.html:64
+#: templates/default/location.html:76
+#: templates/default/stock.html:66
+#: templates/default/stock.html:79
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/default/login.html:2 templates/default/login.html:47
+#: templates/default/location.html:65
+#: templates/default/stock.html:67
+msgid "New"
+msgstr "Nuevo"
+
+#: templates/default/location.html:69
+msgid "Search location by product"
+msgstr "Buscar una ubicación para el producto"
+
+#: templates/default/location.html:81
+msgid "Add new product location"
+msgstr "Añade una nueva ubicación para el producto"
+
+#: templates/default/location.html:87
+#: templates/default/stock.html:90
+msgid "Save"
+msgstr "Guardar"
+
+#: templates/default/login.html:2
+#: templates/default/login.html:17
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: templates/default/login.html:14
-msgid "Add a user name"
-msgstr "Inserte nombre de usuario"
-
 #: templates/default/login.html:15
-msgid "Add a password"
-msgstr "Inserte contraseña"
-
-#: templates/default/login.html:34
 msgid "Username"
 msgstr "Usuario"
 
-#: templates/default/login.html:40
+#: templates/default/login.html:16
 msgid "Password"
 msgstr "Contraseña"
 
-#: templates/default/nav.html:18
+#: templates/default/nav.html:5
+msgid "Toggle navigation"
+msgstr "Navegación"
+
+#: templates/default/nav.html:17
+msgid "Stock"
+msgstr "Stock"
+
+#: templates/default/nav.html:20
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: templates/default/nav.html:20
+#: templates/default/nav.html:22
 msgid "Order by"
 msgstr "Ordenar por"
 
-#: templates/default/nav.html:26
+#: templates/default/nav.html:28
 msgid "Logout"
 msgstr "Salir"
 
-#: templates/default/picking.html:12 templates/default/picking.html:147
+#: templates/default/picking.html:12
+#: templates/default/picking.html:179
 msgid "Product"
 msgstr "Producto"
 
-#: templates/default/picking.html:13 templates/default/picking.html:58
-#: templates/default/picking.html:74 templates/default/picking.html:149
-msgid "Qty"
-msgstr "Ctda."
-
-#: templates/default/picking.html:14 templates/default/picking.html:59
+#: templates/default/picking.html:14
+#: templates/default/picking.html:71
 msgid "Qty Available"
 msgstr "Ctda. disponible"
 
-#: templates/default/picking.html:21
+#: templates/default/picking.html:19
 msgid "There are not pickings to process"
 msgstr "No hay albaranes para procesar"
 
-#: templates/default/picking.html:50
-msgid "Find"
-msgstr "Buscar"
-
-#: templates/default/picking.html:51
-msgid "Clean"
-msgstr "Limpiar"
-
-#: templates/default/picking.html:52
-msgid "Continue"
-msgstr "Continuar"
-
-#: templates/default/picking.html:54
+#: templates/default/picking.html:65
 msgid "Reference"
 msgstr "Referencia"
 
-#: templates/default/picking.html:91
+#: templates/default/picking.html:80
+msgid "Find"
+msgstr "Buscar"
+
+#: templates/default/picking.html:81
+msgid "Clean"
+msgstr "Limpiar"
+
+#: templates/default/picking.html:82
+msgid "Continue"
+msgstr "Continuar"
+
+#: templates/default/picking.html:83
+msgid "Info"
+msgstr "Info"
+
+#: templates/default/picking.html:111
 msgid "Send and next"
 msgstr "Enviar y siguiente"
 
-#: templates/default/picking.html:92
+#: templates/default/picking.html:112
 msgid "Send and Done"
 msgstr "Enviar y finalizar"
 
-#: templates/default/picking.html:97
+#: templates/default/picking.html:119
 msgid "Pickings info and Done"
 msgstr "Información y finalizar"
 
-#: templates/default/picking.html:102
+#: templates/default/picking.html:124
 msgid "Grid Cart"
 msgstr "Cestas del carrito"
 
-#: templates/default/picking.html:115
+#: templates/default/picking.html:139
 msgid "Pickings have been sent and process successfully"
 msgstr "Los albaranes se han enviado y procesado."
 
-#: templates/default/picking.html:118
+#: templates/default/picking.html:142
 msgid "What do you do?"
 msgstr "Que puedes hacer?"
 
-#: templates/default/picking.html:120
+#: templates/default/picking.html:143
 msgid "Do more pickings to delivery"
 msgstr "Realizar más albaranes para empaquetar"
 
-#: templates/default/picking.html:120
+#: templates/default/picking.html:143
 msgid "or"
 msgstr "o bien"
 
-#: templates/default/picking.html:120
+#: templates/default/picking.html:143
 msgid "logout"
 msgstr "salir"
 
-#: templates/default/picking.html:124 templates/default/picking.html:166
+#: templates/default/picking.html:146
+#: templates/default/picking.html:204
 msgid "Done"
 msgstr "Realizado"
 
-#: templates/default/picking.html:134
+#: templates/default/picking.html:160
 msgid "Pickings"
 msgstr "Albaranes"
 
-#: templates/default/picking.html:140
+#: templates/default/picking.html:167
+#: templates/default/picking.html:200
 msgid "Print"
 msgstr "Imprimir"
 
-#: templates/default/picking.html:141
+#: templates/default/picking.html:169
+#: templates/default/picking.html:202
 msgid "Carrier"
 msgstr "Mensajero"
 
-#: templates/default/picking.html:148
+#: templates/default/picking.html:180
 msgid "Ordered"
 msgstr "Ordenado"
 
-#: templates/default/picking.html:204
+#: templates/default/picking.html:199
+msgid "Details"
+msgstr "Detalles"
+
+#: templates/default/picking.html:251
 msgid "Not find EAN: "
 msgstr "No se encuentra EAN:"
 
+#: templates/default/picking.html:394
+msgid "Send shipments to printer"
+msgstr "Enviar albaranes a impresora"
+
+#: templates/default/picking.html:413
+msgid "Send shipments to carrier"
+msgstr "Enviar albaranes al mensajero"
+
+#: templates/default/stock.html:2
+#: templates/default/stock.html:7
+msgid "Inventory"
+msgstr "Inventario"
+
+#: templates/default/stock.html:71
+msgid "Search location and quantity by product"
+msgstr "Buscar una ubicación y cantidad por producto"
+
+#: templates/default/stock.html:84
+msgid "Add new stock product (inventory)"
+msgstr "Añadir nuevo stock (inventario)"
+
+#~ msgid "Error connection server"
+#~ msgstr "Error en la conexión con el servidor"
+
+#~ msgid "Add a user name"
+#~ msgstr "Inserte nombre de usuario"
+
+#~ msgid "Add a password"
+#~ msgstr "Inserte contraseña"
