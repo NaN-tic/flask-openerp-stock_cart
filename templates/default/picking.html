@@ -234,8 +234,8 @@ $(".last-product").attr("disabled", "disabled");
 $(".get-ean13").click(function(event){
     var boxean = $(this).attr('href').replace('#', '.');
     var ean = boxean.slice(1, boxean.length);
-    var data = $('#ean-'+ean).val();
-    var ean13 = data
+    var ean13 = $('#ean-'+ean).val();
+    var data = {'ean': ean, 'ean13': ean13}
 
     $.ajax({
         type: "POST",

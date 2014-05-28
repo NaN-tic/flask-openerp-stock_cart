@@ -581,13 +581,18 @@ def find_product_ean():
     '''Find product by EAN'''
     result = False
 
-    ean13 = request.json
+    ean = request.json.get('ean') # EAN from id div
+    ean13 = request.json.get('ean13')
 
     Client = erp_connect()
-    products = Client.search('product.product',['|',
+    products = Client.search('product.product',[
             ('ean13', '=', ean13),
-            ('ean13_ids.name', '=', ean13),
             ])
+    if not products:
+        products = Client.search('product.product',[
+                ('ean13', '=', ean),
+                ('ean13_ids.name', '=', ean13),
+                ])
     if products:
         result = True
 
