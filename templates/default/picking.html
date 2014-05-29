@@ -19,7 +19,7 @@
             {% if not products %}<tr><td colspan="5">{{ _('There are not pickings to process') }}</td></tr>{% endif %}
             {% for product in products %}<tr class="{% if product.qty_available <= 0 %}stock-alert{% endif %}">
                 <td><strong>{{ product.code }}</strong></td>
-                <td><a href="#{{ product.id }}" data-toggle="modal" data-target="#{{ product.id }}">{{ product.name }}</a></td>
+                <td>{% if product.ean13 %}<a href="#{{ product.id }}" data-toggle="modal" data-target="#{{ product.id }}">{{ product.name }}</a>{% else %}{{ product.name }} <small>({{ _('Not available EAN13') }})</small>{% endif %}</td>
                 <td class="visible-md visible-lg"><strong>{{ product.qty }}</strong></td>
                 <td class="visible-md visible-lg">{{ product.qty_available }}</td>
                 <td class="visible-md visible-lg">{% if product.loc_rack %}{{ product.loc_rack }}{% endif %}-{% if product.loc_row %}{{ product.loc_row }}{% endif %}-{% if product.loc_case %}{{ product.loc_case }}{% endif %}</td>
@@ -30,7 +30,7 @@
     </div>
 </div>
 
-{% for product in products recursive %}{% if products[loop.index] %}{% set next_product = products[loop.index] %}{% endif %}
+{% for product in products if product.ean13  recursive %}{% if products[loop.index] %}{% set next_product = products[loop.index] %}{% endif %}
 <div id="{{ product.id }}" class="modal fade modal-product" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
