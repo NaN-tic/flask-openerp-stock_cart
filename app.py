@@ -226,7 +226,7 @@ def cart():
 def picking():
     '''Get all pickings and get info to make pickings'''
     cart = session.get('cart', None)
-    order = session.get('order', None)
+    order = session.get('order', 'product_location')
     if not cart:
         return redirect(url_for('cart'))
 
