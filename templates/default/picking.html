@@ -90,23 +90,24 @@
                     <div class="row-stockcart">
                         {% for cell in range(session.cart_rows*session.cart_columns) %}
                             <div class="col-xs-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-sm-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-md-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-lg-{{ (12 / session.cart_columns)|floatwithoutdecimal }} row-stockcart-basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
-                                <div class="form-group" >
-                                    <strong class="control-label col-xs-2 col-lg-2" title="{{ picking_cell_name }}">{{ cell }} </strong>
+                                    <strong>{{ cell }} </strong><br/>
                                     {% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
                                     {% if picking.state != 'assigned' %}
-                                        <span class="box-alert box-alert-danger">{{ picking.qty }}</span>
+                                        <span class="box-alert box-alert-danger">{{ picking.qty }}</span><br/>
                                     {% else %}
+                                        <div class="input-group">
+                                        {% if not product.qty_available < 0 %}{% set qty_value = picking.qty %}{% else %}{% set qty_value = 0 %}{% endif %}
                                         <a href="#" data-field-qty="{{picking.move}}" class="btn btn-default btn-xs button-minus product_quantity_down">
                                             <span><i class="icon-minus"></i></span>
                                         </a>
-                                        <input type="textinput" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required form-control-qty input-qty" required>
+                                        <input type="textinput" id="{{picking.move}}" name="{{picking.move}}" min="0" max="{{ qty_value }}" value="{{ qty_value }}" class="required form-control-qty input-qty" required disabled>
                                         <a href="#" data-field-qty="{{picking.move}}" class="btn btn-default btn-xs button-plus product_quantity_up">
                                             <span><i class="icon-plus"></i></span>
                                         </a>
-                                         {% if product.qty_available <= 0 %} <span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
+                                        </div>
+                                        {% if product.qty_available <= 0 %} <span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span><br/>{% endif %}
                                     {% endif %}
                                    {% endif %}{% endfor %}
-                                </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -485,10 +486,14 @@ $(document).on('click', '.product_quantity_up', function(e){
     e.preventDefault();
     fieldName = $(this).data('field-qty');
     var currentVal = parseInt($('input[name='+fieldName+']').val());
-    if (!isNaN(currentVal) && currentVal) {
-        $('input[name='+fieldName+']').val(currentVal + 1).trigger('keyup');
-    } else {
-        $('input[name='+fieldName+']').val(1);
+    var qty_max = $('input[name='+fieldName+']').attr('max');
+
+    if (qty_max != currentVal) {
+        if (!isNaN(currentVal) && currentVal) {
+            $('input[name='+fieldName+']').val(currentVal + 1).trigger('keyup');
+        } else {
+            $('input[name='+fieldName+']').val(1);
+        }
     }
 });
 // The button to decrement the product value
@@ -499,7 +504,7 @@ $(document).on('click', '.product_quantity_down', function(e){
     if (!isNaN(currentVal) && currentVal > 1) {
         $('input[name='+fieldName+']').val(currentVal - 1).trigger('keyup');
     } else {
-        $('input[name='+fieldName+']').val(1);
+        $('input[name='+fieldName+']').val(0);
     }
 });
 </script>
