@@ -53,3 +53,7 @@ Preguntas frecuentes
 * No hay ningún carro disponible para seleccionar. Esto es debido que el usuario cerró el
   cliente sin salir de la sesión. Existe un control de usaurio y carros estan en uso. Si desea liberar el usuario
   del carro, acceda al ERP y en la configuración de los carro, elimine el usuario asignado en el carro.
+* En procesar productos, en el caso de que se visualice en la cela un caja en rojo con la cantidad en vez de mostrarse
+  el campo del formulario para añadir la cantidad, quiere decir que este movimiento del albarán se ha procesado previamente
+  y ya no se encuentra en estado asignado. En estos casos, deberá finalizar los otros movimientos del albarán para que el albarán
+  pase finalmente al estado de confirmado y en próximos procesos de empaquetado ya no visualizará estos movimientos ya confirmados.
