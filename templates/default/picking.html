@@ -96,7 +96,13 @@
                                     {% if picking.state != 'assigned' %}
                                         <span class="box-alert box-alert-danger">{{ picking.qty }}</span>
                                     {% else %}
-                                        <input type="number" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required form-control input-qty" required>
+                                        <a href="#" data-field-qty="{{picking.move}}" class="btn btn-default btn-xs button-minus product_quantity_down">
+                                            <span><i class="icon-minus"></i></span>
+                                        </a>
+                                        <input type="textinput" id="{{picking.move}}" name="{{picking.move}}" min="1" value="{% if not product.qty_available < 0 %}{{ picking.qty }}{% else %}0{% endif %}" class="required form-control-qty input-qty" required>
+                                        <a href="#" data-field-qty="{{picking.move}}" class="btn btn-default btn-xs button-plus product_quantity_up">
+                                            <span><i class="icon-plus"></i></span>
+                                        </a>
                                          {% if product.qty_available <= 0 %} <span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span>{% endif %}
                                     {% endif %}
                                    {% endif %}{% endfor %}
@@ -473,5 +479,28 @@ $(".modal").on('shown.bs.modal', function() {
 });
 /* Desactive Keyword ean input field */
 $( "ean-input" ).blur(function() {});
+
+// The button to increment the product value
+$(document).on('click', '.product_quantity_up', function(e){
+    e.preventDefault();
+    fieldName = $(this).data('field-qty');
+    var currentVal = parseInt($('input[name='+fieldName+']').val());
+    if (!isNaN(currentVal) && currentVal) {
+        $('input[name='+fieldName+']').val(currentVal + 1).trigger('keyup');
+    } else {
+        $('input[name='+fieldName+']').val(1);
+    }
+});
+// The button to decrement the product value
+$(document).on('click', '.product_quantity_down', function(e){
+    e.preventDefault();
+    fieldName = $(this).data('field-qty');
+    var currentVal = parseInt($('input[name='+fieldName+']').val());
+    if (!isNaN(currentVal) && currentVal > 1) {
+        $('input[name='+fieldName+']').val(currentVal - 1).trigger('keyup');
+    } else {
+        $('input[name='+fieldName+']').val(1);
+    }
+});
 </script>
 {% endblock %}
