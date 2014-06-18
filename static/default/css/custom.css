@@ -183,3 +183,21 @@ body {padding-top: 0px; padding-bottom: 40px; background-color: #f5f5f5}
   background-color: #d9534f;
   border-color: #d43f3a;
 }
+.box-min-alert {
+  display: inline-block;
+  padding: 2px 2px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
