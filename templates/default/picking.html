@@ -88,7 +88,7 @@
                 <hr/>
                 <div class="box-stockcart {{product.ean13}}">
                     <div class="row-stockcart">
-                        {% for cell in range(session.cart_rows*session.cart_columns) %}
+                        {% for cell in range(grid|length) %}
                             <div class="col-xs-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-sm-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-md-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-lg-{{ (12 / session.cart_columns)|floatwithoutdecimal }} row-stockcart-basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
                                     <strong>{{ cell }} </strong><br/>
                                     {% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
@@ -135,7 +135,7 @@
 {% if grid|length %}<!-- legend -->
 <hr/>
 <h4>{{ _('Grid Cart') }}</h4>
-<div class="row-stockcart">{% set count = 0 %}{% for cell in range(session.cart_rows*session.cart_columns) %}{% if count < grid|length %}
+<div class="row-stockcart">{% set count = 0 %}{% for cell in range(grid|length) %}{% if count < grid|length %}
 {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
 <div class="row-stockcart">{% endif %}{% endif %}
         <div class="col-xs-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-sm-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-md-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-lg-{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}{% set picking_products = grid|pickingproducts(cell) %}
