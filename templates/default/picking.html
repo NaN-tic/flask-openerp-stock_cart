@@ -100,11 +100,11 @@
                                     {% else %}
                                         <div class="input-group">
                                         {% if not product.qty_available < 0 %}{% set qty_value = picking.qty %}{% else %}{% set qty_value = 0 %}{% endif %}
-                                        <a href="#" data-field-qty="{{picking.move}}" class="btn btn-default btn-xs button-minus product_quantity_down">
+                                        <a href="#" data-field-qty="{{picking.move}}" class="input-group-addon input-group-xs btn btn-default btn-xs button-minus product_quantity_down">
                                             <span><i class="icon-minus"></i></span>
                                         </a>
-                                        <input type="textinput" id="{{picking.move}}" name="{{picking.move}}" min="0" max="{{ qty_value }}" value="{{ qty_value }}" class="required form-control-qty input-qty" required disabled>
-                                        <a href="#" data-field-qty="{{picking.move}}" class="btn btn-default btn-xs button-plus product_quantity_up">
+                                        <input type="textinput" id="{{picking.move}}" name="{{picking.move}}" min="0" max="{{ qty_value }}" value="{{ qty_value }}" class="required form-control input-qty" required disabled>
+                                        <a href="#" data-field-qty="{{picking.move}}" class="input-group-addon input-group-xs btn btn-default btn-xs button-plus product_quantity_up">
                                             <span><i class="icon-plus"></i></span>
                                         </a>
                                         </div>
@@ -141,7 +141,7 @@
 <div class="row-stockcart">{% set count = 0 %}{% for cell in range(grid|length) %}{% if count < grid|length %}
 {% if count is divisibleby session.cart_columns  %}{% if not count == 0 %}</div>
 <div class="row-stockcart">{% endif %}{% endif %}
-        <div class="col-xs-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-sm-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-md-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-lg-{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}{% set picking_products = grid|pickingproducts(cell) %}
+        <div class="col-xs-12 col-sm-12 col-md-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-lg-{{ (12 / session.cart_columns)|floatwithoutdecimal }} basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}{% set picking_products = grid|pickingproducts(cell) %}
         <table class="table table-striped">
         <thead>
             <tr>
