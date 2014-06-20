@@ -93,24 +93,24 @@
                     <div class="row-stockcart">
                         {% for cell in range(grid|length) %}
                             <div class="col-xs-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-sm-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-md-{{ (12 / session.cart_columns)|floatwithoutdecimal }} col-lg-{{ (12 / session.cart_columns)|floatwithoutdecimal }} row-stockcart-basket">{% set cell = loop.index %}{% set picking_cell_name = grid|pickingname(cell) %}
-                                    <strong>{{ cell }} </strong><br/>
-                                    {% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
-                                    {% if picking.state != 'assigned' %}
-                                        <span class="box-alert box-alert-danger">{{ picking.qty }}</span><br/>
-                                    {% else %}
-                                        <div class="input-group">
-                                        {% if not product.qty_available < 0 %}{% set qty_value = picking.qty %}{% else %}{% set qty_value = 0 %}{% endif %}
-                                        <a href="#" data-field-qty="{{picking.move}}" class="input-group-addon input-group-xs btn btn-default btn-xs button-minus product_quantity_down">
-                                            <span><i class="icon-minus"></i></span>
-                                        </a>
-                                        <input type="textinput" id="{{picking.move}}" name="{{picking.move}}" min="0" max="{{ qty_value }}" value="{{ qty_value }}" class="required form-control input-qty" required disabled>
-                                        <a href="#" data-field-qty="{{picking.move}}" class="input-group-addon input-group-xs btn btn-default btn-xs button-plus product_quantity_up">
-                                            <span><i class="icon-plus"></i></span>
-                                        </a>
-                                        </div>
-                                        {% if product.qty_available <= 0 %} <span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span><br/>{% endif %}
-                                    {% endif %}
-                                   {% endif %}{% endfor %}
+                                <strong>{{ cell }} </strong><br/>
+                                {% for picking in product.pickings %}{% if picking.name == picking_cell_name %}
+                                {% if picking.state != 'assigned' %}
+                                    <span class="box-alert box-alert-danger">{{ picking.qty }}</span><br/>
+                                {% else %}
+                                    <div class="input-group qty-control">
+                                    {% if not product.qty_available < 0 %}{% set qty_value = picking.qty %}{% else %}{% set qty_value = 0 %}{% endif %}
+                                    <a href="#" data-field-qty="{{picking.move}}" class="input-group-addon input-group-xs btn btn-default product_quantity_down">
+                                        <span><i class="icon-minus"></i></span>
+                                    </a>
+                                    <input type="textinput" id="{{picking.move}}" name="{{picking.move}}" min="0" max="{{ qty_value }}" value="{{ qty_value }}" class="required form-control input-qty" required disabled>
+                                    <a href="#" data-field-qty="{{picking.move}}" class="input-group-addon input-group-xs btn btn-default product_quantity_up">
+                                        <span><i class="icon-plus"></i></span>
+                                    </a>
+                                    </div>
+                                    {% if product.qty_available <= 0 %} <span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span><br/>{% endif %}
+                                {% endif %}
+                               {% endif %}{% endfor %}
                             </div>
                         {% endfor %}
                     </div>
