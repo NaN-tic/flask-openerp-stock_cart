@@ -98,16 +98,10 @@
                                 {% if picking.state != 'assigned' %}
                                     <span class="box-alert box-alert-danger">{{ picking.qty }}</span><br/>
                                 {% else %}
-                                    <div class="input-group qty-control">
                                     {% if not product.qty_available < 0 %}{% set qty_value = picking.qty %}{% else %}{% set qty_value = 0 %}{% endif %}
-                                    <a href="#" data-field-qty="{{picking.move}}" class="input-group-addon input-group-xs btn btn-default product_quantity_down">
-                                        <span><i class="icon-minus"></i></span>
-                                    </a>
-                                    <input type="textinput" id="{{picking.move}}" name="{{picking.move}}" min="0" max="{{ qty_value }}" value="{{ qty_value }}" class="required form-control input-qty" required disabled>
-                                    <a href="#" data-field-qty="{{picking.move}}" class="input-group-addon input-group-xs btn btn-default product_quantity_up">
-                                        <span><i class="icon-plus"></i></span>
-                                    </a>
-                                    </div>
+                                    <select id="{{picking.move}}" name="{{picking.move}}" class="form-control input-sm select-qty">
+                                        {% for num in range(qty_value+1) %}<option value="{{ num }}"{% if num == qty_value %} selected{% endif %}>{{ num }}</option>{% endfor %}
+                                    </select>
                                     {% if product.qty_available <= 0 %} <span class="stock-alert">({{ _('Qty') }}: {{ picking.qty }})</span><br/>{% endif %}
                                 {% endif %}
                                {% endif %}{% endfor %}
@@ -483,32 +477,5 @@ $(".modal").on('shown.bs.modal', function() {
 });
 /* Desactive Keyword ean input field */
 $( "ean-input" ).blur(function() {});
-
-// The button to increment the product value
-$(document).on('click', '.product_quantity_up', function(e){
-    e.preventDefault();
-    fieldName = $(this).data('field-qty');
-    var currentVal = parseInt($('input[name='+fieldName+']').val());
-    var qty_max = $('input[name='+fieldName+']').attr('max');
-
-    if (qty_max != currentVal) {
-        if (!isNaN(currentVal) && currentVal) {
-            $('input[name='+fieldName+']').val(currentVal + 1).trigger('keyup');
-        } else {
-            $('input[name='+fieldName+']').val(1);
-        }
-    }
-});
-// The button to decrement the product value
-$(document).on('click', '.product_quantity_down', function(e){
-    e.preventDefault();
-    fieldName = $(this).data('field-qty');
-    var currentVal = parseInt($('input[name='+fieldName+']').val());
-    if (!isNaN(currentVal) && currentVal > 1) {
-        $('input[name='+fieldName+']').val(currentVal - 1).trigger('keyup');
-    } else {
-        $('input[name='+fieldName+']').val(0);
-    }
-});
 </script>
 {% endblock %}
