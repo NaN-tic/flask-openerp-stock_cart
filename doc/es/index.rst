@@ -22,6 +22,16 @@ Cuando inicie el proceso de recogida de productos, se le mostrará un listado de
 productos y el número de productos a recoger. Por cada producto, sabrá cuantas unidades
 debe dejar en cada caja del carro. Recuerde que cada caja del carro equivale a un albarán.
 
+Los productos del listado de su carro provienen de los albaranes con la siguiente condición:
+
+* Albaranes de salida
+* Estado albarán: reservado
+* Opción "Empaquetando" activado
+
+En el caso que el usuario refresque la pantalla o no haya finalizado albaranes que se le
+han añadido en su carro en otro momento, se le mostrarán esto albaranes primero antes de añadir
+nuevos albaranes en el carro para que los finalice.
+
 Cada vez que cambie de producto (**Enviar y siguiente**) se enviarán la cantidad introducida.
 Según el producto y la cantidad cambiará el estado de la línea de movimiento del albarán.
 Si la cantidad introducida NO es igual que la solicitad, esta línea de movimiento se divide en dos.
