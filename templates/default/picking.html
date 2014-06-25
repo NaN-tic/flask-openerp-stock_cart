@@ -59,7 +59,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <form action="#" id="{{ product.id }}-form" class="form-horizontal" method="POST">
+                <form action="#" id="{{ product.id }}-form" class="form-horizontal form-product-modal" method="POST">
                 <div id="{{product.ean13}}" class="collapse on row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <strong>{{ product.name }}</strong>
@@ -477,5 +477,12 @@ $(".modal").on('shown.bs.modal', function() {
 });
 /* Desactive Keyword ean input field */
 $( "ean-input" ).blur(function() {});
+
+/* Dissable key enter to send form */
+$(".form-product-modal").keypress(function (event) {
+    if (event.keyCode == 10 || event.keyCode == 13) {
+        event.preventDefault();
+    }
+});
 </script>
 {% endblock %}
