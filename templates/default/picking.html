@@ -263,6 +263,7 @@ $(".get-ean13").click(function(event){
     var ean = boxean.slice(1, boxean.length);
     var ean13 = $('#ean-'+ean).val();
     var data = {'ean': ean, 'ean13': ean13}
+    var classes = $(this).attr('class').split(" ");
 
     $.ajax({
         type: "POST",
@@ -273,7 +274,10 @@ $(".get-ean13").click(function(event){
             if (data.result){
                 $('#message-'+ean).text('');
                 $(boxean).show();
-                $('.next-'+ean).removeAttr("disabled"); 
+                $('.next-'+ean).removeAttr("disabled");
+                if( $.inArray('last-prod', classes) > 0){
+                    $('.last-product').removeAttr("disabled"); 
+                } 
             } else {
                 $('#message-'+ean).text("{{ _('Not find EAN: ') }}"+ean13);
                 $('#message-'+ean).css('color', 'red');
