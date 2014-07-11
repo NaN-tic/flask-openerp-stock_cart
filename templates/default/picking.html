@@ -78,7 +78,7 @@
                     <div class="col-md-12 box-ean13">
                         <div class="form-group">
                             <div class="col-md-3">
-                                <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus="autofocus" class="form-control input-xs ean-input">
+                                <input type="number" id="ean-{{product.ean13}}" name="ean-{{product.ean13}}" autofocus class="form-control input-xs ean-input">
                             </div>
                             <a id="search-{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
                             <a href="#{{product.ean13}}" class="clean-ean13 btn btn-link btn-sm">{{ _('Clean') }}</a>
@@ -306,7 +306,6 @@ $(".show-stockcart").click(function(event){
 $(".clean-ean13").click(function(event){
     var boxean = $(this).attr('href').replace('#', '.');
     var ean = boxean.slice(1, boxean.length);
-    var classes = $(this).attr('class').split(" ");
 
     $('#ean-'+ean).val('');
 });
