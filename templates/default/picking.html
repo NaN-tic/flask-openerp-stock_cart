@@ -33,7 +33,7 @@
     </div>
 </div>
 
-{% for product in products if product.ean13  recursive %}{% if products[loop.index] %}{% set next_product = products[loop.index] %}{% endif %}
+{% for product in products_ean recursive %}{% if products_ean[loop.index] %}{% set next_product = products_ean[loop.index] %}{% endif %}
 <div id="{{ product.id }}" class="modal modal-product" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -83,6 +83,7 @@
                             <a id="search-{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
                             <a href="#{{product.ean13}}" class="clean-ean13 btn btn-link btn-sm">{{ _('Clean') }}</a>
                             <a href="#{{product.ean13}}" class="show-stockcart btn btn-link btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
+                            <a id="{{product.id}}-{{ next_product['id'] }}" href="#{{product.ean13}}" class="not-available btn btn-link btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Not Available') }}</a>
                             <a href="#{{product.ean13}}" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#{{product.ean13}}">{{ _('Info') }}</a>
                             <div id="message-{{product.ean13}}"></div>
                         </div>
@@ -316,6 +317,19 @@ $(".clean-ean13").click(function(event){
 });
 
 {% if not products %}$("#send-pickings-done").hide();{% endif %}
+
+/* Not Available */
+$('.not-available').click(function(){
+    var products = this.id.split('-');
+    var classes = $(this).attr('class').split(" ");
+
+    $('#'+products[0]).modal('hide');
+    if( $.inArray('last-prod', classes) > 0){
+        $('#pickings').modal('show');
+    } else {
+        $('#'+products[1]).modal('show');
+    }
+})
 
 /* Next product */
 $('.next-product').click(function(){
