@@ -83,7 +83,7 @@
                             <a id="search-{{product.ean13}}" href="#{{product.ean13}}" class="get-ean13 btn btn-primary btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Find') }}</a>
                             <a href="#{{product.ean13}}" class="clean-ean13 btn btn-link btn-sm">{{ _('Clean') }}</a>
                             <a href="#{{product.ean13}}" class="show-stockcart btn btn-link btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Continue') }}</a>
-                            <a id="{{product.id}}-{{ next_product['id'] }}" href="#{{product.ean13}}" class="not-available btn btn-link btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Not Available') }}</a>
+                            {% if next_product %}<a id="{{product.id}}-{{ next_product['id'] }}" href="#{{product.ean13}}" class="not-available btn btn-link btn-sm{% if loop.last %} last-prod{% endif %}">{{ _('Not Available') }}</a>{% endif %}
                             <a href="#{{product.ean13}}" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#{{product.ean13}}">{{ _('Info') }}</a>
                             <div id="message-{{product.ean13}}"></div>
                         </div>
